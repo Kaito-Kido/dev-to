@@ -1,0 +1,34 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.login-box {
+  width: 640px;
+  background: white;
+  border-radius: 2px;
+  color: rbg(23, 23, 23);
+  box-shadow: 0 0 0 1px rgba(23, 23, 23, 0.1);
+  padding: 3rem;
+  margin: 0 auto;
+}
+
+.registration-content {
+  margin-bottom: var(--su-6);
+  text-align: center;
+
+  h1 {
+    font-size: 1.875rem;
+    color: var(--card-color);
+    line-height: 1.25;
+    margin-bottom: 0;
+  }
+}
+
+.registration-description {
+  color: var(--card-color-second);
+  font-size: 1rem;
+  text-align: center;
+  p {
+    margin: 0;
+  }
+}
