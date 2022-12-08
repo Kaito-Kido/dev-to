@@ -1,15 +1,20 @@
 @import "~bootstrap/scss/bootstrap";
 @import "./posts.scss";
 @import "./users.scss";
-
+@import "./header.scss";
 :root {
   --header-height: 56px;
+
   --color-hover: rgba(47, 58, 178);
   --bg-hover: rgba(59, 73, 223);
   --body-bg: rgba(245, 245, 245);
   --card-color: rgba(23, 23, 23);
   --card-color-second: rgba(64, 64, 64);
 
+  --label-primary: rbg(23, 23, 23);
+  --focus: rgb(59, 73, 223);
+
+  --radius: 0.375rem;
   --su-05: 0.125rem;
   --su-1: 0.25rem;
   --su-2: 0.5rem;
@@ -21,4 +26,6 @@
   --su-8: 3rem;
   --su-9: 4rem;
   --su-10: 8rem;
+
+  --fs-base: 1em;
 }
