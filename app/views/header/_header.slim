@@ -9,4 +9,4 @@
     .log-in-out 
         = link_to 'Log in', new_user_session_path, class: "login-button" 
         = link_to 'Create account',  new_user_registration_path, class: "sign-up-button"
-
+    = link_to 'Log out', destroy_user_session_path, method: :delete
