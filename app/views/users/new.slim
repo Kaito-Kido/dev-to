@@ -1,5 +1,3 @@
-= render "/header/header"
-
 .contain
     .login-box 
         .registration-content  
@@ -34,4 +32,4 @@
             .registration-hr
                 span.registration-hr-label
                     | Already have an account? 
-                    a href="/users/login" Login
+                    =link_to "Login", login_user_path
