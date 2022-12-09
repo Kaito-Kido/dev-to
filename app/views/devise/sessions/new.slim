@@ -1,0 +1,48 @@
+.contain
+		.login-box 
+				.registration-content  
+						h1 
+								| Welcome to DEV Community 👩‍💻👨‍💻
+						.registration-description 
+								p 
+										| DEV Community 👩‍💻👨‍💻 is a community of 968,547 amazing developers
+				.registration-actions 
+						.link-login-btn.apple
+								=image_tag("/assets/apple-icon.svg")
+								text Continue with Apple
+						.link-login-btn.forem
+								=image_tag("/assets/forem-icon.svg")
+								text Continue with Forem
+						.link-login-btn.github
+								=image_tag("/assets/github-icon.svg")
+								text Continue with Github
+						.link-login-btn.twitter
+								=image_tag("/assets/twitter-icon.svg")
+								text Continue with Twitter
+				.registration-actions-email
+					.registration-hr
+							span.registration-hr-label
+									| Have a password? Continue with your email address
+					= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+						.input-field
+							= f.label :email
+							= f.email_field :email, autofocus: true, autocomplete: "email"
+						
+
+						.input-field
+							= f.label :password 
+							= f.password_field :password, autocomplete: "current-password"
+						
+
+						- if devise_mapping.rememberable?
+							.check-box
+								= f.check_box :remember_me 
+								= f.label :remember_me, "Remember me" 
+
+						.submit-login-btn
+							= f.submit "Continue"
+
+
+					- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
+						.forget-pass
+							= link_to "Forgot your password?", new_password_path(resource_name)

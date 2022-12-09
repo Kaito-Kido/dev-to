@@ -7,6 +7,6 @@
                 .search-logo
                     =image_tag("/assets/search-icon.svg", alt: "search icon")
     .log-in-out 
-        = link_to 'Log in', login_user_path, class: "login-button" 
-        = link_to 'Create account',  new_user_path, class: "sign-up-button"
+        = link_to 'Log in', new_user_session_path, class: "login-button" 
+        = link_to 'Create account',  new_user_registration_path, class: "sign-up-button"
 
