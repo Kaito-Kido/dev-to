@@ -1,0 +1,196 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.login-box {
+  width: 640px;
+  background: white;
+  border-radius: 2px;
+  color: rbg(23, 23, 23);
+  box-shadow: 0 0 0 1px rgba(23, 23, 23, 0.1);
+  padding: 3rem;
+  margin: 0 auto;
+}
+
+.registration-content {
+  margin-bottom: var(--su-6);
+  text-align: center;
+
+  h1 {
+    font-size: 1.875rem;
+    color: var(--card-color);
+    line-height: 1.25;
+    margin-bottom: 0;
+  }
+}
+
+.registration-description {
+  color: var(--card-color-second);
+  font-size: 1rem;
+  text-align: center;
+  p {
+    margin: 0;
+  }
+}
+
+.registration-actions {
+  margin-bottom: var(--su-4);
+  display: grid;
+  grid-gap: var(--su-2);
+  width: 100%;
+}
+
+.link-login-btn {
+  width: 100%;
+  padding: var(--su-3) var(--su-5);
+  img {
+    margin-right: 0.5rem;
+    fill: white;
+  }
+  border-radius: var(--radius);
+  text {
+    color: white;
+  }
+  display: flex;
+  justify-content: center;
+}
+
+.apple {
+  background-color: black;
+}
+
+.forem {
+  background-color: #05313b;
+}
+
+.github {
+  background-color: #000;
+}
+
+.twitter {
+  background-color: #0096f2;
+}
+
+.continue {
+  background-color: rgb(47, 58, 178);
+}
+
+.registration-hr {
+  margin-bottom: var(--su-4);
+  text-align: center;
+  position: relative;
+  &:before {
+    border: 1px solid gray;
+    content: "";
+    display: block;
+    top: 50%;
+    width: 100%;
+    border-radius: var(--radius);
+    position: absolute;
+  }
+}
+
+.registration-hr-label {
+  font-size: 0.875rem;
+  color: var(--card-color-second);
+  padding: 0 var(--su-2);
+  max-width: 75%;
+  z-index: 1;
+  background: white;
+  display: inline-block;
+  position: relative;
+}
+
+.registration-actions-email {
+  display: block;
+}
+
+.label {
+  color: var(--label-primary);
+  // font-weight: 500;
+}
+
+.text-field {
+  margin-top: var(--su-2);
+  line-height: 1.5;
+  padding: calc(0.5rem - 1.5px) 0.5em;
+  font-size: var(--fs-base);
+  width: 100%;
+  resize: vertical;
+  border: 1.5px solid rgb(212, 212, 212);
+  color: var(--body-color);
+  border-radius: var(--radius);
+  outline: 0;
+
+  &:hover {
+    border-color: rgb(163, 163, 163);
+  }
+
+  &:focus-within {
+    border-color: var(--focus);
+    box-shadow: 0 0 0 1px var(--focus);
+  }
+}
+
+.check-box {
+  &:hover {
+    background: var(--body-bg);
+    box-shadow: 0 0 0 var(--su-1) var(--body-bg);
+  }
+  display: inline-flex;
+  align-items: center;
+  flex-direction: row;
+  grid-template-columns: 1.5em 1fr;
+  grid-gap: var(--su-2);
+  border-radius: var(--radius);
+  font-size: var(--fs-base);
+
+  input {
+    margin: 0.1875em;
+    justify-self: center;
+  }
+
+  label {
+    margin-top: 0;
+    padding-right: var(--su-2);
+  }
+}
+
+.input-field {
+  margin-bottom: var(--su-3);
+  display: flex;
+  flex-direction: column;
+  font-size: var(--fs-base);
+}
+
+.submit-login-btn {
+  margin-bottom: 5px;
+  padding-top: var(--su-3);
+
+  input {
+    width: 100%;
+    padding: var(--su-3) var(--su-5);
+    border-radius: var(--radius);
+    line-height: var(--su-6);
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: var(--focus);
+    color: white;
+    outline: 0;
+    border: 0;
+  }
+}
+
+.forget-pass {
+  text-align: center;
+  padding-top: var(--su-6);
+  margin: 0;
+  width: 100%;
+
+  a {
+    color: var(--focus);
+    text-decoration: none;
+    text-align: center;
+  }
+}
