@@ -1,0 +1,33 @@
+.contain
+  .login-box
+    .registration-actions-email
+      = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+        = render "devise/shared/error_messages", resource: resource
+
+        .input-field
+          = f.label :email, class: "label"
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: "text-field" 
+
+
+        .input-field
+          = f.label :password, class: "label"
+          - if @minimum_password_length
+            em
+              =@minimum_password_length 
+              | &nbsp;characters minimum
+          = f.password_field :password, autocomplete: "new-password", class: "text-field"
+
+
+        .input-field
+          = f.label :password_confirmation, class: "label"
+          = f.password_field :password_confirmation, autocomplete: "new-password", class: "text-field"
+
+        .submit-login-btn
+          = f.submit "Sign up"
+
+
+      .registration-hr
+        span.registration-hr-label
+          | Already have an account? 
+          span
+            =link_to "Log in", new_user_session_path 
