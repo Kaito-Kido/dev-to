@@ -6,7 +6,18 @@
             input type="text" placeholder="Search..."
                 .search-logo
                     =image_tag("/assets/search-icon.svg", alt: "search icon")
-    .log-in-out 
-        = link_to 'Log in', new_user_session_path, class: "login-button" 
-        = link_to 'Create account',  new_user_registration_path, class: "sign-up-button"
-    = link_to 'Log out', destroy_user_session_path, method: :delete
+    - if user_signed_in?
+        .rh__group_button
+            = link_to 'Create post', new_post_path, class: "sign-up-button"
+            .rh__group_button--right#drop-button
+                = image_tag("https://res.cloudinary.com/practicaldev/image/fetch/s--AqDMneXM--/c_fill,f_auto,fl_progressive,h_90,q_auto,w_90/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/698413/b3883b82-8e7a-4066-a100-b4281adc4863.jpeg", alt: "avatar")
+            .rh__dropdown#menu 
+                = link_to profile_user_path 
+                    span 
+                        = current_user.email
+                .rh__dropdown__line
+                = link_to 'Log out', destroy_user_session_path, method: :delete
+    - else
+        .log-in-out 
+            = link_to 'Log in', new_user_session_path, class: "login-button" 
+            = link_to 'Create account',  new_user_registration_path, class: "sign-up-button"
