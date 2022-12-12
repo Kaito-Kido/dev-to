@@ -12,7 +12,7 @@
             .rh__group_button--right#drop-button
                 = image_tag("https://res.cloudinary.com/practicaldev/image/fetch/s--AqDMneXM--/c_fill,f_auto,fl_progressive,h_90,q_auto,w_90/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/698413/b3883b82-8e7a-4066-a100-b4281adc4863.jpeg", alt: "avatar")
             .rh__dropdown#menu 
-                = link_to profile_user_path 
+                = link_to profile_user_path, class: "link__button"
                     span 
                         = current_user.email
                 .rh__dropdown__line

@@ -121,7 +121,7 @@
   right: var(--su-2);
   left: auto;
   height: fit-content;
-  width: max-content;
+  width: fit-content;
   margin-top: 8px;
   padding: 8px;
   max-width: 360px;
@@ -134,9 +134,11 @@
   background-color: white;
 
   a {
+    display: flex;
     text-decoration: none;
     color: black;
     width: 100%;
+    max-width: 250px;
     padding: 8px 16px;
     line-height: 1.25;
     border-radius: var(--radius);

@@ -3,6 +3,6 @@ Rails.application.routes.draw do
   devise_for :users
   resources :posts
 
-  get "/users/profile", to: "users#profile", as: 'profile_user'
+  get "/users/profile", to: "users#show", as: 'profile_user'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
