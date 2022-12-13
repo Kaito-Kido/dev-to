@@ -10,9 +10,17 @@
         .rh__group_button
             = link_to 'Create post', new_post_path, class: "sign-up-button"
             .rh__group_button--right#drop-button
-                = image_tag("https://res.cloudinary.com/practicaldev/image/fetch/s--AqDMneXM--/c_fill,f_auto,fl_progressive,h_90,q_auto,w_90/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/698413/b3883b82-8e7a-4066-a100-b4281adc4863.jpeg", alt: "avatar")
+                - if current_user.avatar.nil?
+                    = image_tag("https://res.cloudinary.com/practicaldev/image/fetch/s--AqDMneXM--/c_fill,f_auto,fl_progressive,h_90,q_auto,w_90/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/698413/b3883b82-8e7a-4066-a100-b4281adc4863.jpeg", alt: "avatar")
+                - else 
+                    = image_tag(current_user.avatar, alt: "avatar")
             .rh__dropdown#menu 
-                = link_to profile_user_path, class: "link__button"
+                = link_to profile_user_path
+                    span
+                        - if current_user.name.nil?
+                            = "username#{current_user.id}"
+                        - else 
+                            = current_user.name
                     span 
                         = current_user.email
                 .rh__dropdown__line

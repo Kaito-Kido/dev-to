@@ -5,3 +5,23 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+user_ids = User.pluck(:id)
+1000.times.each do |id|
+  Post.create(
+    user_id: user_ids.sample, 
+    title: Faker::Lorem.sentence,
+    content: Faker::Lorem.sentence
+  )
+end
+
+# 100.times.each do |id|
+#   User.create!(
+#     name: Faker::Name.name,
+#     avatar: Faker::Avatar.image,
+#     role: :user,
+#     email: Faker::Internet.email,
+#     password: Faker::Internet.password,
+#   )
+# end
+
