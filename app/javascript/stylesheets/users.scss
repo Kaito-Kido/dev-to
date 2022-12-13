@@ -181,6 +181,14 @@
     border: 0;
   }
 }
+.delete__button {
+  width: 100%;
+  background-color: rgb(255, 69, 0);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: var(--su-2);
+}
 
 .forget-pass {
   text-align: center;

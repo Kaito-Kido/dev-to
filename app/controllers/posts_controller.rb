@@ -1,6 +1,6 @@
 
 class PostsController < ApplicationController
   def index
-    @pagy, @posts = pagy(Post.all, items: 10)
+    @pagy, @posts = pagy(Post.includes(:user).all, items: 10)
   end
 end

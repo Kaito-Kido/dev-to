@@ -23,6 +23,7 @@
                             = current_user.name
                     span.header__email
                         = current_user.email
+                = link_to 'Setting', edit_user_registration_path
                 .rh__dropdown__line
                 = link_to 'Log out', destroy_user_session_path, method: :delete
     - else

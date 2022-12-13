@@ -9,6 +9,12 @@
   display: flex;
   justify-content: center;
   padding: 8px;
+  &--bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 50px;
+  }
 }
 
 .column-post {
