@@ -218,20 +218,40 @@
 
 .pro__header--top {
   display: flex;
-  justify-content: center;
   position: relative;
+  justify-content: flex-end;
   div {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
     height: var(--su-10);
     width: var(--su-10);
     border-radius: 999px;
     padding: var(--su-2);
-    margin-top: -70px;
+    top: -90px;
     background-color: var(--body-bg);
     img {
       width: 100%;
       height: 100%;
       overflow: hidden;
       border-radius: 999px;
+    }
+  }
+
+  a {
+    padding: 0.575rem;
+    background-color: rgba(79, 70, 229);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    color: white;
+    border-radius: var(--radius);
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba(99, 102, 241);
+      color: white;
     }
   }
 }
@@ -247,4 +267,9 @@
     line-height: 1.5;
     font-size: 1.875rem;
   }
+}
+.space {
+  height: 20px;
+  padding: 20px;
+  width: 100%;
 }

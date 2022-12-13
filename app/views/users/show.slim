@@ -3,6 +3,8 @@
   .pro__header--container 
     .pro__header--main
       .pro__header--top
+        - if user_signed_in? && current_user.id == @user.id
+          =link_to "Edit profile", edit_user_path
         div
           - if !@user.avatar.nil?
             =image_tag(@user.avatar, alt: "avatar")

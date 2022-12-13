@@ -15,7 +15,7 @@
                 - else 
                     = image_tag(current_user.avatar, alt: "avatar")
             .rh__dropdown#menu 
-                = link_to profile_user_path(current_user.id)
+                = link_to user_path(current_user.id)
                     span
                         - if current_user.name.nil?
                             = "username#{current_user.id}"

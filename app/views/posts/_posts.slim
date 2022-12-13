@@ -1,7 +1,7 @@
 .column-post
         - posts.each do |post|
             .post
-                .post-top
+                = link_to user_path(post.user), class: "post-top"
                     .avatar
                         = image_tag(post.user.avatar, alt: "avatar")
                     .name-date 
