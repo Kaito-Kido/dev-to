@@ -15,13 +15,13 @@
                 - else 
                     = image_tag(current_user.avatar, alt: "avatar")
             .rh__dropdown#menu 
-                = link_to profile_user_path
+                = link_to profile_user_path(current_user.id)
                     span
                         - if current_user.name.nil?
                             = "username#{current_user.id}"
                         - else 
                             = current_user.name
-                    span 
+                    span.header__email
                         = current_user.email
                 .rh__dropdown__line
                 = link_to 'Log out', destroy_user_session_path, method: :delete
