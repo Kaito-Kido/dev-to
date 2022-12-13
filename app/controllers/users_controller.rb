@@ -10,11 +10,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+    @user = find_user
   end
 
   def update
-    @user = User.find(params[:id])
+    @user = find_user
     unless @user.update(user_params)
       render :edit
     else
@@ -25,6 +25,10 @@ class UsersController < ApplicationController
   private
     def user_params
       params.require(:user).permit(:name, :email, :avatar)
+    end
+
+    def find_user
+      return User.find(params[:id])
     end
   
 end
