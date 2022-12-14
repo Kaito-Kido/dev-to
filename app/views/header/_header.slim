@@ -17,10 +17,7 @@
             .rh__dropdown#menu 
                 = link_to user_path(current_user.id)
                     span
-                        - if current_user.name.nil?
-                            = "username#{current_user.id}"
-                        - else 
-                            = current_user.name
+                        =name_of_user
                     span.header__email
                         = current_user.email
                 = link_to 'Setting', edit_user_registration_path
