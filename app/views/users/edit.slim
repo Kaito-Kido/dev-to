@@ -1,0 +1,24 @@
+.contain
+  .login-box
+    .registration-actions-email
+      h2 User
+
+      = form_for @user, url: user_path(@user), html: {method: "patch"} do |f| 
+        div.input-field
+          = f.label :email, class: "label"
+          = f.email_field :email, autofocus: true, autocomplete: "email" , class: "text-field"
+        
+        .input-field 
+          = f.label :name, class: "label"
+          = f.text_field :name, autofocus: true, autocomplete: "name", class: "text-field"
+
+        .input-field 
+          =f.label :avatar, class: "label"
+          = f.text_field :avatar, autofocus: true, autocomplete: "name", class: "text-field"
+
+
+
+        div.submit-login-btn
+          = f.submit "Save Profile Information" 
+
+

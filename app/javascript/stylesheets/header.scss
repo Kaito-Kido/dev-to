@@ -142,6 +142,7 @@
     padding: 8px 16px;
     line-height: 1.25;
     border-radius: var(--radius);
+    flex-direction: column;
     &:hover {
       text-decoration: underline;
       background-color: var(--color-hover);
@@ -154,4 +155,9 @@
   margin: 8px 0;
   border: 0.1px solid rgba(0, 0, 0, 0.3);
   height: 0;
+}
+
+.header__email {
+  font-size: 0.875rem;
+  opacity: 0.75;
 }

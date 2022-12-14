@@ -1,0 +1,47 @@
+.contain--bottom
+  .login-box
+    .registration-actions-email
+      h2 User
+      = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| 
+        = render "devise/shared/error_messages", resource: resource 
+
+        div.input-field
+          = f.label :email, class: "label"
+          = f.email_field :email, autofocus: true, autocomplete: "email" , class: "text-field"
+      
+
+
+        - if devise_mapping.confirmable? && resource.pending_reconfirmation? 
+          div Currently waiting confirmation for: = resource.unconfirmed_email 
+
+        div.input_field
+          = f.label :password, class: "label"
+          br
+          i leave blank if you don't want to change it
+          = f.password_field :password, autocomplete: "new-password", class: "text-field"
+          - if @minimum_password_length 
+            br 
+            em 
+              =@minimum_password_length 
+              | &nbsp;characters minimum
+
+        div.input_field
+          = f.label :password_confirmation , class: "label"
+          br
+          = f.password_field :password_confirmation, autocomplete: "new-password", class:"text-field" 
+
+        div.input_field 
+          = f.label :current_password , class: 'label'
+          i we need your current password to confirm your changes
+          br
+          = f.password_field :current_password, autocomplete: "current-password", class: "text-field" 
+
+        div.submit-login-btn
+          = f.submit "Change password" 
+
+
+  .login-box
+    .registration-actions-email
+      h3 Delete my account
+      p Unhappy? 
+      = button_to "Delete account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "delete__button"
