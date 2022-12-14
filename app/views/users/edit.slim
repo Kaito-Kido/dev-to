@@ -3,7 +3,7 @@
     .registration-actions-email
       h2 User
 
-      = form_for @user, url: update_user_path(@user), html: {method: "patch"} do |f| 
+      = form_for @user, url: user_path(@user), html: {method: "patch"} do |f| 
         div.input-field
           = f.label :email, class: "label"
           = f.email_field :email, autofocus: true, autocomplete: "email" , class: "text-field"
