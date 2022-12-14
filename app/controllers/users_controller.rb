@@ -14,9 +14,9 @@ class UsersController < ApplicationController
   def update
     @user.assign_attributes(user_params)
     if @user.save
-      render :edit
-    else
       redirect_to user_path
+    else
+      render :edit
     end
   end
 
