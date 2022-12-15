@@ -1,5 +1,5 @@
 .contain--bottom
-  .login-box
+  .box
     .registration-actions-email
       h2 User
       = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| 
@@ -40,7 +40,7 @@
           = f.submit "Change password" 
 
 
-  .login-box
+  .box
     .registration-actions-email
       h3 Delete my account
       p Unhappy? 

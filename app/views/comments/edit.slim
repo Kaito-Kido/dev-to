@@ -1,0 +1,14 @@
+.contain--flex 
+  .cmt__contain
+    .cmt__header
+      .cmt__header--h2 
+        h2 Edit comment
+    .cmt__input_field
+      =image_tag(current_user.avatar)
+      .cmt__input
+        = form_for [@post, @comment], method: :patch  do |form|
+          .cmt__input--area
+            =form.text_area :content 
+          .cmt__button--submit
+            .submit-login-btn 
+              =form.submit "Submit"

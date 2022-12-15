@@ -1,0 +1,56 @@
+.contain--flex
+  .sp__head 
+    .sp__head--contain
+      = link_to user_path(@post.user), class: "post-top"
+        .sp__head--avatar 
+          =image_tag(@post.user.avatar)
+        .sp__head--name
+          .name
+            =@post.user.name
+          .date
+            =@post.user.created_at.strftime('%b %d')
+    .sp__head--title
+      h1 =@post.title
+  .sp__main 
+    =@post.content
+  .cmt__contain 
+    .cmt__header 
+      .cmt__header--h2 
+        h2 Top comments (#{@post.comments.count})
+    .cmt__input_field 
+      -if user_signed_in?
+        =image_tag(current_user.avatar)
+      - else 
+        =image_tag("https://res.cloudinary.com/practicaldev/image/fetch/s--RmY55OKL--/c_limit,f_auto,fl_progressive,q_auto,w_256/https://practicaldev-herokuapp-com.freetls.fastly.net/assets/devlogo-pwa-512.png")
+      .cmt__input
+        = form_for [@post, Comment.new], method: :post  do |form|
+          .cmt__input--area
+            =form.text_area :content, placeholder: "Add to the discussion"
+          .cmt__button--submit
+            .submit-login-btn 
+              =form.submit "Submit"
+
+    - @post.comments.each do |comment|
+      .cmt__output_field
+        =image_tag(comment.user.avatar)
+        .cmt__output_area
+          .cmt__output--head
+            .cmt__date_name
+              =comment.user.name
+              span
+                | •
+              =comment.created_at.strftime('%b %d')
+            =image_tag("/assets/threedot.svg")
+            .div#edit_comment
+              =link_to "Edit", edit_post_comment_path(post_id: @post.id, id: comment.id)
+              =link_to "Delete", post_comment_path(post_id: @post.id, id: comment.id), method: :delete, data: {confirm: "Are you sure?"}
+          .cmt__content 
+            = comment.content
+
+
+
+
+        
+
+    
+    
