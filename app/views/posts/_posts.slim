@@ -24,6 +24,6 @@
                                     =image_tag('/assets/fillheart-icon.svg')
                                     p Like
                                 
-                            .react-button 
+                            = link_to post_path(post), class: "react-button" 
                                 =image_tag('/assets/comment-icon.svg')
-                                | Add Comment 
+                                p Add Comment 
