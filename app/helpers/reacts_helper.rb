@@ -1,11 +1,8 @@
 module ReactsHelper
-  def reacted?(post_id)
+  def reacted?(post)
     if user_signed_in?
-      React.where(post_id: post_id, user_id: current_user.id).exists?
+      # React.where(post: post, user: current_user).exists?
+      post.reacters.include?(current_user)
     end
-  end
-
-  def find_react_id(post_id)
-    React.where(post_id: post_id, user_id: current_user.id).ids
   end
 end

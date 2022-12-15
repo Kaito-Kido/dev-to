@@ -8,19 +8,19 @@
                         .name
                           =post.user.name
                         .date
-                          =post.created_at.strftime('%b %d') 
+                          =date_created_at(post)
                     .post-bottom
                 .post-main 
                     .post-title
                         =link_to post_path(post) 
                             =post.title
                         .post-bottom-interact
-                            - if reacted?(post.id)
-                                = link_to post_react_path(id: find_react_id(post.id), post_id: post.id), method: :delete, class: "react-button"
+                            - if reacted?(post)
+                                = link_to post_react_path(post), method: :delete, class: "react-button"
                                     =image_tag('/assets/fillheart-icon.svg')
                                     p.liked Liked
                             - else
-                                =link_to post_reacts_path(post), method: :post, class: "react-button"
+                                =link_to post_react_path(post), method: :post, class: "react-button"
                                     =image_tag('/assets/fillheart-icon.svg')
                                     p Like
                                 

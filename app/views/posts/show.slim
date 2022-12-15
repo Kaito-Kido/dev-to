@@ -8,7 +8,7 @@
           .name
             =@post.user.name
           .date
-            =@post.user.created_at.strftime('%b %d')
+            =date_created_at(@post)
     .sp__head--title
       h1 =@post.title
   .sp__main 
@@ -18,10 +18,7 @@
       .cmt__header--h2 
         h2 Top comments (#{@post.comments.count})
     .cmt__input_field 
-      -if user_signed_in?
-        =image_tag(current_user.avatar)
-      - else 
-        =image_tag("https://res.cloudinary.com/practicaldev/image/fetch/s--RmY55OKL--/c_limit,f_auto,fl_progressive,q_auto,w_256/https://practicaldev-herokuapp-com.freetls.fastly.net/assets/devlogo-pwa-512.png")
+      =image_tag(avatar_when_comment)
       .cmt__input
         = form_for [@post, Comment.new], method: :post  do |form|
           .cmt__input--area
@@ -39,7 +36,7 @@
               =comment.user.name
               span
                 | •
-              =comment.created_at.strftime('%b %d')
+              =date_created_at(comment)
             =image_tag("/assets/threedot.svg")
             .div#edit_comment
               =link_to "Edit", edit_post_comment_path(post_id: @post.id, id: comment.id)

@@ -4,8 +4,12 @@ Rails.application.routes.draw do
     registration: 'register'
 }
   resources :posts do 
-    resources :reacts
+    resource :react, only: [:create, :destroy]
     resources :comments
+
+    # collections do
+    #   get :reacters_list
+    # end
   end
   resources :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

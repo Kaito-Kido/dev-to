@@ -2,7 +2,7 @@
 class PostsController < ApplicationController
   before_action :set_post, except: [:index]
   def index
-    @pagy, @posts = pagy(Post.all.includes(:user), items: 10)
+    @pagy, @posts = pagy(Post.all.includes(:user, :reacters), items: 10)
   end
 
   def show
