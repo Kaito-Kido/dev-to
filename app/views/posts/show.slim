@@ -18,7 +18,7 @@
       .cmt__header--h2 
         h2 Top comments (#{@post.comments.count})
     .cmt__input_field 
-      =image_tag(avatar_when_comment)
+      =image_tag(avatar(current_user))
       .cmt__input
         = form_for [@post, Comment.new], method: :post  do |form|
           .cmt__input--area
