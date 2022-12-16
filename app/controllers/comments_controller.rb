@@ -18,8 +18,8 @@ class CommentsController < ApplicationController
   end
 
   def update
-    comment.assign_attributes(comment_params)
-    if comment.save
+    @comment.assign_attributes(comment_params)
+    if @comment.save
       redirect_to post_path(@post)
     end
   end
@@ -31,7 +31,7 @@ class CommentsController < ApplicationController
 
   def find_comment
     @post = Post.find(params[:post_id])
-    @comment = Post.comments.find(params[:id])
+    @comment = @post.comments.find(params[:id])
   end
 
   
