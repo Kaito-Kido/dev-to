@@ -7,11 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 user_ids = User.pluck(:id)
-1000.times.each do |id|
-  Post.create(
-    user_id: user_ids.sample, 
-    title: Faker::Lorem.sentence,
-    content: Faker::Lorem.sentence
+Post.all.each do |post|
+  post.update(
+    status: :published
   )
 end
 

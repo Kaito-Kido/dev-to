@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @posts = @user.posts.where(status: :published).includes(:user, :reacters)
   end
 
   def edit
