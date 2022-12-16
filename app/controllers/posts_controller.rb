@@ -5,7 +5,7 @@ class PostsController < ApplicationController
 
 
   def index
-    @pagy, @posts = pagy(Post.where(status: :published).includes(:user, :reacters), items: 10)
+    @pagy, @posts = pagy(Post.published.includes(:user, :reacters), items: 10)
   end
 
   def new
@@ -14,11 +14,11 @@ class PostsController < ApplicationController
   end
 
   def edit
-    render layout: "new_post" 
+    render layout: "without_create_post" 
   end
 
   def archive
-    @posts = current_user.posts.where(status: :draft).or(current_user.posts.where(status: :pending))
+    @posts = current_user.posts.draft.or(current_user.posts.pending)
   end
 
   def destroy
@@ -30,8 +30,12 @@ class PostsController < ApplicationController
 
   def update
     @post.assign_attributes(post_params)
-    @post.status = params[:status]
-    if @post.save!
+    if params[:status] == "pending"
+      @post.status = :pending
+    else
+      @post.status = :draft
+    end
+    if @post.save
       redirect_to post_path(@post)
     else
       render :edit
@@ -46,7 +50,7 @@ class PostsController < ApplicationController
 
   private
   def post_params
-    params.require(:post).permit(:title, :content, :status)
+    params.require(:post).permit(:title, :content)
   end
 
   def set_post
