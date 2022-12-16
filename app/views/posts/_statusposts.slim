@@ -1,0 +1,31 @@
+.column-post
+        - posts.each do |post|
+            .post
+                = link_to user_path(post.user), class: "post-top"
+                    .avatar
+                        = image_tag(post.user.avatar, alt: "avatar")
+                    .name-date 
+                        .name
+                          =post.user.name
+                        .date
+                          =date_created_at(post)
+                    .status__text      
+                        p = post.status
+                    
+                .post-main 
+                    .post-title
+                        =link_to post_path(post) 
+                            =post.title
+                        .post-bottom-interact
+                            - if reacted?(post)
+                                = link_to post_react_path(post), method: :delete, class: "react-button"
+                                    =image_tag('/assets/fillheart-icon.svg')
+                                    p.liked Liked
+                            - else
+                                =link_to post_react_path(post), method: :post, class: "react-button"
+                                    =image_tag('/assets/fillheart-icon.svg')
+                                    p Like
+                                
+                            = link_to post_path(post, anchor: 'comment-section'), class: "react-button" 
+                                =image_tag('/assets/comment-icon.svg')
+                                p Add Comment 

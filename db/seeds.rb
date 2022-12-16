@@ -5,7 +5,15 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+#Add published status
+user_ids = User.pluck(:id)
+Post.all.each do |post|
+  post.update(
+    status: :published
+  )
+end
 
+#Create post
 user_ids = User.pluck(:id)
 1000.times.each do |id|
   Post.create(
