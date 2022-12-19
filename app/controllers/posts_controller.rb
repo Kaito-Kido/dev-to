@@ -5,8 +5,13 @@ class PostsController < ApplicationController
 
 
   def index
-    @posts = current_user.posts.draft.or(current_user.posts.pending).or(current_user.posts.declined)
-    @pending_posts = Post.pending
+    @posts = lambda do |is_admin|
+      if is_admin
+        return Post.pending
+      else
+        return current_user.posts.where.not(status: :published)
+      end
+    end
   end
 
   def new
@@ -27,15 +32,17 @@ class PostsController < ApplicationController
 
 
   def update
-    if params[:status] == "published" || params[:status] == "declined"
+    case params[:status]
+    when "pending"
+      @post.status = :pending
+      @post.assign_attributes(post_params)
+    when "published"
+      @post.status = params[:status]
+    when "declined"
       @post.status = params[:status]
     else
+      @post.status = :draft
       @post.assign_attributes(post_params)
-      if params[:status] == "pending"
-        @post.status = :pending
-      else
-        @post.status = :draft
-      end
     end
     if @post.save
       redirect_to post_path(@post)

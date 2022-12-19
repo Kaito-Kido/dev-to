@@ -1,8 +1,6 @@
 .contain
-  - if current_user.role == "admin" 
-    = render "/posts/status_posts", posts: @pending_posts
-  - else
-    = render "/posts/status_posts", posts: @posts 
+    = render "posts/status_posts", posts: @posts.call(current_user.admin?)
+
 
 
 

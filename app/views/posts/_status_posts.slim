@@ -30,7 +30,7 @@
                                 = link_to post_path(post, anchor: 'comment-section'), class: "react-button" 
                                     =image_tag('/assets/comment-icon.svg')
                                     p Add Comment 
-                            - if current_user.role == "admin"
+                            - if current_user.admin?
                                 .approve__button
                                     = link_to "Approve", post_path(id: post.id, status: :published), method: :patch
                                 .decline_button
