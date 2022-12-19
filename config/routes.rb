@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'posts#index'
+  root to: 'users#root_routing'
   devise_for :users, path_names: {
     registration: 'register'
 }

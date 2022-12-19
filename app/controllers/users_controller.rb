@@ -1,6 +1,22 @@
 class UsersController < ApplicationController
   
-  before_action :set_user
+  before_action :set_user, except: [:root_routing]
+
+  def root_routing
+    if user_signed_in?
+      path = case current_user.role
+      when 'admin'
+        dashboard_path
+      else
+        posts_path
+      end
+
+      redirect_to path
+    else
+      redirect_to posts_path
+    end
+  end
+
   def index
   end
 

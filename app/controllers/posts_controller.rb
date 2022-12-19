@@ -18,7 +18,8 @@ class PostsController < ApplicationController
   end
 
   def archive
-    @posts = current_user.posts.draft.or(current_user.posts.pending)
+    @posts = current_user.posts.draft.or(current_user.posts.pending).or(current_user.posts.declined)
+    @pending_posts = Post.pending
   end
 
   def destroy
@@ -29,11 +30,15 @@ class PostsController < ApplicationController
 
 
   def update
-    @post.assign_attributes(post_params)
-    if params[:status] == "pending"
-      @post.status = :pending
+    if params[:status] == "published" || params[:status] == "declined"
+      @post.status = params[:status]
     else
-      @post.status = :draft
+      @post.assign_attributes(post_params)
+      if params[:status] == "pending"
+        @post.status = :pending
+      else
+        @post.status = :draft
+      end
     end
     if @post.save
       redirect_to post_path(@post)
