@@ -20,7 +20,7 @@ class HomeController < ApplicationController
 
   def search
     if params[:search]
-      @posts = Post.where('title LIKE ?', "%#{params[:search]}%")
+      @posts = Post.where('title LIKE ?', "%#{params[:search]}%").includes(:user, :reacters)
     else
       @posts = Post.all
     end
