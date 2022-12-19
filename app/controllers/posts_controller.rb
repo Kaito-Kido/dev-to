@@ -5,7 +5,8 @@ class PostsController < ApplicationController
 
 
   def index
-    @pagy, @posts = pagy(Post.published.includes(:user, :reacters), items: 10)
+    @posts = current_user.posts.draft.or(current_user.posts.pending).or(current_user.posts.declined)
+    @pending_posts = Post.pending
   end
 
   def new
@@ -17,10 +18,6 @@ class PostsController < ApplicationController
     render layout: "without_create_post" 
   end
 
-  def archive
-    @posts = current_user.posts.draft.or(current_user.posts.pending).or(current_user.posts.declined)
-    @pending_posts = Post.pending
-  end
 
   def destroy
     if @post.destroy

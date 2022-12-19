@@ -2,10 +2,7 @@
     .logo-search-bar
         = link_to root_path
             =image_tag("https://dev-to-uploads.s3.amazonaws.com/uploads/logos/resized_logo_UQww2soKuUsjaOGNB38o.png", alt: "logo",class: "logo")
-        .search-bar 
-            input type="text" placeholder="Search..."
-                .search-logo
-                    =image_tag("/assets/search-icon.svg", alt: "search icon")
+        .createPost__title Create post
     - if user_signed_in?
         .rh__group_button
             .rh__group_button--right#drop-button
