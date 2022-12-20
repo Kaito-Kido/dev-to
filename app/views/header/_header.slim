@@ -4,7 +4,8 @@
             =image_tag("https://dev-to-uploads.s3.amazonaws.com/uploads/logos/resized_logo_UQww2soKuUsjaOGNB38o.png", alt: "logo",class: "logo")
         =form_with url: search_path, method: :get do |f|
             .search-bar 
-                =f.text_field :search, placeholder: "Search..."
+                =f.text_field :search, placeholder: "Search...", value: params[:search]
+                =f.hidden_field :type, value: params[:type] ? params[:type] : :post
                 .search-logo
                     =f.submit "Search", type: :image, src: "/assets/search-icon.svg"
     - if user_signed_in?
