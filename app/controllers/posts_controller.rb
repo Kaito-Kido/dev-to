@@ -6,9 +6,9 @@ class PostsController < ApplicationController
 
   def index
     if current_user.admin?
-      @posts =  Post.pending
+      @posts = Post.pending
     else
-      @posts current_user.posts.where.not(status: :published)
+      @posts = current_user.posts.where.not(status: :published)
     end
   end
 
