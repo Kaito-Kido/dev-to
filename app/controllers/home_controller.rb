@@ -20,10 +20,19 @@ class HomeController < ApplicationController
 
   def search
     if params[:search]
-      @posts = Post.where('title LIKE ?', "%#{params[:search]}%").includes(:user, :reacters)
+      if params[:order]
+        @posts = Post.where('title LIKE ?', "%#{params[:search]}%").order(created_at: params[:order]).includes(:user, :reacters)
+      else
+        @posts = Post.where('title LIKE ?', "%#{params[:search]}%").includes(:user, :reacters)
+      end
     else
-      @posts = Post.all
+      if params[:order]
+        @posts = Post.all.order(created_at: params[:order]).includes(:user, :reacters)
+      else
+        @posts = Post.all.includes(:user, :reacters)
+      end
     end
+
 
   end
 end

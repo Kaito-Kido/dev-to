@@ -1,0 +1,30 @@
+.left__container {
+  padding: 0 20px;
+  min-width: 100px;
+  max-width: 550px;
+  display: flex;
+  flex-direction: column;
+  h1 {
+    font-size: 26px;
+  }
+}
+
+.filter__row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+
+.filter__btn {
+  margin-right: 10px;
+  border: 0.2px solid black;
+  color: black;
+  background-color: transparent;
+  padding: 3px 6px;
+  border-radius: var(--radius);
+  &:hover {
+    background-color: black;
+    color: white;
+  }
+}

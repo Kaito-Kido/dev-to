@@ -1,5 +1,13 @@
 .contain
-  -if @posts.present?
-    = render 'posts/posts', posts: @posts
-  -else
-    p No result found
+  .left__container
+    h1 Search results for #{params[:search]}
+    .filter__row 
+      =form_with url: search_path, method: :get do |f|
+        =f.hidden_field :search, value: params[:search]
+        =f.button "Newest", name: :order, value: :desc, class: "filter__btn"
+        =f.button "Oldest", name: :order, value: :asc, class: "filter__btn"
+  .column-post
+    -if @posts.present?
+      = render 'posts/posts', posts: @posts
+    -else
+      p No result found
