@@ -21,7 +21,7 @@
                         =name_of_user(current_user)
                     span.header__email
                         = current_user.email
-                = link_to 'Dashboard', dashboard_path
+                = link_to 'Dashboard', posts_path
                 = link_to 'Setting', edit_user_registration_path
                 .rh__dropdown__line
                 = link_to 'Log out', destroy_user_session_path, method: :delete

@@ -5,12 +5,10 @@ class PostsController < ApplicationController
 
 
   def index
-    @posts = lambda do |is_admin|
-      if is_admin
-        return Post.pending
-      else
-        return current_user.posts.where.not(status: :published)
-      end
+    if current_user.admin?
+      @posts = Post.pending
+    else
+      @posts = current_user.posts.where.not(status: :published)
     end
   end
 
