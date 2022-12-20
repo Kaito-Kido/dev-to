@@ -23,9 +23,8 @@ class HomeController < ApplicationController
         @pgay, @res = pagy(User.all, items: 10)
       end
     end
-    if params[:order]
-      @res = @res.order(created_at: params[:order])
-    end
+
+    @res = @res.order(created_at: params[:order]) if params[:order]
 
 
   end
