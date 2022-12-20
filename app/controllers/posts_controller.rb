@@ -5,7 +5,11 @@ class PostsController < ApplicationController
 
 
   def index
-    @pagy, @posts = pagy(Post.published.includes(:user, :reacters), items: 10)
+    if current_user.admin?
+      @posts = Post.pending
+    else
+      @posts = current_user.posts.where.not(status: :published)
+    end
   end
 
   def new
@@ -17,9 +21,6 @@ class PostsController < ApplicationController
     render layout: "without_create_post" 
   end
 
-  def archive
-    @posts = current_user.posts.draft.or(current_user.posts.pending)
-  end
 
   def destroy
     if @post.destroy
@@ -29,11 +30,17 @@ class PostsController < ApplicationController
 
 
   def update
-    @post.assign_attributes(post_params)
-    if params[:status] == "pending"
+    case params[:status]
+    when "pending"
       @post.status = :pending
+      @post.assign_attributes(post_params)
+    when "published"
+      @post.status = params[:status]
+    when "declined"
+      @post.status = params[:status]
     else
       @post.status = :draft
+      @post.assign_attributes(post_params)
     end
     if @post.save
       redirect_to post_path(@post)

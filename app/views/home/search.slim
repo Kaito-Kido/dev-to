@@ -1,0 +1,5 @@
+.contain
+  -if @posts.present?
+    = render 'posts/posts', posts: @posts
+  -else
+    p No result found

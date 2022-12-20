@@ -41,6 +41,7 @@
   height: fit-content;
   background-color: white;
   border-radius: 5px;
+  min-width: 600px;
 }
 
 .post-top {
@@ -60,6 +61,7 @@
     margin: 0;
     background-color: blueviolet;
     border-radius: var(--radius);
+    padding: 5px 10px;
   }
   &:hover {
     text-decoration: none;
@@ -125,6 +127,34 @@
   font-size: 0.875rem;
   line-height: 1.25;
   gap: 10px;
+}
+
+.post__bottom--approve {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.approve__button {
+  a {
+    color: white;
+    padding: 5px 10px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    background-color: var(--bg-hover);
+    font-size: 18px;
+  }
+}
+
+.decline_button {
+  a {
+    color: white;
+    padding: 5px 10px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    background-color: #ee4b2b;
+    font-size: 18px;
+  }
 }
 
 .react-button {

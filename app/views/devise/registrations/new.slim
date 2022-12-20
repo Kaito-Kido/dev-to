@@ -22,8 +22,8 @@
           = f.label :password_confirmation, class: "label"
           = f.password_field :password_confirmation, autocomplete: "new-password", class: "text-field"
 
-        .submit-login-btn
-          = f.submit "Sign up"
+        .signup__btn
+          = f.button "Sign up", name: 'role', value: 'user'
 
 
       .registration-hr
