@@ -27,4 +27,9 @@
     background-color: black;
     color: white;
   }
+  &--type {
+    @extend .filter__btn;
+    margin-top: 10px;
+    width: 100%;
+  }
 }

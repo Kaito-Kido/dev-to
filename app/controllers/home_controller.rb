@@ -9,18 +9,22 @@ class HomeController < ApplicationController
   end
 
   def search
-    if params[:search]
-      if params[:order]
-        @posts = Post.where('title LIKE ?', "%#{params[:search]}%").order(created_at: params[:order]).includes(:user, :reacters)
+    case params[:type]    
+    when "post"
+      if params[:search]
+        @pagy, @res = pagy(Post.where('title LIKE ?', "%#{params[:search]}%").includes(:user, :reacters), items: 10)
       else
-        @posts = Post.where('title LIKE ?', "%#{params[:search]}%").includes(:user, :reacters)
+        @pagy, @res = pagy(Post.all.includes(:user, :reacters), items: 10)
       end
-    else
-      if params[:order]
-        @posts = Post.all.order(created_at: params[:order]).includes(:user, :reacters)
+    when "user"
+      if params[:search]
+        @pagy, @res = pagy(User.where('name LIKE ?', "%#{params[:search]}%"), items: 10)
       else
-        @posts = Post.all.includes(:user, :reacters)
+        @pgay, @res = pagy(User.all, items: 10)
       end
+    end
+    if params[:order]
+      @res = @res.order(created_at: params[:order])
     end
 
 
