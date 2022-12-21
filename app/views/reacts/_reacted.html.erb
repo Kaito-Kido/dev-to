@@ -1,0 +1,5 @@
+<%=link_to post_react_path(post), remote: true, method: :delete, class: "react-button", id: "like-#{post.id}", data: { "post-id": post.id } do%>
+  <span class="liked">
+    <img src="/assets/reacted.svg">
+  <p class="liked">Liked</p>
+<%end%>

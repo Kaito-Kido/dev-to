@@ -8,6 +8,8 @@ import Turbolinks from "turbolinks";
 import * as ActiveStorage from "@rails/activestorage";
 import "channels";
 import "./login";
+import "./like";
+import "./dropdown";
 require("jquery");
 Rails.start();
 Turbolinks.start();

@@ -4,7 +4,8 @@
 
 .contain {
   background-color: var(--body-bg);
-  height: 100%;
+  min-height: 100vh;
+  height: fit-content;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -51,9 +52,16 @@
   flex-direction: row;
   text-decoration: none;
   color: black;
+  justify-content: space-between;
 }
+
+.post__top--left {
+  display: flex;
+  align-items: center;
+}
+
 .status__text {
-  width: 100%;
+  width: fit-content;
   display: flex;
   justify-content: flex-end;
   p {
@@ -96,6 +104,7 @@
   color: rgb(82, 82, 82);
   cursor: pointer;
   margin-top: 3px;
+  width: fit-content;
 }
 .post-main {
   padding-left: calc(var(--su-7) + var(--su-2));
@@ -133,6 +142,7 @@
   display: flex;
   width: 100%;
   justify-content: space-between;
+  position: relative;
 }
 
 .approve__button {
@@ -178,6 +188,18 @@
       color: #0d6efd;
     }
   }
+  span {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    &.liked {
+      fill: #0d6efd;
+    }
+  }
+}
+
+.hide {
+  display: none;
 }
 
 .sp__head {
@@ -301,6 +323,9 @@
   border: 1px solid black;
   img {
     cursor: pointer;
+    &:hover {
+      background-color: rgba(59, 73, 223, 0.1);
+    }
   }
 }
 
@@ -328,7 +353,7 @@
   padding: 0 16px;
 }
 
-#edit_comment {
+.edit_comment__button {
   padding: 8px;
   border: 0.5px solid rgba(0, 0, 0, 0.3);
   background-color: white;
@@ -336,7 +361,7 @@
   right: 5px;
   top: 100%;
   border-radius: var(--radius);
-  display: flex;
+  display: none;
   flex-direction: column;
   a {
     padding: 8px;
@@ -349,6 +374,13 @@
     }
   }
 }
+.edit_post__button {
+  @extend .edit_comment__button;
+  a {
+    font-size: 16px;
+    font-weight: 500;
+  }
+}
 
 .post__container {
   border-radius: var(--radius);
@@ -358,7 +390,7 @@
   max-width: 1280px;
   margin: auto;
   width: 100%;
-  height: calc(100vh - 56px - 16px);
+  height: 100%;
 }
 
 .post__container--title {
@@ -435,4 +467,14 @@
   color: white;
   outline: 0;
   border: 0;
+}
+
+.drop__btn {
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(59, 73, 223, 0.1);
+  }
 }

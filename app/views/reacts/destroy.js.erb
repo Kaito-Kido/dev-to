@@ -1,0 +1,3 @@
+$("a[data-post-id=<%=@react.post_id%>]").replaceWith(
+  `<%= j render "reacts/react", post: @react.post %>`
+)
