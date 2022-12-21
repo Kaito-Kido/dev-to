@@ -4,7 +4,10 @@
       .post__container--title
         =form.text_field :title, autofocus: true, placeholder: "New post title here...", class: "post__title"
       .post__container--body
-        =form.text_area :content, autofocus: true,size: "30x15", placeholder: "Write your post current here...", class: "post__body"
+        =form.text_area :content, autofocus: true,size: "30x21", placeholder: "Write your post current here...", class: "post__body"
       .post__container--bottom
-        =form.button :Submit, name: "status", value: "pending", class: "publish__button"
+        - if current_user.admin?
+          = form.button :Submit, name: "status", value: "published", class: "publish__button"
+        - else 
+          = form.button :Submit, name: "status", value: "pending", class: "publish__button"
         =form.button "Save draft", name: "status", value: "draft", class: "save_draft__button"

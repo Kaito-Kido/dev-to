@@ -4,7 +4,7 @@
       .cmt__header--h2 
         h2 Edit comment
     .cmt__input_field
-      =image_tag(current_user.avatar)
+      =image_tag(avatar_when_comment)
       .cmt__input
         = form_for [@post, @comment], method: :patch  do |form|
           .cmt__input--area

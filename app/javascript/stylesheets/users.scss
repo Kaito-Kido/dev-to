@@ -175,10 +175,13 @@
     text-align: center;
     text-decoration: none;
     cursor: pointer;
-    background-color: var(--focus);
+    background-color: rgba(67, 56, 202);
     color: white;
     outline: 0;
     border: 0;
+    &:hover {
+      background-color: rgba(79, 70, 229);
+    }
   }
 }
 

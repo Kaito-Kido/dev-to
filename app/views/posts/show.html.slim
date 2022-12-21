@@ -33,7 +33,7 @@
 
     - @post.comments.each do |comment|
       .cmt__output_field
-        =image_tag(comment.user.avatar)
+        =image_tag(avatar_when_comment)
         .cmt__output_area
           .cmt__output--head
             .cmt__date_name
@@ -41,8 +41,8 @@
               span
                 | •
               =date_created_at(comment)
-            =image_tag("/assets/threedot.svg")
-            .div#edit_comment
+            =image_tag("/assets/threedot.svg", id: "drop-comment-#{comment.id}") 
+            div.edit_comment__button id="edit-comment-#{comment.id}"
               =link_to "Edit", edit_post_comment_path(post_id: @post.id, id: comment.id)
               =link_to "Delete", post_comment_path(post_id: @post.id, id: comment.id), method: :delete, data: {confirm: "Are you sure?"}
           .cmt__content 
