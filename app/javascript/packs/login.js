@@ -1,4 +1,4 @@
-$(document).on("turbolinks:load", function () {
+$(document).on("turbo:load", function () {
   $("#drop-button").on("click", function () {
     if ($("#menu").is(":visible")) {
       $("#menu").hide();

@@ -5,7 +5,9 @@ class HomeController < ApplicationController
   end
 
   def index
-    @pagy, @posts = pagy(Post.published.includes(:user, :reacters), items: 10)
+    @pagy, @posts = pagy_countless(Post.published.includes(:user, :reacters), items: 10)
+
+    render partial: "home/scrollable_list" if params[:page]
   end
 
   def search

@@ -2,6 +2,7 @@
   "name": "dev-to",
   "private": true,
   "dependencies": {
+    "@hotwired/turbo-rails": "^7.2.4",
     "@popperjs/core": "^2.11.6",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
@@ -10,7 +11,6 @@
     "bootstrap": "^5.2.3",
     "jquery": "^3.6.1",
     "popper.js": "^1.16.1",
-    "turbolinks": "^5.2.0",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12"
   },

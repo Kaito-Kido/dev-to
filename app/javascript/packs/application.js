@@ -4,15 +4,13 @@
 // that code so it'll be compiled.
 
 import Rails from "@rails/ujs";
-import Turbolinks from "turbolinks";
 import * as ActiveStorage from "@rails/activestorage";
 import "channels";
 import "./login";
-import "./like";
 import "./dropdown";
 require("jquery");
 Rails.start();
-Turbolinks.start();
 ActiveStorage.start();
 import "bootstrap";
 import "../stylesheets/application";
+import "@hotwired/turbo-rails";
