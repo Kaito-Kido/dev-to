@@ -26,6 +26,13 @@
     align-items: center;
     flex-direction: column;
   }
+
+  &--scroll {
+    @extend .contain;
+    flex-direction: column;
+    align-items: center;
+    width: auto;
+  }
 }
 
 .column-post {
@@ -81,6 +88,9 @@
   img {
     height: 32px;
     width: 32px;
+  }
+  img {
+    border-radius: 50%;
   }
   margin-right: 8px;
   cursor: pointer;
@@ -363,6 +373,7 @@
   border-radius: var(--radius);
   display: none;
   flex-direction: column;
+  z-index: 2;
   a {
     padding: 8px;
     text-decoration: none;

@@ -9,7 +9,7 @@ class HomeController < ApplicationController
 
     render partial: "home/scrollable_list" if params[:page]
   end
-
+  
   def search
     case params[:type]    
     when "post"
@@ -22,13 +22,16 @@ class HomeController < ApplicationController
       if params[:search]
         @pagy, @res = pagy(User.where('name LIKE ?', "%#{params[:search]}%"), items: 10)
       else
-        @pgay, @res = pagy(User.all, items: 10)
+        @pagy, @res = pagy(User.all, items: 10)
       end
     end
     if params[:order]
       @res = @res.order(created_at: params[:order])
+      # respond_to do |format|
+      #   format.js
+      # end
     end
-
-
   end
+
+
 end
