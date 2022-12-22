@@ -27,11 +27,7 @@ class HomeController < ApplicationController
     end
     if params[:order]
       @res = @res.order(created_at: params[:order])
-      # respond_to do |format|
-      #   format.js
-      # end
     end
   end
-
 
 end

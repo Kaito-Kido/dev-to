@@ -1,33 +1,29 @@
 .column-post
         - posts.each do |post|
             .post
-                = link_to user_path(post.user), class: "post-top"
-                    .post__top--left
-                        .avatar
-                            = image_tag(avatar(post.user), alt: "avatar")
-                        .name-date 
-                            .name
-                                =post.user.name
-                            .date
-                                =date_created_at(post)
-                    .status__text      
-                        p = post.status
+                .post--approve
+                    = link_to user_path(post.user), class: "post-top"
+                        .post__top--left
+                            .avatar
+                                = image_tag(avatar(post.user), alt: "avatar")
+                            .name-date 
+                                .name
+                                    =post.user.name
+                                .date
+                                    =date_created_at(post)
+                    .post__top--right
+                        .status__text      
+                            p = post.status
+                        
+                        - if current_user.admin?
+                            =image_tag("/assets/threedot.svg", id: "drop-post-#{post.id}",class: "drop__btn") 
+                            div.edit_post__button id="edit-post-#{post.id}"
+                                =link_to "Approve", post_path(id: post.id, status: :published), method: :patch
+                                =link_to "Delete", post_path(id: post.id, staus: :declined), method: :patch
                     
                 .post-main 
                     .post-title
                         =link_to post_path(post) 
                             =post.title
-                        .post__bottom--approve
-                            .post-bottom-interact
-                                - if reacted?(post)
-                                    = render 'reacts/reacted', post: post
-                                - else
-                                    = render 'reacts/react', post: post
-                                = link_to post_path(post, anchor: 'comment-section'), class: "react-button" 
-                                    =image_tag('/assets/comment-icon.svg')
-                                    p Add Comment 
-                            - if current_user.admin?
-                                =image_tag("/assets/threedot.svg", id: "drop-post-#{post.id}",class: "drop__btn") 
-                                div.edit_post__button id="edit-post-#{post.id}"
-                                    =link_to "Approve", post_path(id: post.id, status: :published), method: :patch
-                                    =link_to "Delete", post_path(id: post.id, staus: :declined), method: :patch
+
+                            

@@ -6,9 +6,22 @@ class PostsController < ApplicationController
 
   def index
     if current_user.admin?
-      @posts = Post.pending
+      if params[:type] == "user"
+        @pagy, @res = pagy_countless(User.all, items:10)
+      else
+        case params[:status]
+        when "pending"
+          @pagy, @res = pagy_countless(Post.pending, items:10)
+        when "published"
+          @pagy, @res = pagy_countless(Post.published, items:10)
+        when "draft"
+          @pagy, @res = pagy_countless(Post.draft, items:10)
+        else
+          @pagy, @res = pagy_countless(Post.all, items:10)
+        end
+      end
     else
-      @posts = current_user.posts.where.not(status: :published)
+      @pagy, @posts = pagy_countless(current_user.posts, items:10)
     end
   end
 
