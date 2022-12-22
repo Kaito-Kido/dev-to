@@ -1,4 +1,4 @@
-$(document).on("turbolinks:load", function () {
+$(document).on("turbo:load", function () {
   $('img[id^="drop-comment-"]').on("click", function (e) {
     const id = e.currentTarget.id.match(/\d+/)[0];
     if ($("#edit-comment-" + id).is(":visible")) {
