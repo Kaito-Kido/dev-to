@@ -7,7 +7,13 @@ class PostsController < ApplicationController
   def index
     if current_user.admin?
       if params[:type] == "user"
-        @pagy, @res = pagy_countless(User.all, items:10)
+        if params[:most]
+          post_id = React.group(:post_id).order("count_all DESC").count.first[0]
+          post = Post.where(id: post_id).first
+          @res = User.where(id: post.user_id)
+        else
+          @pagy, @res = pagy_countless(User.all, items:10)
+        end
       else
         case params[:status]
         when "pending"
