@@ -31,8 +31,8 @@
             .submit-btn 
               =form.submit "Submit"
 
-    - @post.comments.each do |comment|
-      .cmt__output_field
+    - @post.comments.order(created_at: :desc).each do |comment|
+      div class="cmt__output_field" id="#{dom_id(comment)}"
         =image_tag(avatar_when_comment)
         .cmt__output_area
           .cmt__output--head

@@ -2,18 +2,19 @@
   .left__container
     h1 Search results for #{params[:search]}
     .filter__row 
-      =form_with url: search_path, method: :get do |f|
-        =f.hidden_field :search, value: params[:search]
-        =f.hidden_field :type, value: params[:type]
-        =f.button "Newest", name: :order, value: :desc, class: "filter__btn"
-        =f.button "Oldest", name: :order, value: :asc, class: "filter__btn"
-        =f.button "Post", name: :type, value: :post, class: "filter__btn--type"
-        =f.button "People", name: :type, value: :user, class: "filter__btn--type"
-  - if params[:type] == "post"
-    = render 'posts/posts', posts: @res
-  - elsif params[:type] == "user"
-    = render 'users/users', users: @res
+      = link_to "Newest", search_path(search: params[:search], type: params[:type], order: :desc), class: params[:order] == "desc" ? 'filter__btn filter--active' : 'filter__btn'
+      = link_to "Oldest", search_path(search: params[:search], type: params[:type], order: :asc), class: params[:order] == "asc" ? 'filter__btn filter--active' : 'filter__btn'
+      = link_to "Post", search_path(search: params[:search], type: :post), class: params[:type] == "post" ? 'filter__btn--type filter--active' : 'filter__btn--type'
+      = link_to "People", search_path(search: params[:search], type: :user), class: params[:type] == "user" ? 'filter__btn--type filter--active' : 'filter__btn--type'
+  - if params[:type] == "post" && @res.present?
+    = turbo_frame_tag "posts-page-#{@pagy.page}", class: "contain--scroll"
+      = render "posts/posts", posts: @res
+      = render partial: "home/next_page"
+  - elsif params[:type] == "user" && @res.present?
+    = turbo_frame_tag "posts-page-#{@pagy.page}", class: "contain--scroll"
+      = render 'users/users', users: @res
+      = render partial: "home/next_page"
   - else
     p No result found
 
-==pagy_bootstrap_nav(@pagy)
+

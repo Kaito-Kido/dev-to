@@ -6,14 +6,34 @@ class PostsController < ApplicationController
 
   def index
     if current_user.admin?
-      @posts = Post.pending
+      if params[:type] == "user"
+        if params[:most]
+          @pagy, @res = pagy_countless(User.joins(:posts).distinct.select('users.*, COUNT(posts.reacts_count) AS user_reacts_count').group('id').order(user_reacts_count: :desc), items: 10)
+        else
+          @pagy, @res = pagy_countless(User.all, items:10)
+        end
+      else
+        if params[:most]
+          @pagy, @res = pagy_countless(Post.published.order(reacts_count: :desc), items: 10)
+        elsif params[:status].present? && Post.statuses.keys.include?(params[:status])
+          @pagy, @res = pagy_countless(Post.send(params[:status]), items:10)
+        else
+          @pagy, @res = pagy_countless(Post.all, items:10)
+        end
+      end
     else
-      @posts = current_user.posts.where.not(status: :published)
+      if params[:most]
+        @pagy, @posts = pagy_countless(current_user.posts.published.order(reacts_count: :desc), items: 10)
+      elsif params[:status].present? && Post.statuses.keys.include?(params[:status])
+        @pagy, @posts = pagy_countless(current_user.posts.send(params[:status]), items:10)
+      else
+        @pagy, @posts = pagy_countless(current_user.posts, items:10)
+      end
     end
   end
 
   def new
-    @post = Post.create(status: :draft, user_id: current_user.id)
+    @post = Post.create(title: "Untitled", status: :draft, user_id: current_user.id)
     redirect_to edit_post_path(@post)
   end
 
@@ -36,6 +56,9 @@ class PostsController < ApplicationController
       @post.assign_attributes(post_params)
     when "published"
       @post.status = params[:status]
+      if Post.find(params[:id]).user.admin?
+        @post.assign_attributes(post_params)
+      end
     when "declined"
       @post.status = params[:status]
     else

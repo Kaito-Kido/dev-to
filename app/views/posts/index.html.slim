@@ -1,5 +1,8 @@
 .contain
-    = render "posts/status_posts", posts: @posts
+  - if current_user.admin?
+    = render "posts/admin_dashboard", res: @res
+  - else
+    = render "posts/user_dashboard", posts: @posts
 
 
 
