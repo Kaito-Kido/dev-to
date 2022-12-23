@@ -8,11 +8,11 @@ class PostsController < ApplicationController
     if current_user.admin?
       if params[:type] == "user"
         if params[:most]
-          posts_id = React.group(:post_id).order("count_all DESC").count
-          @res = posts_id.keys.uniq.map do |id|
-            Post.find(id).user
+          @pagy, posts = pagy_countless(Post.order(reacts_count: :DESC).includes(:user), items: 10)
+          @res = posts.map do |post|
+            post.user
           end
-          @res = @res.uniq
+          
         else
           @pagy, @res = pagy_countless(User.all, items:10)
         end

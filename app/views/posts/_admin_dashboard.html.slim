@@ -10,7 +10,9 @@
       =link_to "User with the most reacted post", posts_path(type: :user, most: true), class: params[:most] ? 'filter__btn--type filter--active' : 'filter__btn--type'
 - if params[:type] == "user" && res.present?
   - if params[:most] 
-    = render'users/users', users: res
+    = turbo_frame_tag "posts-page-#{@pagy.page}", class: "contain--scroll", target: "_top"
+      = render'users/users', users: res
+      = render partial: "home/next_page"
   -elsif res.present?
     = turbo_frame_tag "posts-page-#{@pagy.page}", class: "contain--scroll", target: "_top"
       = render 'users/users', users: res
