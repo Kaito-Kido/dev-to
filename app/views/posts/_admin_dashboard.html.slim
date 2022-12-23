@@ -5,9 +5,10 @@
       = link_to "Published Posts", posts_path(type: :post, status: :published), class: params[:status] == "published" ? 'filter__btn--type filter--active' : 'filter__btn--type'
       = link_to "Pending Posts", posts_path(type: :post, status: :pending), class: params[:status] == "pending" ? 'filter__btn--type filter--active' : 'filter__btn--type'
       = link_to "Draft Posts", posts_path(type: :post, status: :draft), class: params[:status] == "draft" ? 'filter__btn--type filter--active' : 'filter__btn--type'
+      = link_to "Most reacts post", posts_path(type: :post, most: true), class: params[:most] && params[:type] == "post" ? 'filter__btn--type filter--active' : 'filter__btn--type'
     = link_to "List Users", posts_path(type: :user), class: params[:type] == "user" ? 'filter__btn--type filter--active' : 'filter__btn--type'
     div class="selection__contain #{"hide" if params[:type] != "user"}" 
-      =link_to "User with the most reacted post", posts_path(type: :user, most: true), class: params[:most] ? 'filter__btn--type filter--active' : 'filter__btn--type'
+      =link_to "User with the most reacts", posts_path(type: :user, most: true), class: params[:most]  && params[:type] == "user" ? 'filter__btn--type filter--active' : 'filter__btn--type'
 - if params[:type] == "user" && res.present?
   - if params[:most] 
     = turbo_frame_tag "posts-page-#{@pagy.page}", class: "contain--scroll", target: "_top"

@@ -8,23 +8,24 @@ class PostsController < ApplicationController
     if current_user.admin?
       if params[:type] == "user"
         if params[:most]
-          @pagy, posts = pagy_countless(Post.order(reacts_count: :DESC).includes(:user), items: 10)
-          @res = posts.map do |post|
-            post.user
-          end
-          
+          @pagy, @res = pagy_countless(User.joins(:posts).distinct.select('users.*, COUNT(posts.reacts_count) AS user_reacts_count').group('id').order(user_reacts_count: :desc), items: 10)
         else
           @pagy, @res = pagy_countless(User.all, items:10)
         end
       else
-        if params[:status].present? && Post.statuses.keys.include?(params[:status])
+        if params[:most]
+          @pagy, @res = pagy_countless(Post.published.order(reacts_count: :desc), items: 10)
+        elsif params[:status].present? && Post.statuses.keys.include?(params[:status])
           @pagy, @res = pagy_countless(Post.send(params[:status]), items:10)
         else
           @pagy, @res = pagy_countless(Post.all, items:10)
         end
       end
     else
-      if params[:status].present? && Post.statuses.keys.include?(params[:status])
+      byebug
+      if params[:most]
+        @pagy, @posts = pagy_countless(current_user.posts.published.order(reacts_count: :desc), items: 10)
+      elsif params[:status].present? && Post.statuses.keys.include?(params[:status])
         @pagy, @posts = pagy_countless(current_user.posts.send(params[:status]), items:10)
       else
         @pagy, @posts = pagy_countless(current_user.posts, items:10)
