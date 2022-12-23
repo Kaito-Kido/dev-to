@@ -8,20 +8,17 @@ class PostsController < ApplicationController
     if current_user.admin?
       if params[:type] == "user"
         if params[:most]
-          post_id = React.group(:post_id).order("count_all DESC").count.first[0]
-          post = Post.where(id: post_id).first
-          @res = User.where(id: post.user_id)
+          posts_id = React.group(:post_id).order("count_all DESC").count
+          @res = posts_id.keys.uniq.map do |id|
+            Post.find(id).user
+          end
+          @res = @res.uniq
         else
           @pagy, @res = pagy_countless(User.all, items:10)
         end
       else
-        case params[:status]
-        when "pending"
-          @pagy, @res = pagy_countless(Post.pending, items:10)
-        when "published"
-          @pagy, @res = pagy_countless(Post.published, items:10)
-        when "draft"
-          @pagy, @res = pagy_countless(Post.draft, items:10)
+        if params[:status].present? && Post.statuses.keys.include?(params[:status])
+          @pagy, @res = pagy_countless(Post.send(params[:status]), items:10)
         else
           @pagy, @res = pagy_countless(Post.all, items:10)
         end
