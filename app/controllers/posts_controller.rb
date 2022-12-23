@@ -24,12 +24,16 @@ class PostsController < ApplicationController
         end
       end
     else
-      @pagy, @posts = pagy_countless(current_user.posts, items:10)
+      if params[:status].present? && Post.statuses.keys.include?(params[:status])
+        @pagy, @posts = pagy_countless(current_user.posts.send(params[:status]), items:10)
+      else
+        @pagy, @posts = pagy_countless(current_user.posts, items:10)
+      end
     end
   end
 
   def new
-    @post = Post.create(status: :draft, user_id: current_user.id)
+    @post = Post.create(title: "Untitled", status: :draft, user_id: current_user.id)
     redirect_to edit_post_path(@post)
   end
 

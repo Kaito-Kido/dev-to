@@ -4,7 +4,8 @@ class Post < ApplicationRecord
   has_many :reacters, through: :reacts, source: :user
   has_many :comments, dependent: :destroy
 
-  validates :title, :content, presence: true, if: :is_not_draft?
+  validates :content, presence: true, if: :is_not_draft?
+  validates :title, presence: true
   enum status: [:draft, :pending, :published, :declined]
 
   def is_not_draft?
