@@ -52,6 +52,9 @@ class PostsController < ApplicationController
       @post.assign_attributes(post_params)
     when "published"
       @post.status = params[:status]
+      if Post.find(params[:id]).user.admin?
+        @post.assign_attributes(post_params)
+      end
     when "declined"
       @post.status = params[:status]
     else

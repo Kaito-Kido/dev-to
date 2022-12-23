@@ -1,26 +1,30 @@
 .contain
-  .left__container
-    .filter__row 
-      = link_to "List Posts", posts_path(type: :post), class: params[:type] == "post" ? 'filter__btn--type filter--active' : 'filter__btn--type'
-      div class="selection__contain #{"hide" if params[:type] != "post"}"
-        = link_to "Published Posts", posts_path(type: :post, status: :published), class: params[:status] == "published" ? 'filter__btn--type filter--active' : 'filter__btn--type'
-        = link_to "Pending Posts", posts_path(type: :post, status: :pending), class: params[:status] == "pending" ? 'filter__btn--type filter--active' : 'filter__btn--type'
-        = link_to "Draft Posts", posts_path(type: :post, status: :draft), class: params[:draft] == "draft" ? 'filter__btn--type filter--active' : 'filter__btn--type'
-      = link_to "List Users", posts_path(type: :user), class: params[:type] == "user" ? 'filter__btn--type filter--active' : 'filter__btn--type'
-      div class="selection__contain #{"hide" if params[:type] != "user"}" 
-        =link_to "User with the most reacted post", posts_path(type: :user, most: true), class: params[:most] ? 'filter__btn--type filter--active' : 'filter__btn--type'
-  - if params[:type] == "user"
-    - if params[:most] 
-      = render'users/users', users: @res
-    -else
+  - if current_user.admin?
+    .left__container
+      .filter__row 
+        = link_to "List Posts", posts_path(type: :post), class: params[:type] == "post" ? 'filter__btn--type filter--active' : 'filter__btn--type'
+        div class="selection__contain #{"hide" if params[:type] != "post"}"
+          = link_to "Published Posts", posts_path(type: :post, status: :published), class: params[:status] == "published" ? 'filter__btn--type filter--active' : 'filter__btn--type'
+          = link_to "Pending Posts", posts_path(type: :post, status: :pending), class: params[:status] == "pending" ? 'filter__btn--type filter--active' : 'filter__btn--type'
+          = link_to "Draft Posts", posts_path(type: :post, status: :draft), class: params[:draft] == "draft" ? 'filter__btn--type filter--active' : 'filter__btn--type'
+        = link_to "List Users", posts_path(type: :user), class: params[:type] == "user" ? 'filter__btn--type filter--active' : 'filter__btn--type'
+        div class="selection__contain #{"hide" if params[:type] != "user"}" 
+          =link_to "User with the most reacted post", posts_path(type: :user, most: true), class: params[:most] ? 'filter__btn--type filter--active' : 'filter__btn--type'
+    - if params[:type] == "user"
+      - if params[:most] 
+        = render'users/users', users: @res
+      -else
+        = turbo_frame_tag "posts-page-#{@pagy.page}", class: "contain--scroll", target: "_top"
+          = render 'users/users', users: @res
+          = render partial: "home/next_page"
+    - else
       = turbo_frame_tag "posts-page-#{@pagy.page}", class: "contain--scroll", target: "_top"
-        = render 'users/users', users: @res
+        = render "posts/status_posts", posts: @res
         = render partial: "home/next_page"
   - else
     = turbo_frame_tag "posts-page-#{@pagy.page}", class: "contain--scroll", target: "_top"
-      = render "posts/status_posts", posts: @res
-      = render partial: "home/next_page"
-
+        = render "posts/status_posts", posts: @posts
+        = render partial: "home/next_page"
 
 
 

@@ -15,7 +15,7 @@
                         .status__text      
                             p = post.status
                         
-                        - if current_user.admin?
+                        - if current_user.admin? && post.status == "pending"
                             =image_tag("/assets/threedot.svg", id: "drop-post-#{post.id}",class: "drop__btn") 
                             div.edit_post__button id="edit-post-#{post.id}"
                                 =link_to "Approve", post_path(id: post.id, status: :published), method: :patch
