@@ -2,17 +2,7 @@
   - if current_user.admin?
     = render "posts/admin_dashboard", res: @res
   - else
-    .left__container
-      .filter__row 
-        = link_to "Published Posts", posts_path(status: :published), class: params[:status] == "published" ? 'filter__btn--type filter--active' : 'filter__btn--type'
-        = link_to "Pending Posts", posts_path(status: :pending), class: params[:status] == "pending" ? 'filter__btn--type filter--active' : 'filter__btn--type'
-        = link_to "Draft Posts", posts_path(type: :post, status: :draft), class: params[:status] == "draft" ? 'filter__btn--type filter--active' : 'filter__btn--type'
-    - if @posts.present?
-      = turbo_frame_tag "posts-page-#{@pagy.page}", class: "contain--scroll", target: "_top"
-          = render "posts/status_posts", posts: @posts
-          = render partial: "home/next_page"
-    - else
-      p No result found
+    = render "posts/user_dashboard", posts: @posts
 
 
 
