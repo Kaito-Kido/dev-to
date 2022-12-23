@@ -22,7 +22,6 @@ class PostsController < ApplicationController
         end
       end
     else
-      byebug
       if params[:most]
         @pagy, @posts = pagy_countless(current_user.posts.published.order(reacts_count: :desc), items: 10)
       elsif params[:status].present? && Post.statuses.keys.include?(params[:status])
