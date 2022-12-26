@@ -304,3 +304,18 @@
   padding: 20px;
   width: 100%;
 }
+
+.input__avatar {
+  display: flex;
+
+  img {
+    height: 48px;
+    width: 48px;
+    border-radius: 50%;
+  }
+
+  input {
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+}

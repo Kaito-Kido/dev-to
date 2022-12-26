@@ -10,10 +10,10 @@ module UsersHelper
   end
 
   def avatar(user)
-    if user.avatar.present?
+    if user.avatar.attached?
       user.avatar
     else
-      "https://res.cloudinary.com/practicaldev/image/fetch/s--AqDMneXM--/c_fill,f_auto,fl_progressive,h_90,q_auto,w_90/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/698413/b3883b82-8e7a-4066-a100-b4281adc4863.jpeg"
+      "https://st4.depositphotos.com/4329009/19956/v/600/depositphotos_199564354-stock-illustration-creative-vector-illustration-default-avatar.jpg"
     end    
   end
 

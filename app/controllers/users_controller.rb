@@ -16,6 +16,7 @@ class UsersController < ApplicationController
 
   def update
     @user.assign_attributes(user_params)
+    @user.avatar.attach(params[:user][:avatar])
     if @user.save
       redirect_to user_path
     else
