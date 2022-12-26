@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   before_action :find_comment, only: [:update, :edit, :destroy]
   before_action :authenticate_user!
+
   def create
     @post = Post.find(params[:post_id])
     @comment = Comment.new(post_id: @post.id, user_id: current_user.id, content: params[:comment][:content])

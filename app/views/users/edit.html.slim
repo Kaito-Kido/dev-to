@@ -13,8 +13,10 @@
           = f.text_field :name, autofocus: true, autocomplete: "name", class: "text-field"
 
         .input-field 
-          =f.label :avatar, class: "label"
-          = f.text_field :avatar, autofocus: true, autocomplete: "name", class: "text-field"
+          = f.label :avatar, class: "label"
+          .input__avatar
+            = image_tag @user.avatar, id: "img_prev"
+            = f.file_field :avatar, direct_upload: true, value: "Drop an image here", id: "avatar_input"
 
 
 

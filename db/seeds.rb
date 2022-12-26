@@ -6,22 +6,22 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 #Add published status
-user_ids = User.pluck(:id)
-Post.all.each do |post|
-  post.update(
-    status: :published
-  )
-end
+# user_ids = User.pluck(:id)
+# Post.all.each do |post|
+#   post.update(
+#     status: :published
+#   )
+# end
 
 #Create post
-user_ids = User.pluck(:id)
-1000.times.each do |id|
-  Post.create(
-    user_id: user_ids.sample, 
-    title: Faker::Lorem.sentence,
-    content: Faker::Lorem.sentence
-  )
-end
+# user_ids = User.pluck(:id)
+# 1000.times.each do |id|
+#   Post.create(
+#     user_id: user_ids.sample, 
+#     title: Faker::Lorem.sentence,
+#     content: Faker::Lorem.sentence
+#   )
+# end
 
 # 100.times.each do |id|
 #   User.create!(
@@ -33,3 +33,10 @@ end
 #   )
 # end
 
+
+# seed avatar with active storate
+users = User.all
+users.each do |user|
+  image = URI.parse("https://avatars.dicebear.com/api/adventurer-neutral/#{user.id}.svg").open
+  user.avatar.attach(io: image, filename: "user#{user.id}")
+end

@@ -8,6 +8,7 @@ import * as ActiveStorage from "@rails/activestorage";
 import "channels";
 import "./login";
 import "./dropdown";
+import "./edit_user";
 require("jquery");
 Rails.start();
 ActiveStorage.start();

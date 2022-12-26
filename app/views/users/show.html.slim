@@ -6,8 +6,8 @@
         - if user_signed_in? && current_user == @user
           =link_to "Edit profile", edit_user_path
         div
-          =image_tag(avatar(@user))
+          =image_tag(@user.avatar)
       .pro__header--detailed 
-        h1 = name_of_user(@user)
+        h1 = @user.name
   
     =render "posts/posts", posts: @posts
