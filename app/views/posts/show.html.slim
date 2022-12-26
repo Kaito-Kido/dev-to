@@ -3,7 +3,7 @@
     .sp__head--contain
       = link_to user_path(@post.user), class: "post-top"
         .sp__head--avatar 
-          =image_tag(avatar(@post.user))
+          =image_tag(@post.user.avatar)
         .sp__head--name
           .name
             =@post.user.name
@@ -33,7 +33,7 @@
 
     - @post.comments.order(created_at: :desc).each do |comment|
       div class="cmt__output_field" id="#{dom_id(comment)}"
-        =image_tag(avatar(comment.user))
+        =image_tag(comment.user.avatar)
         .cmt__output_area
           .cmt__output--head
             .cmt__date_name

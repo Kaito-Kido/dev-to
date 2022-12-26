@@ -62,6 +62,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   private
+  
   def set_avatar
     user = User.last
     avatar = URI.parse("https://avatars.dicebear.com/api/adventurer-neutral/#{user.id}.svg").open
