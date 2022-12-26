@@ -33,7 +33,7 @@
 
     - @post.comments.order(created_at: :desc).each do |comment|
       div class="cmt__output_field" id="#{dom_id(comment)}"
-        =image_tag(avatar_when_comment)
+        =image_tag(avatar(comment.user))
         .cmt__output_area
           .cmt__output--head
             .cmt__date_name

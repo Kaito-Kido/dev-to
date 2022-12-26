@@ -6,6 +6,11 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+ActiveStorage::Engine.config
+.active_storage
+.content_types_to_serve_as_binary
+.delete('image/svg+xml')
+
 module DevTo
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.

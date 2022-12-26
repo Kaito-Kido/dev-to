@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'home/index', to: "home#index"
   devise_for :users, path_names: {
     registration: 'register'
-}
+}, controllers: {registrations: 'users/registrations'}
   resources :posts do 
     resource :react, only: [:create, :destroy]
     resources :comments

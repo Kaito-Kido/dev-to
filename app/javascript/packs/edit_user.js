@@ -10,7 +10,6 @@ function readURL(input) {
     var reader = new FileReader();
 
     reader.onload = function (e) {
-      console.log(e.target.result);
       $("#img_prev").attr("src", e.target.result).width(48).height(48);
     };
 

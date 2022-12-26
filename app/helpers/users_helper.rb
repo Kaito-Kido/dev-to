@@ -1,7 +1,7 @@
 module UsersHelper
   def name_of_user(user)
     if user_signed_in?
-      if user.name.nil?
+      if user.name.nil? || user.name.blank?
         "username#{user.id}"
       else
         user.name
@@ -11,10 +11,8 @@ module UsersHelper
 
   def avatar(user)
     if user.avatar.attached?
-      user.avatar
-    else
-      "https://st4.depositphotos.com/4329009/19956/v/600/depositphotos_199564354-stock-illustration-creative-vector-illustration-default-avatar.jpg"
-    end    
+      user.avatar  
+    end
   end
 
 
