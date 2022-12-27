@@ -79,6 +79,7 @@ class PostsController < ApplicationController
       @post.assign_attributes(post_params)
       @post.cover.attach(post_params[:cover]) if post_params[:cover].present?
       @post.save
+      redirect_to edit_post_path
     end
   end
 

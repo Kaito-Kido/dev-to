@@ -3,7 +3,7 @@
     =form_for @post, url: post_path(@post), method: :patch do |form|
       .post__container--title
         .post__container--cover 
-          = label :cover, "Add a cover image", id: "cover-button", value: @post.cover if @post.cover.attached?
+          = label :cover, "Add a cover image", id: "cover-button"
           = form.file_field :cover, direct_upload: true, id: "file-field", class: "post__file_field"
         =form.text_field :title, autofocus: true, placeholder: "New post title here...", class: "post__title"
       .post__container--body

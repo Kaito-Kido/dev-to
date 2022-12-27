@@ -5,19 +5,16 @@ $(document).on("turbo:load", function () {
   });
 
   var typingTimer;
-  var doneTypingInterval = 4000;
-  $("#content-field, #post_title").on("keyup", function () {
-    clearTimeout(typingTimer);
-    typingTimer = setTimeout(doneTyping, doneTypingInterval);
-  });
+  var doneTypingInterval = 3000;
 
-  $("#content-field, #post_title").on("keydown", function () {
-    clearTimeout(typingTimer);
+  $("#content-field").on("blur", function () {
+    doneTyping();
   });
-
-  $("#file-field").on("change", function () {
-    clearTimeout(typingTimer);
-    typingTimer = setTimeout(doneTyping, doneTypingInterval);
+  $("#file-field").on("blur", function () {
+    doneTyping();
+  });
+  $("#post-title").on("blur", function () {
+    doneTyping();
   });
 
   function doneTyping() {
