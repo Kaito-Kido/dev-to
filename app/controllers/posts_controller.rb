@@ -54,21 +54,25 @@ class PostsController < ApplicationController
     when "pending"
       @post.status = :pending
       @post.assign_attributes(post_params)
+      @post.cover.attach(post_params[:cover])
+      @post.save
     when "published"
       @post.status = params[:status]
       if Post.find(params[:id]).user.admin?
         @post.assign_attributes(post_params)
+        @post.cover.attach(post_params[:cover])
+        @post.save
+        redirect_to post_path(@post)
       end
     when "declined"
       @post.status = params[:status]
+      @post.redirect_to post_path(@post)
     else
       @post.status = :draft
       @post.assign_attributes(post_params)
-    end
-    if @post.save
-      redirect_to post_path(@post)
-    else
-      render :edit
+      @post.cover.attach(post_params[:cover])
+      @post.save
+      return
     end
   end
 
@@ -80,7 +84,7 @@ class PostsController < ApplicationController
 
   private
   def post_params
-    params.require(:post).permit(:title, :content)
+    params.require(:post).permit(:title, :content, :cover)
   end
 
   def set_post

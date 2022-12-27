@@ -1,4 +1,7 @@
 .contain--flex
+  - if @post.cover.attached?
+    .cover__head
+      = image_tag(@post.cover)
   .sp__head 
     .sp__head--contain
       = link_to user_path(@post.user), class: "post-top"
@@ -15,8 +18,8 @@
           = link_to "Delete", post_path(@post), method: :delete, class: "save_draft__button"
     .sp__head--title
       h1 =@post.title
-  .sp__main 
-    =@post.content
+  .sp__main
+    = @post.content.to_s
   .cmt__contain#comment-section 
     .cmt__header 
       .cmt__header--h2 
@@ -45,7 +48,7 @@
             div.edit_comment__button id="edit-comment-#{comment.id}"
               =link_to "Edit", edit_post_comment_path(post_id: @post.id, id: comment.id)
               =link_to "Delete", post_comment_path(post_id: @post.id, id: comment.id), method: :delete, data: {confirm: "Are you sure?"}
-          .cmt__content 
+          .cmt__content
             = comment.content
 
 

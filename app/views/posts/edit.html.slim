@@ -2,12 +2,15 @@
   .post__container
     =form_for @post, url: post_path(@post), method: :patch do |form|
       .post__container--title
+        .post__container--cover 
+          = label :cover, "Add a cover image", id: "cover-button"
+          = form.file_field :cover, direct_upload: true, id: "file-field", class: "post__file_field"
         =form.text_field :title, autofocus: true, placeholder: "New post title here...", class: "post__title"
       .post__container--body
-        =form.text_area :content, autofocus: true,size: "30x21", placeholder: "Write your post current here...", class: "post__body"
+        =form.rich_text_area :content, autofocus: true,size: "30x21", placeholder: "Write your post current here...", class: "post__body", id: "content-field"
       .post__container--bottom
         - if current_user.admin?
           = form.button :Submit, name: "status", value: "published", class: "publish__button"
         - else 
           = form.button :Submit, name: "status", value: "pending", class: "publish__button"
-        =form.button "Save draft", name: "status", value: "draft", class: "save_draft__button"
+        =form.button "Save draft", name: "status", value: "draft", class: "save_draft__button hidden", id: "autosave"
