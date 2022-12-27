@@ -19,7 +19,7 @@
                             =image_tag("/assets/threedot.svg", id: "drop-post-#{post.id}",class: "drop__btn") 
                             div.edit_post__button id="edit-post-#{post.id}"
                                 =link_to "Approve", post_path(id: post.id, status: :published), method: :patch
-                                =link_to "Delete", post_path(id: post.id, staus: :declined), method: :patch
+                                =link_to "Delete", post_path(id: post.id, status: :declined), method: :patch
                     
                 .post-main 
                     .post-title

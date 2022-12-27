@@ -54,25 +54,31 @@ class PostsController < ApplicationController
     when "pending"
       @post.status = :pending
       @post.assign_attributes(post_params)
-      @post.cover.attach(post_params[:cover])
-      @post.save
+      @post.cover.attach(post_params[:cover]) if post_params[:cover].present?
+      if @post.save
+        redirect_to post_path(@post)
+      end
     when "published"
       @post.status = params[:status]
       if Post.find(params[:id]).user.admin?
         @post.assign_attributes(post_params)
-        @post.cover.attach(post_params[:cover])
-        @post.save
+        @post.cover.attach(post_params[:cover]) if post_params[:cover].present?
+      end
+      if @post.save
         redirect_to post_path(@post)
       end
     when "declined"
       @post.status = params[:status]
-      @post.redirect_to post_path(@post)
+      @post.assign_attributes(post_params)
+      if @post.save
+        redirect_to posts_path
+      end
+      
     else
       @post.status = :draft
       @post.assign_attributes(post_params)
-      @post.cover.attach(post_params[:cover])
+      @post.cover.attach(post_params[:cover]) if post_params[:cover].present?
       @post.save
-      return
     end
   end
 
