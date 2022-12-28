@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_26_172844) do
+ActiveRecord::Schema.define(version: 2022_12_28_093900) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -50,6 +50,12 @@ ActiveRecord::Schema.define(version: 2022_12_26_172844) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.text "tag"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "comments", force: :cascade do |t|
     t.string "content"
     t.integer "user_id", null: false
@@ -80,6 +86,15 @@ ActiveRecord::Schema.define(version: 2022_12_26_172844) do
     t.index ["user_id"], name: "index_reacts_on_user_id"
   end
 
+  create_table "tags", force: :cascade do |t|
+    t.integer "category_id", null: false
+    t.integer "post_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_tags_on_category_id"
+    t.index ["post_id"], name: "index_tags_on_post_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -101,4 +116,6 @@ ActiveRecord::Schema.define(version: 2022_12_26_172844) do
   add_foreign_key "posts", "users"
   add_foreign_key "reacts", "posts"
   add_foreign_key "reacts", "users"
+  add_foreign_key "tags", "categories"
+  add_foreign_key "tags", "posts"
 end
