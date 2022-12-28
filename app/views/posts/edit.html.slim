@@ -1,11 +1,13 @@
 .contain
   .post__container
     =form_for @post, url: post_path(@post), method: :patch do |form|
-      .post__container--title
+      .post__container--title#post-container-title
         .post__container--cover 
           = label :cover, "Add a cover image", id: "cover-button"
-          = form.file_field :cover, direct_upload: true, id: "file-field", class: "post__file_field"
-        =form.text_field :title, autofocus: true, placeholder: "New post title here...", class: "post__title"
+          = form.file_field :cover, direct_upload: true, id: "file-field", class: "hidden post__file_field"
+          - if @post.cover.attached?
+            = image_tag @post.cover, id: "cover-prev"
+        =form.text_field :title, autofocus: true, placeholder: "New post title here...", class: "post__title", id: "post-title"
       .post__container--body
         =form.rich_text_area :content, autofocus: true,size: "30x21", placeholder: "Write your post current here...", class: "post__body", id: "content-field"
       .post__container--bottom
