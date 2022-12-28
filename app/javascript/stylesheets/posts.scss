@@ -533,6 +533,9 @@
   padding: 4px 8px;
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.2);
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 img#cover-prev {

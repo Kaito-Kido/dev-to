@@ -1,6 +1,6 @@
 .contain
   .post__container
-    =form_for @post, url: post_path(@post), method: :patch do |form|
+    =form_for @post, url: post_path(@post), method: :patch, remote: true do |form|
       .post__container--title#post-container-title
         .post__container--cover 
           = label :cover, "Add a cover image", id: "cover-button"

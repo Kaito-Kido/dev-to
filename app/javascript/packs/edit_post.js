@@ -4,7 +4,7 @@ $(document).on("turbo:load", function () {
   });
 
   var typingTimer;
-  var doneTypingInterval = 10000;
+  var doneTypingInterval = 1000;
 
   // Catch attach and remove attach event
   $("body").on("trix-attachment-add", function () {
@@ -41,10 +41,9 @@ $(document).on("turbo:load", function () {
     typingTimer = setTimeout(doneTyping, doneTypingInterval);
   });
   function doneTyping() {
+    $("#loading-status").text("loading...").fadeIn().delay(1000);
     $("#autosave").trigger("click");
   }
-
-  // Control + s to save
 
   $("#post-container-title").on("dragover", function (e) {
     e.preventDefault();

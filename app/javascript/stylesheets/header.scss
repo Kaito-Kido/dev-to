@@ -178,3 +178,12 @@
   text-align: center;
   align-items: center;
 }
+
+.loading-status {
+  width: fit-content;
+  font-size: 1em;
+  color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
