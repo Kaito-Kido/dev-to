@@ -9,9 +9,15 @@ import "channels";
 import "./login";
 import "./dropdown";
 import "./edit_user";
+import "./edit_post";
+import "trix";
+import "@rails/actiontext";
 require("jquery");
 Rails.start();
 ActiveStorage.start();
 import "bootstrap";
 import "../stylesheets/application";
 import "@hotwired/turbo-rails";
+
+require("trix");
+require("@rails/actiontext");

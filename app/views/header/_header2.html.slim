@@ -3,6 +3,8 @@
         = link_to root_path
             =image_tag("https://dev-to-uploads.s3.amazonaws.com/uploads/logos/resized_logo_UQww2soKuUsjaOGNB38o.png", alt: "logo",class: "logo")
         .createPost__title Create post
+        .loading-status#loading-status
+            | 
     - if user_signed_in?
         .rh__group_button
             .rh__group_button--right#drop-button

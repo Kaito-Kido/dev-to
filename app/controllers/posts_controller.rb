@@ -54,21 +54,47 @@ class PostsController < ApplicationController
     when "pending"
       @post.status = :pending
       @post.assign_attributes(post_params)
+      @post.cover.attach(post_params[:cover]) if post_params[:cover].present?
+      if @post.save
+        respond_to do |format|
+          format.js {
+            render js: "window.location='#{posts_path}'"
+          }
+        end
+      end
     when "published"
       @post.status = params[:status]
       if Post.find(params[:id]).user.admin?
         @post.assign_attributes(post_params)
+        @post.cover.attach(post_params[:cover]) if post_params[:cover].present?
+      end
+      if @post.save
+        respond_to do |format|   
+          format.js {
+            render js: "window.location='#{post_path(@post)}'"
+          }
+        end
       end
     when "declined"
       @post.status = params[:status]
+      @post.assign_attributes(post_params)
+      if @post.save
+        respond_to do |format|
+          format.js {
+            render js: "window.location='#{posts_path}'"
+          }
+        end
+      end
+      
     else
       @post.status = :draft
       @post.assign_attributes(post_params)
-    end
-    if @post.save
-      redirect_to post_path(@post)
-    else
-      render :edit
+      @post.cover.attach(post_params[:cover]) if post_params[:cover].present?
+      if @post.save
+        respond_to do |format| 
+          format.js 
+        end
+      end
     end
   end
 
@@ -80,7 +106,7 @@ class PostsController < ApplicationController
 
   private
   def post_params
-    params.require(:post).permit(:title, :content)
+    params.require(:post).permit(:title, :content, :cover)
   end
 
   def set_post
