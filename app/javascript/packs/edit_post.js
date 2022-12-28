@@ -17,21 +17,12 @@ $(document).on("turbo:load", function () {
   });
 
   // catching typing event on editor for auto save
-  $("#content-field").on("keydown", function () {
+  $("#content-field, #post-title").on("keydown", function () {
     clearTimeout(typingTimer);
   });
-  $("#content-field").on("keyup", function () {
+  $("#content-field, #post-title").on("keyup", function () {
     clearTimeout(typingTimer);
     typingTimer = setTimeout(doneTyping, doneTypingInterval);
-  });
-
-  // catching typing event on title editor for auto save
-  $("#post-title").on("keyup", function (e) {
-    clearTimeout(typingTimer);
-    typingTimer = setTimeout(doneTyping, doneTypingInterval);
-  });
-  $("#post-title").on("keydown", function () {
-    clearTimeout(typingTimer);
   });
 
   // catching change on cover for autosave
@@ -44,28 +35,6 @@ $(document).on("turbo:load", function () {
     $("#loading-status").text("loading...").fadeIn().delay(1000);
     $("#autosave").trigger("click");
   }
-
-  $("#post-container-title").on("dragover", function (e) {
-    e.preventDefault();
-    e.stopPropagation();
-  });
-  $("#post-container-title").on("dragenter", function (e) {
-    e.preventDefault();
-    e.stopPropagation();
-  });
-
-  // $("#post-container-title").on("drop", function (e) {
-  //   if (
-  //     e.originalEvent.dataTransfer &&
-  //     e.originalEvent.dataTransfer.files.length
-  //   ) {
-  //     e.preventDefault();
-  //     e.stopPropagation();
-  //     /*UPLOAD FILES HERE*/
-
-  //     // $("#file-field").value = e.originalEvent.dataTransfer.files;
-  //   }
-  // });
 });
 
 function readURL(input) {

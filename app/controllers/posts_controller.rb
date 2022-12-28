@@ -58,7 +58,7 @@ class PostsController < ApplicationController
       if @post.save
         respond_to do |format|
           format.js {
-            render :js => "window.location='#{posts_path}'"
+            render js: "window.location='#{posts_path}'"
           }
         end
       end
@@ -71,7 +71,7 @@ class PostsController < ApplicationController
       if @post.save
         respond_to do |format|   
           format.js {
-            render :js => "window.location='#{post_path(@post)}'"
+            render js: "window.location='#{post_path(@post)}'"
           }
         end
       end
@@ -81,7 +81,7 @@ class PostsController < ApplicationController
       if @post.save
         respond_to do |format|
           format.js {
-            render :js => "window.location='#{posts_path}'"
+            render js: "window.location='#{posts_path}'"
           }
         end
       end
