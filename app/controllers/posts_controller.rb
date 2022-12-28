@@ -56,7 +56,11 @@ class PostsController < ApplicationController
       @post.assign_attributes(post_params)
       @post.cover.attach(post_params[:cover]) if post_params[:cover].present?
       if @post.save
-        redirect_to post_path(@post)
+        respond_to do |format|
+          format.js {
+            render :js => "window.location='#{posts_path}'"
+          }
+        end
       end
     when "published"
       @post.status = params[:status]
@@ -65,22 +69,31 @@ class PostsController < ApplicationController
         @post.cover.attach(post_params[:cover]) if post_params[:cover].present?
       end
       if @post.save
-        redirect_to post_path(@post)
+        respond_to do |format|   
+          format.js {
+            render :js => "window.location='#{post_path(@post)}'"
+          }
+        end
       end
     when "declined"
       @post.status = params[:status]
       @post.assign_attributes(post_params)
       if @post.save
-        redirect_to posts_path
+        respond_to do |format|
+          format.js {
+            render :js => "window.location='#{posts_path}'"
+          }
+        end
       end
       
     else
       @post.status = :draft
       @post.assign_attributes(post_params)
       @post.cover.attach(post_params[:cover]) if post_params[:cover].present?
-      @post.save
-      respond_to do |format| 
-        format.js 
+      if @post.save
+        respond_to do |format| 
+          format.js 
+        end
       end
     end
   end
