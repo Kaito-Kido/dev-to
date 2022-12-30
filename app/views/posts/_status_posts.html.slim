@@ -25,5 +25,8 @@
                     .post-title
                         =link_to post_path(post) 
                             =post.title
+                    .hashtag__row
+                        - post.categories.each do |category|
+                            = link_to "#" + category.name, category_path(category)
 
                             

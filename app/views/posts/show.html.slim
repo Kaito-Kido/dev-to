@@ -18,6 +18,9 @@
           = link_to "Delete", post_path(@post), method: :delete, class: "save_draft__button"
     .sp__head--title
       h1 =@post.title
+    .hashtag__row
+      - @post.categories.each do |category|
+          = link_to "#" + category.name, category_path(category)
   .sp__main
     = @post.content.to_s
   .cmt__contain#comment-section 

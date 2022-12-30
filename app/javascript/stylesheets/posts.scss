@@ -543,3 +543,26 @@ img#cover-prev {
   max-width: 400px;
   object-fit: cover;
 }
+
+.hashtag__row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-start;
+  width: fit-content;
+  margin-bottom: 8px;
+  margin-left: -4px;
+
+  a {
+    padding: 4px 7px;
+    color: rgba(0, 0, 0, 0.5);
+    text-decoration: none;
+    font-size: 14px;
+    &:hover {
+      color: black;
+      border-radius: 5px;
+      border: 0.5px solid white;
+      background-color: rgba(200, 200, 220);
+    }
+  }
+}
