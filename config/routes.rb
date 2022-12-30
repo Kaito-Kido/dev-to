@@ -12,8 +12,8 @@ Rails.application.routes.draw do
     # collections do
     #   get :reacters_list
     # end
-  resources :categories, only: [:create, :destroy, :show]
   end
+  resources :categories, only: [:create, :destroy, :show]
   resources :users
   get "search", to: "home#search", as: "search"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
