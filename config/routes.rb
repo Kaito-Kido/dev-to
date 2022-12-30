@@ -7,10 +7,12 @@ Rails.application.routes.draw do
   resources :posts do 
     resource :react, only: [:create, :destroy]
     resources :comments
+    resources :tags, only: [:create, :destroy]
 
     # collections do
     #   get :reacters_list
     # end
+  resources :categories, only: [:create, :destroy, :show]
   end
   resources :users
   get "search", to: "home#search", as: "search"

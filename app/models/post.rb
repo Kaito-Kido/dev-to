@@ -3,6 +3,8 @@ class Post < ApplicationRecord
   has_many :reacts, dependent: :destroy
   has_many :reacters, through: :reacts, source: :user
   has_many :comments, dependent: :destroy
+  has_many :tags
+  has_many :categories, through: :tags
   has_one_attached :cover
   has_rich_text :content
 

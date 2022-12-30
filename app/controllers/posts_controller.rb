@@ -3,7 +3,6 @@ class PostsController < ApplicationController
   before_action :set_post, except: [:index, :new, :archive]
   before_action :authenticate_user!, except: [:index, :show]
 
-
   def index
     if current_user.admin?
       if params[:type] == "user"
@@ -38,17 +37,16 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @categories = Category.all
     render layout: "without_create_post" 
   end
-
 
   def destroy
     if @post.destroy
       redirect_to user_path(current_user)
     end
   end
-
-
+  
   def update
     case params[:status]
     when "pending"
@@ -84,8 +82,7 @@ class PostsController < ApplicationController
             render js: "window.location='#{posts_path}'"
           }
         end
-      end
-      
+      end 
     else
       @post.status = :draft
       @post.assign_attributes(post_params)
@@ -97,9 +94,6 @@ class PostsController < ApplicationController
       end
     end
   end
-
-  
-
 
   def show
   end

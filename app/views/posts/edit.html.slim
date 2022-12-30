@@ -5,9 +5,9 @@
         .post__container--cover 
           = label :cover, "Add a cover image", id: "cover-button"
           = form.file_field :cover, direct_upload: true, id: "file-field", class: "hidden post__file_field"
-          - if @post.cover.attached?
-            = image_tag @post.cover, id: "cover-prev"
-        =form.text_field :title, autofocus: true, placeholder: "New post title here...", class: "post__title", id: "post-title"
+          = image_tag @post.cover.attached? ? @post.cover : "", id: "cover-prev"
+        = form.text_field :title, autofocus: true, placeholder: "New post title here...", class: "post__title", id: "post-title"   
+        = select_tag :category, options_from_collection_for_select(@categories, 'id', 'name', @post.categories.pluck(:id)), id: "select-box", "data-post-id": @post.id, multiple: true    
       .post__container--body
         =form.rich_text_area :content, autofocus: true,size: "30x21", placeholder: "Write your post current here...", class: "post__body", id: "content-field"
       .post__container--bottom
@@ -16,3 +16,4 @@
         - else 
           = form.button :Submit, name: "status", value: "pending", class: "publish__button"
         =form.button "Save draft", name: "status", value: "draft", class: "save_draft__button hidden", id: "autosave"
+modal

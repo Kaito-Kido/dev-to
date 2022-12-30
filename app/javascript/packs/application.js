@@ -5,6 +5,9 @@
 
 import Rails from "@rails/ujs";
 import * as ActiveStorage from "@rails/activestorage";
+Rails.start();
+ActiveStorage.start();
+
 import "channels";
 import "./login";
 import "./dropdown";
@@ -12,12 +15,12 @@ import "./edit_user";
 import "./edit_post";
 import "trix";
 import "@rails/actiontext";
-require("jquery");
-Rails.start();
-ActiveStorage.start();
+import "select2/dist/css/select2.css";
+
 import "bootstrap";
 import "../stylesheets/application";
 import "@hotwired/turbo-rails";
 
 require("trix");
 require("@rails/actiontext");
+import "select2";
