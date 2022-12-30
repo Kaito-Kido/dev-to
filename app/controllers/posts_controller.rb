@@ -38,17 +38,19 @@ class PostsController < ApplicationController
   end
 
   def edit
+    # @categories = Category.where('id NOT IN (?)', @post.categories.pluck(:id))
+    @categories = Category.all
     render layout: "without_create_post" 
   end
-
-
+  
+  
   def destroy
     if @post.destroy
       redirect_to user_path(current_user)
     end
   end
-
-
+  
+  
   def update
     case params[:status]
     when "pending"

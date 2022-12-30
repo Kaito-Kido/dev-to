@@ -23,6 +23,7 @@ gem 'redis', '~> 4.0'
 gem "slim"
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'
+
 gem "devise"
 
 gem 'faker'
