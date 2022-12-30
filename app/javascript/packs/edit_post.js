@@ -73,13 +73,13 @@ $(document).on("turbo:load", function () {
 
   $("#select-box").on("select2:unselect", function (e) {
     var data = e.params.data;
-    // var post_id = $("#select-box").data("post-id");
-    // $.ajax({
-    //   type: "DELETE",
-    //   url: "/posts/" + post_id + "/tags/" + data.id,
-    //   dataType: "json",
-    //   data: { category_id: data.id },
-    // });
+    var post_id = $("#select-box").data("post-id");
+    $.ajax({
+      type: "DELETE",
+      url: "/posts/" + post_id + "/tags/" + data.id,
+      dataType: "json",
+      data: { category_id: data.id },
+    });
   });
 });
 
