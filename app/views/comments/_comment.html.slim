@@ -1,0 +1,32 @@
+div class="cmt__output_field" id="#{dom_id(comment)}"
+  =image_tag(comment.user.avatar)
+  .reply__cmt--flex_col
+    .cmt__output_area
+      .cmt__output--head
+        .cmt__date_name
+          =comment.user.name
+          span
+            | •
+          =date_created_at(comment)
+        =image_tag("/assets/threedot.svg", id: "drop-comment-#{comment.id}") 
+        div.edit_comment__button id="edit-comment-#{comment.id}"
+          =link_to "Edit", edit_comment_comment_path(comment_id: comment.commentable.id, id: comment.id)
+          =link_to "Delete", comment_comment_path(comment), method: :delete, data: {confirm: "Are you sure?"}
+      .cmt__content
+        = comment.content 
+    .reply__container
+      a class="react-button" id="reply-button-#{comment.id}"
+        =image_tag('/assets/comment-icon.svg')
+        p Reply
+    .cmt__input.hide id="reply-area-#{comment.id}"
+      = form_for [comment, Comment.new], method: :post  do |form|
+        .cmt__input--area
+          =form.text_area :content, placeholder: "Reply"
+        .cmt__button--submit
+          .submit-btn 
+            =form.submit "Submit"
+          .dismiss-btn id="dismiss-btn-#{comment.id}" 
+            | Dismiss
+- if comment.comments.present?
+  .subcomment 
+    = render comment.comments

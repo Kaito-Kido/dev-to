@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_28_093900) do
+ActiveRecord::Schema.define(version: 2023_01_03_023310) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 2022_12_28_093900) do
   end
 
   create_table "categories", force: :cascade do |t|
-    t.text "tag"
+    t.text "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -59,10 +59,11 @@ ActiveRecord::Schema.define(version: 2022_12_28_093900) do
   create_table "comments", force: :cascade do |t|
     t.string "content"
     t.integer "user_id", null: false
-    t.integer "post_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.string "commentable_type"
+    t.integer "commentable_id"
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
@@ -111,7 +112,6 @@ ActiveRecord::Schema.define(version: 2022_12_28_093900) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "reacts", "posts"

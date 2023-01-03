@@ -13,6 +13,9 @@ Rails.application.routes.draw do
     #   get :reacters_list
     # end
   end
+  resources :comments do
+    resources :comments
+  end
   resources :categories, only: [:create, :destroy, :show]
   resources :users
   get "search", to: "home#search", as: "search"

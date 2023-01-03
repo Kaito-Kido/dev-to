@@ -356,6 +356,7 @@
       background-color: rgba(59, 73, 223, 0.1);
     }
   }
+  margin-bottom: 10px;
 }
 
 .cmt__output--head {
@@ -375,6 +376,7 @@
 .cmt__button--submit {
   display: flex;
   justify-content: flex-start;
+  align-items: center;
 }
 .cmt__content {
   margin-top: 8px;
@@ -565,4 +567,19 @@ img#cover-prev {
       background-color: rgba(200, 200, 220);
     }
   }
+}
+
+.reply__container {
+  @extend .post-bottom-interact;
+}
+
+.reply__cmt--flex_col {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.subcomment {
+  padding-left: 40px;
+  width: 100%;
 }
