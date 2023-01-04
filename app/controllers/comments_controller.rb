@@ -12,13 +12,14 @@ class CommentsController < ApplicationController
 
   def destroy
     comment = Comment.find(params[:id])
-    comment.destroy
     if params[:postId]
       post = Post.find(params[:postId])
     elsif params[:post_id]
       post = Post.find(params[:post_id])
     end
-    redirect_to post_path(post)
+    if comment.destroy
+      redirect_to post_path(post)
+    end
   end
 
   def edit
