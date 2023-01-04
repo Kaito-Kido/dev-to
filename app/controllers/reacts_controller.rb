@@ -1,10 +1,11 @@
 class ReactsController < ApplicationController
   before_action :authenticate_user!
+  before_action :find_reactable
 
   def create
-    return if reacted?(params[:post_id])
+    return if reacted?(@reactable)
 
-    @react = React.new(user_id: current_user.id, post_id: params[:post_id])
+    @react = @reactable.reacts.new(user_id: current_user.id)
     @react.save
     respond_to do |format|
       format.js 
@@ -12,20 +13,29 @@ class ReactsController < ApplicationController
   end
 
   def destroy
-    if reacted?(params[:post_id])
-      @react = React.find_by(post_id: params[:post_id], user_id: current_user.id)
-      @react.destroy
-      respond_to do |format|
-        format.js {
-        }
-
+    if reacted?(@reactable)
+      @react = @reactable.reacts.find_by(user_id: current_user.id)
+      if @react.destroy
+        respond_to do |format|
+          format.js {
+          }
+        end
       end
     end
   end
 
   private
-  def reacted?(post)
-      React.find_by(post: post, user: current_user).present?
+  def reacted?(reactable)
+      reactable.reacts.find_by(user: current_user).present?
+  end
+
+  def find_reactable
+    @reactable =
+      if params[:post_id]
+        Post.find(params[:post_id])
+      elsif params[:comment_id]
+        Comment.find(params[:comment_id])
+      end
   end
 
 

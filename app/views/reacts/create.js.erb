@@ -1,3 +1,6 @@
-$("a[data-post-id=<%=@react.post_id%>]").replaceWith(
-  `<%= j render "reacts/reacted", post: @react.post %>`
-)
+if (`<%= raw @react.reactable_type%>` == "Post") {
+  $("a[data-post-id=<%=@reactable.id%>]").replaceWith(
+    `<%= j render "reacts/reacted", reactable: @reactable %>`
+  ) 
+}
+

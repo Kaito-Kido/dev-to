@@ -21,9 +21,9 @@
                             = link_to "#" + category.name, category_path(category)
                     .post-bottom-interact
                         - if reacted?(post)
-                            = render 'reacts/reacted', post: post
+                            = render "reacts/reacted", reactable: post
                         - else
-                            = render 'reacts/react', post: post
+                            = render "reacts/react", reactable: post
                         = link_to post_path(post, anchor: 'comment-section'), class: "react-button" 
                             =image_tag('/assets/comment-icon.svg')
                             p Add Comment 

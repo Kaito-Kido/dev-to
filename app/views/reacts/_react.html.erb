@@ -1,6 +1,15 @@
-<%= link_to post_react_path(post), remote: true, method: :post, class: "react-button", id: "like-#{post.id}", data: { "post-id": post.id } do %>
-  <span>
-    <img src="/assets/like.svg"/>
-  </span>
-  <p><%= post.reacts_count%> Like</p>
+<%- if is_post?(reactable) %>
+  <%= link_to post_react_path(reactable), remote: true, method: :post, class: "react-button", id: "like-#{reactable.id}", data: { "post-id": reactable.id } do %>
+    <span>
+      <img src="/assets/like.svg"/>
+    </span>
+    <p><%= reactable.reacts_count%> Like</p>
+  <% end %>
+<%- else %>
+  <%= link_to comment_react_path(reactable), remote: true, method: :post, class: "react-button", id: "like-#{reactable.id}", data: { "comment-id": reactable.id } do %>
+    <span>
+      <img src="/assets/like.svg"/>
+    </span>
+    <p><%= reactable.reacts_count%> Like</p>
+  <% end %>
 <% end %>

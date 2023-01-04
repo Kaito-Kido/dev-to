@@ -3,9 +3,9 @@ class Post < ApplicationRecord
   
   belongs_to :user
 
-  has_many :reacts, dependent: :destroy
+  has_many :reacts, as: :reactable,  dependent: :destroy
   has_many :reacters, through: :reacts, source: :user
-  has_many :tags
+  has_many :tags, dependent: :destroy
   has_many :categories, through: :tags
   has_one_attached :cover
   has_rich_text :content
