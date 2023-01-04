@@ -13,6 +13,7 @@ import "./login";
 import "./dropdown";
 import "./edit_user";
 import "./edit_post";
+import "./comment";
 import "trix";
 import "@rails/actiontext";
 import "select2/dist/css/select2.css";

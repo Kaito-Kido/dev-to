@@ -6,7 +6,8 @@
     .cmt__input_field
       =image_tag(avatar_when_comment)
       .cmt__input
-        = form_for [@post, @comment], method: :patch  do |form|
+        = form_for [@commentable, @comment], method: :patch  do |form|
+          =form.hidden_field :post_id, value: @post_id
           .cmt__input--area
             =form.text_area :content 
           .cmt__button--submit
