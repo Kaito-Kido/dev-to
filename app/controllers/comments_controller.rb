@@ -1,21 +1,32 @@
 class CommentsController < ApplicationController
   before_action :find_commentable
+  before_action :find_post, only: [:create, :update]
   before_action :authenticate_user!
 
   def create
     comment = @commentable.comments.new(user_id: current_user.id, content: params[:comment][:content])
     if comment.save
-      redirect_to post_path(@commentable)
+      redirect_to post_path(@post)
     end
   end
 
   def destroy
     comment = Comment.find(params[:id])
     comment.destroy
-    redirect_to post_path(comment.commentable)
+    if params[:postId]
+      post = Post.find(params[:postId])
+    elsif params[:post_id]
+      post = Post.find(params[:post_id])
+    end
+    redirect_to post_path(post)
   end
 
   def edit
+    if params[:postId]
+      @postId = params[:postId]
+    elsif params[:post_id]
+      @postId = Post.find(params[:post_id]).id
+    end
     @comment = Comment.find(params[:id])
   end
 
@@ -23,7 +34,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     @comment.assign_attributes(comment_params)
     if @comment.save
-      redirect_to post_path(@commentable) if params[:post_id]
+      redirect_to post_path(@post)
     end
   end
 
@@ -40,5 +51,12 @@ class CommentsController < ApplicationController
     end
   end
 
+  def find_post
+    if params[:post_id]
+      @post = Post.find(params[:post_id])
+    elsif params[:comment][:postId]
+      @post = Post.find(params[:comment][:postId])
+    end
+  end
   
 end

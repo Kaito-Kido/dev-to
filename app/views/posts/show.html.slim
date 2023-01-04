@@ -60,7 +60,7 @@
               p Reply
           .cmt__input.hide id="reply-area-#{comment.id}"
             = form_for [comment, Comment.new], method: :post  do |form|
-              = form.hidden_field :comment_id, value: comment.id
+              = form.hidden_field :postId, value: params[:id] 
               .cmt__input--area
                 =form.text_area :content, placeholder: "Reply"
               .cmt__button--submit
