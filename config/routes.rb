@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'follows/create'
+  get 'follows/destroy'
   root to: 'home#root_routing'
   get 'home/index', to: "home#index"
   devise_for :users, path_names: {
