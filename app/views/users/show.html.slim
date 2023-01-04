@@ -2,11 +2,16 @@
 .contain 
   .pro__header--container 
     .pro__header--main
-      .pro__header--top
+      .pro__header--top.profile-button
         - if user_signed_in? && current_user == @user
-          =link_to "Edit profile", edit_user_path
+          =link_to "Edit profile", edit_user_path, class: "profile-button"
         div
           =image_tag(@user.avatar)
+      .pro__header--follow.profile-button
+        - if @user != current_user && !following?(@user.id)
+          = render "follows/follow_button", user: @user
+        - elsif @user != current_user && following?(@user.id)
+          = render "follows/unfollow_button", user: @user
       .pro__header--detailed 
         h1 = @user.name
   

@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'follows/create'
-  get 'follows/destroy'
   root to: 'home#root_routing'
   get 'home/index', to: "home#index"
   devise_for :users, path_names: {
@@ -19,7 +17,9 @@ Rails.application.routes.draw do
     resources :comments
   end
   resources :categories, only: [:create, :destroy, :show]
-  resources :users
+  resources :users do 
+    resource :follow, only: [:create, :destroy]
+  end
   get "search", to: "home#search", as: "search"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
