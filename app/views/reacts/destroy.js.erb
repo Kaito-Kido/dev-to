@@ -3,3 +3,8 @@ if (`<%= raw @react.reactable_type%>` == "Post") {
     `<%= j render "reacts/react", reactable: @reactable %>`
   )
 }
+else {
+   $("a[data-comment-id=<%=@reactable.id%>]").replaceWith(
+    `<%= j render "reacts/react", reactable: @reactable %>`
+  )
+}

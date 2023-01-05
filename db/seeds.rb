@@ -41,7 +41,7 @@
 #   user.avatar.attach(io: image, filename: "user#{user.id}")
 # end
 
-posts = Post.all
-posts.each do |post|
-  Tag.create(post_id: post.id, category_id: Category.find(rand(1...Category.all.count)).id)
-end
+# posts = Post.all
+# posts.each do |post|
+#   Tag.create(post_id: post.id, category_id: Category.find(rand(1...Category.all.count)).id)
+# end
