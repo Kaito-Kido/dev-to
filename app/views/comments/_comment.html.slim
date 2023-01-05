@@ -14,7 +14,11 @@ div class="cmt__output_field" id="#{dom_id(comment)}"
           =link_to "Delete", comment_comment_path(comment_id: comment.commentable.id, id: comment.id, post_id: params[:id]), method: :delete, data: {confirm: "Are you sure?"}
       .cmt__content
         = comment.content 
-    .reply__container
+    .post-bottom-interact
+      - if reacted?(comment)
+          = render "reacts/reacted", reactable: comment
+      - else
+          = render "reacts/react", reactable: comment
       a class="react-button" id="reply-button-#{comment.id}"
         =image_tag('/assets/comment-icon.svg')
         p Reply

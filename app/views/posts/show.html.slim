@@ -55,6 +55,10 @@
             .cmt__content
               = comment.content 
           .reply__container
+            - if reacted?(comment)
+                = render "reacts/reacted", reactable: comment
+            - else
+                = render "reacts/react", reactable: comment
             a class="react-button" id="reply-button-#{comment.id}"
               =image_tag('/assets/comment-icon.svg')
               p Reply

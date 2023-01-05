@@ -1,7 +1,11 @@
 module ReactsHelper
-  def reacted?(post)
+  def reacted?(reactable)
     if user_signed_in?
-      post.reacters.include?(current_user)
+      reactable.reacts.find_by(user_id: current_user.id).present?
     end
+  end
+
+  def is_post?(reactable)
+    reactable.class.name == "Post"
   end
 end

@@ -15,9 +15,13 @@ Rails.application.routes.draw do
   end
   resources :comments do
     resources :comments
+    resource :react, only: [:create, :destroy]
+
   end
   resources :categories, only: [:create, :destroy, :show]
-  resources :users
+  resources :users do 
+    resource :follow, only: [:create, :destroy]
+  end
   get "search", to: "home#search", as: "search"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

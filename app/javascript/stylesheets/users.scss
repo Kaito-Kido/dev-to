@@ -293,7 +293,9 @@
       object-fit: cover;
     }
   }
+}
 
+.profile-button {
   a {
     padding: 0.575rem;
     background-color: rgba(79, 70, 229);
@@ -322,6 +324,13 @@
     font-size: 1.875rem;
   }
 }
+
+.pro__header--follow {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
 .space {
   height: 20px;
   padding: 20px;

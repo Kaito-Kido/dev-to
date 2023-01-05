@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_03_023310) do
+ActiveRecord::Schema.define(version: 2023_01_05_020917) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -61,10 +61,18 @@ ActiveRecord::Schema.define(version: 2023_01_03_023310) do
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "commentable_type"
-    t.integer "commentable_id"
+    t.string "commentable_type", null: false
+    t.integer "commentable_id", null: false
+    t.integer "reacts_count"
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "follows", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "followed_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "posts", force: :cascade do |t|
@@ -80,10 +88,11 @@ ActiveRecord::Schema.define(version: 2023_01_03_023310) do
 
   create_table "reacts", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "post_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["post_id"], name: "index_reacts_on_post_id"
+    t.string "reactable_type", null: false
+    t.integer "reactable_id", null: false
+    t.index ["reactable_type", "reactable_id"], name: "index_reacts_on_reactable"
     t.index ["user_id"], name: "index_reacts_on_user_id"
   end
 
@@ -114,7 +123,6 @@ ActiveRecord::Schema.define(version: 2023_01_03_023310) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "users"
   add_foreign_key "posts", "users"
-  add_foreign_key "reacts", "posts"
   add_foreign_key "reacts", "users"
   add_foreign_key "tags", "categories"
   add_foreign_key "tags", "posts"
