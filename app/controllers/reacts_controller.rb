@@ -1,4 +1,5 @@
 class ReactsController < ApplicationController
+
   before_action :authenticate_user!
   before_action :find_reactable
 
@@ -14,13 +15,11 @@ class ReactsController < ApplicationController
 
   def destroy
     #If reactable is reacted, destroy it
-    if reacted?(@reactable)
-      @react = @reactable.reacts.find_by(user_id: current_user.id)
-      if @react.destroy
-        respond_to do |format|
-          format.js {
-          }
-        end
+    @react = @reactable.reacts.find_by(user_id: current_user.id)
+    if @react&.destroy
+      respond_to do |format|
+        format.js {
+        }
       end
     end
   end
@@ -35,7 +34,4 @@ class ReactsController < ApplicationController
         Comment.find(params[:comment_id])
       end
   end
-
-
-
 end
