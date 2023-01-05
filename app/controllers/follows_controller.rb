@@ -1,7 +1,9 @@
 class FollowsController < ApplicationController
   def create
+    return if following?(params[:user_id])
     @follow = Follow.new(follower_id: current_user.id, followed_id: params[:user_id])
-    if !following?(params[:user_id]) && @follow.save
+    # If haven't followed yet 
+    if @follow.save
       respond_to do |format|
         format.js
       end
@@ -18,6 +20,7 @@ class FollowsController < ApplicationController
   end
 
   private
+  # Check if current user is following this user or not
   def following?(id)
     return true if Follow.find_by(follower_id: current_user.id, followed_id: id).present?
     false

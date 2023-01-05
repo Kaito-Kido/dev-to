@@ -3,16 +3,19 @@ class ReactsController < ApplicationController
   before_action :find_reactable
 
   def create
+    #If reactable was reacted, do not do anything 
     return if reacted?(@reactable)
 
     @react = @reactable.reacts.new(user_id: current_user.id)
-    @react.save
-    respond_to do |format|
-      format.js 
+    if @react.save
+      respond_to do |format|
+        format.js 
+      end
     end
   end
 
   def destroy
+    #If reactable is reacted, destroy it
     if reacted?(@reactable)
       @react = @reactable.reacts.find_by(user_id: current_user.id)
       if @react.destroy
@@ -25,10 +28,12 @@ class ReactsController < ApplicationController
   end
 
   private
+  # Check if a reactable is reacted or not
   def reacted?(reactable)
       reactable.reacts.find_by(user: current_user).present?
   end
 
+  #Find reactable by params in url
   def find_reactable
     @reactable =
       if params[:post_id]
