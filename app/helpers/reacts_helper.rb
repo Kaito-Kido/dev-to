@@ -6,6 +6,6 @@ module ReactsHelper
   end
 
   def is_post?(reactable)
-    true if reactable.class.name == "Post"
+    reactable.class.name == "Post"
   end
 end

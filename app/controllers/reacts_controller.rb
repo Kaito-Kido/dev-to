@@ -4,9 +4,7 @@ class ReactsController < ApplicationController
 
   def create
     #If reactable was reacted, do not do anything 
-    return if reacted?(@reactable)
-
-    @react = @reactable.reacts.new(user_id: current_user.id)
+    @react = @reactable.reacts.where(user_id: current_user.id).first_or_initialize
     if @react.save
       respond_to do |format|
         format.js 
@@ -28,11 +26,6 @@ class ReactsController < ApplicationController
   end
 
   private
-  # Check if a reactable is reacted or not
-  def reacted?(reactable)
-      reactable.reacts.find_by(user: current_user).present?
-  end
-
   #Find reactable by params in url
   def find_reactable
     @reactable =
