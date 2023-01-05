@@ -1,29 +1,31 @@
 
 .column-post
-        - posts.each do |post|
-            .post
-                = link_to user_path(post.user), class: "post-top"
-                    .post__top--left
-                        .avatar
-                            = image_tag(post.user.avatar, alt: "avatar")
-                        .name-date 
-                            .name
-                                =post.user.name
-                            .date
-                                =date_created_at(post)
-                    .post-bottom
-                .post-main 
-                    .post-title
-                        =link_to post_path(post) 
-                            =post.title
-                    .hashtag__row
-                        - post.categories.each do |category|
-                            = link_to "#" + category.name, category_path(category)
-                    .post-bottom-interact
-                        - if reacted?(post)
-                            = render "reacts/reacted", reactable: post
-                        - else
-                            = render "reacts/react", reactable: post
-                        = link_to post_path(post, anchor: 'comment-section'), class: "react-button" 
-                            =image_tag('/assets/comment-icon.svg')
-                            p Add Comment 
+    - if user_signed_in?
+        = render "notifications/notifications_center", notifications: current_user.notifications
+    - posts.each do |post|
+        .post
+            = link_to user_path(post.user), class: "post-top"
+                .post__top--left
+                    .avatar
+                        = image_tag(post.user.avatar, alt: "avatar")
+                    .name-date 
+                        .name
+                            =post.user.name
+                        .date
+                            =date_created_at(post)
+                .post-bottom
+            .post-main 
+                .post-title
+                    =link_to post_path(post) 
+                        =post.title
+                .hashtag__row
+                    - post.categories.each do |category|
+                        = link_to "#" + category.name, category_path(category)
+                .post-bottom-interact
+                    - if reacted?(post)
+                        = render "reacts/reacted", reactable: post
+                    - else
+                        = render "reacts/react", reactable: post
+                    = link_to post_path(post, anchor: 'comment-section'), class: "react-button" 
+                        =image_tag('/assets/comment-icon.svg')
+                        p Add Comment 

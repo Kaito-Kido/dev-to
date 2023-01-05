@@ -1,0 +1,4 @@
+div class="nav-item dropdown"
+  = render "notifications/counter", counter: current_user.notifications.count
+  ul id="notification-list"
+    = render notifications

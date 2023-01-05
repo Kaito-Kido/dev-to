@@ -6,6 +6,7 @@ class ReactsController < ApplicationController
   def create
     #If reactable was reacted, do not do anything 
     @react = @reactable.reacts.where(user_id: current_user.id).first_or_initialize
+    Notification.create(content: "trigger callback", sender_id: current_user.id, receiver_id: @reactable.user.id)
     if @react.save
       respond_to do |format|
         format.js 
