@@ -10,7 +10,7 @@ class FollowsController < ApplicationController
 
   def destroy
     @follow = Follow.find_by(follower_id: current_user.id, followed_id: params[:user_id])
-    if @follow.present? && @follow.destroy
+    if @follow&.destroy
       respond_to do |format|
         format.js
       end
