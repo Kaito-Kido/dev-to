@@ -187,3 +187,11 @@
   align-items: center;
   margin-left: 10px;
 }
+
+.bell-button {
+  padding: 5px;
+  border-radius: var(--radius);
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+}

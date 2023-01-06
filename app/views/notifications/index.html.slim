@@ -1,0 +1,10 @@
+.contain 
+  .left__container
+    h1 Notifications
+    .filter__row
+      = link_to "All"
+      = link_to "Comments"
+      = link_to "Post"
+      = link_to "Like"
+      = link_to "Follow"
+  = render "notifications/notifications_center", notifications: current_user.notifications.order(created_at: :desc)

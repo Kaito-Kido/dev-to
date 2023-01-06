@@ -11,6 +11,8 @@
     - if user_signed_in?
         .rh__group_button
             = link_to 'Create post', new_post_path, class: "sign-up-button"
+            - if user_signed_in?
+                = link_to image_tag("/assets/bell.svg"), notifications_path, class: "bell-button"
             .rh__group_button--right#drop-button
                 = image_tag current_user.avatar
             .rh__dropdown#menu 
