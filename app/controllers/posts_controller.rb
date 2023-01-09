@@ -68,6 +68,11 @@ class PostsController < ApplicationController
       end
       if @post.save 
         NotificationCreatorForPostService.call(@post, current_user)
+        respond_to do |format|   
+          format.js {
+            render js: "window.location='#{post_path(@post)}'"
+          }
+        end
       end
     when "declined"
       @post.status = params[:status]
