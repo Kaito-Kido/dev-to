@@ -2,13 +2,16 @@
   display: flex;
   height: var(--header-height);
   justify-content: space-between;
-  padding: 0 0.5rem;
+  padding: 0 10.5rem;
   margin: auto;
   align-items: center;
-  position: relative;
-  width: 98%;
+  position: sticky;
+  width: 100%;
   box-sizing: border-box;
-  max-width: 1280px;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
 }
 
 .logo-search-bar {
@@ -124,7 +127,6 @@
     object-fit: cover;
   }
 }
-
 .rh__dropdown {
   position: absolute;
   top: 100%;
@@ -194,4 +196,21 @@
   &:hover {
     background-color: rgba(0, 0, 0, 0.05);
   }
+}
+
+.relative {
+  position: relative;
+}
+
+.ping {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+}
+
+.dot {
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background-color: var(--color-hover);
 }

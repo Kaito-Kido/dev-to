@@ -92,6 +92,11 @@ class PostsController < ApplicationController
   end
 
   def show
+    if params[:notification_id]
+      notification = Notification.find(params[:notification_id])
+      notification.status = :readed
+      notification.save
+    end
   end
 
   private

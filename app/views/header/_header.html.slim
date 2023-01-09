@@ -12,7 +12,14 @@
         .rh__group_button
             = link_to 'Create post', new_post_path, class: "sign-up-button"
             - if user_signed_in?
-                = link_to image_tag("/assets/bell.svg"), notifications_path, class: "bell-button"
+                .relative
+                    = image_tag("/assets/bell.svg", class: "bell-button", id: "bell-button")
+                    - if current_user.notifications.pluck(:status).include?("unread")
+                        .ping.dot
+            .div#noti-menu
+                = render "notifications/notifications_center", notifications: current_user.notifications.order(created_at: :desc).limit(20)
+                = link_to "See all", notifications_path, class: "see_all__link"
+
             .rh__group_button--right#drop-button
                 = image_tag current_user.avatar
             .rh__dropdown#menu 
