@@ -18,8 +18,9 @@
                         .ping.dot
             .div#noti-menu
                 = render "notifications/notifications_center", notifications: current_user.notifications.order(created_at: :desc).limit(20)
-                = link_to "See all", notifications_path, class: "see_all__link"
-
+                .end__dropdown
+                    = link_to "See all", notifications_path, class: "see_all__link"
+                    = link_to "Mark all as read", mark_all_read_path, class: "see_all__link", remote: true
             .rh__group_button--right#drop-button
                 = image_tag current_user.avatar
             .rh__dropdown#menu 

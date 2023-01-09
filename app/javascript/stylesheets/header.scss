@@ -214,3 +214,10 @@
   border-radius: 50%;
   background-color: var(--color-hover);
 }
+
+.end__dropdown {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

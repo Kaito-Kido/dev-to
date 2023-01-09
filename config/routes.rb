@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     resource :follow, only: [:create, :destroy]
   end
   get "search", to: "home#search", as: "search"
+  get "mark_all_read", to: "notifications#markallread"
   resources :notifications
   mount ActionCable.server => '/cable'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
