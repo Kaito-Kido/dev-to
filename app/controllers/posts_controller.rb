@@ -54,7 +54,9 @@ class PostsController < ApplicationController
       @post.assign_attributes(post_params)
       @post.cover.attach(post_params[:cover]) if post_params[:cover].present?
       if @post.save
-        Notification.create(sender_id: @post.user.id, receiver_id: User.admin[0].id, action: :post, content: "#{@post.user.name} has made a post " +  "#{@post.categories.first&.name}", post_id: @post.id, seen: false)
+        User.where(role: "admin").each do |admin|
+          Notification.create(sender_id: @post.user.id, receiver_id: admin.id, action: :post, content: "#{@post.user.name} has made a post " +  "#{@post.categories.first&.name}", post_id: @post.id, seen: false)
+        end
         respond_to do |format|
           format.js {
             render js: "window.location='#{posts_path}'"
