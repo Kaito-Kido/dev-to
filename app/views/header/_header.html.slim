@@ -18,7 +18,7 @@
                         .ping.dot
             .div#noti-menu
                 - if current_user.notifications.first.present?
-                    = render "notifications/notifications_center", notifications: current_user.notifications.order(created_at: :desc).limit(20)
+                    = render "notifications/notifications_center", notifications: current_user.notifications.includes(sender: {avatar_attachment: :blob}).order(created_at: :desc).limit(20)
                     .end__dropdown
                         = link_to "See all", notifications_path, class: "see_all__link"
                         = link_to "Mark all as read", mark_all_read_notifications_path, class: "see_all__link", remote: true

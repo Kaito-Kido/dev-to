@@ -37,7 +37,7 @@
             .submit-btn 
               =form.submit "Submit"
 
-    - @post.comments.order(created_at: :desc).each do |comment|
+    - @post.comments.includes(user: {avatar_attachment: :blob}).order(created_at: :desc).each do |comment|
       div class="cmt__output_field" id="#{dom_id(comment)}"
         =image_tag(comment.user.avatar)
         .reply__cmt--flex_col
@@ -73,7 +73,7 @@
                 .dismiss-btn id="dismiss-btn-#{comment.id}" 
                   | Dismiss
       .subcomment
-        = render comment.comments
+        = render comment.comments.includes(:user, :comments)
       
 
 

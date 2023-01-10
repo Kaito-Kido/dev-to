@@ -7,17 +7,17 @@ class PostsController < ApplicationController
     if current_user.admin?
       if params[:type] == "user"
         if params[:most]
-          @pagy, @res = pagy_countless(User.joins(:posts).distinct.select('users.*, COUNT(posts.reacts_count) AS user_reacts_count').group('id').order(user_reacts_count: :desc), items: 10)
+          @pagy, @res = pagy_countless(User.joins(:posts).distinct.select('users.*, COUNT(posts.reacts_count) AS user_reacts_count').group('id').order(user_reacts_count: :desc).includes(avatar_attachment: :blob), items: 10)
         else
-          @pagy, @res = pagy_countless(User.all, items:10)
+          @pagy, @res = pagy_countless(User.all.includes(avatar_attachment: :blob), items:10)
         end
       else
         if params[:most]
-          @pagy, @res = pagy_countless(Post.published.order(reacts_count: :desc), items: 10)
+          @pagy, @res = pagy_countless(Post.published.order(reacts_count: :desc).includes({user: {avatar_attachment: :blob}}, :categories), items: 10)
         elsif params[:status].present? && Post.statuses.keys.include?(params[:status])
-          @pagy, @res = pagy_countless(Post.send(params[:status]), items:10)
+          @pagy, @res = pagy_countless(Post.send(params[:status]).includes({user: {avatar_attachment: :blob}}, :categories), items:10)
         else
-          @pagy, @res = pagy_countless(Post.all, items:10)
+          @pagy, @res = pagy_countless(Post.all.includes({user: {avatar_attachment: :blob}}, :categories), items:10)
         end
       end
     else

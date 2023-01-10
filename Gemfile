@@ -32,6 +32,8 @@ gem 'pagy'
 
 gem 'sidekiq'
 
+gem 'bullet', group: 'development'
+
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
 
