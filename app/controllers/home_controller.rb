@@ -21,9 +21,9 @@ class HomeController < ApplicationController
       end
     when "user"
       if params[:search]
-        @pagy, @res = pagy(User.where('name LIKE ?', "%#{params[:search]}%"), items: 10)
+        @pagy, @res = pagy(User.where('name LIKE ?', "%#{params[:search]}%").includes(avatar_attachment: :blob), items: 10)
       else
-        @pagy, @res = pagy(User.all, items: 10)
+        @pagy, @res = pagy(User.all.includes(avatar_attachmetn: :blob), items: 10)
       end
     end
     if params[:order]

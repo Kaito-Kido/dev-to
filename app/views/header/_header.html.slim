@@ -16,6 +16,8 @@
                     = image_tag("/assets/bell.svg", class: "bell-button", id: "bell-button")
                     - if current_user.notifications.pluck(:seen).include?(false)
                         .ping.dot
+                    - else 
+                        .ping.dot.hide
             .div#noti-menu
                 - if current_user.notifications.first.present?
                     = render "notifications/notifications_center", notifications: current_user.notifications.includes(sender: {avatar_attachment: :blob}).order(created_at: :desc).limit(20)
