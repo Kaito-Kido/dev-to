@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_09_043039) do
+ActiveRecord::Schema.define(version: 2023_01_09_163752) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 2023_01_09_043039) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "action"
     t.integer "post_id"
-    t.integer "status"
+    t.boolean "seen"
     t.index ["post_id"], name: "index_notifications_on_post_id"
   end
 

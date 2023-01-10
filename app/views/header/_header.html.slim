@@ -14,13 +14,16 @@
             - if user_signed_in?
                 .relative
                     = image_tag("/assets/bell.svg", class: "bell-button", id: "bell-button")
-                    - if current_user.notifications.pluck(:status).include?("unread")
+                    - if current_user.notifications.pluck(:seen).include?(false)
                         .ping.dot
             .div#noti-menu
-                = render "notifications/notifications_center", notifications: current_user.notifications.order(created_at: :desc).limit(20)
-                .end__dropdown
-                    = link_to "See all", notifications_path, class: "see_all__link"
-                    = link_to "Mark all as read", mark_all_read_path, class: "see_all__link", remote: true
+                - if current_user.notifications.first.present?
+                    = render "notifications/notifications_center", notifications: current_user.notifications.order(created_at: :desc).limit(20)
+                    .end__dropdown
+                        = link_to "See all", notifications_path, class: "see_all__link"
+                        = link_to "Mark all as read", mark_all_read_notifications_path, class: "see_all__link", remote: true
+                - else 
+                    p.--no_notification You don't have any notification
             .rh__group_button--right#drop-button
                 = image_tag current_user.avatar
             .rh__dropdown#menu 

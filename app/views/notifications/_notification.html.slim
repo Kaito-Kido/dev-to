@@ -9,7 +9,7 @@
               = notification.content
             .date
               =date_created_at(notification)
-        - if notification.status == "unread"
+        - if notification.seen == false
           .dot
   - else
     = link_to user_path(id: notification.sender.id, notification_id: notification.id), class: "post-top"
@@ -22,5 +22,5 @@
               = notification.content
             .date
               =date_created_at(notification)
-        - if notification.status == "unread"
+        - if notification.seen == false
           .dot

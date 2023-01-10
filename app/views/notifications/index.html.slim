@@ -7,4 +7,4 @@
       = link_to "Post", notifications_path(status: :post)
       = link_to "Like", notifications_path(status: :like)
       = link_to "Follow", notifications_path(status: :follow)
-  = render "notifications/notifications_center", notifications: @notifications.order(created_at: :desc)
+  = render "notifications/notifications_center", notifications: @notifications&.order(created_at: :desc)

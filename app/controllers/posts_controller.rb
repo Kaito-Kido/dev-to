@@ -99,7 +99,7 @@ class PostsController < ApplicationController
   def show
     if params[:notification_id]
       notification = Notification.find(params[:notification_id])
-      notification.status = :readed
+      notification.seen = true
       notification.save
     end
   end

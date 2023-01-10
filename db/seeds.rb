@@ -47,6 +47,6 @@
 # end
 
 Notification.all.each do |noti|
-  noti.status = :unread
+  noti.seen = false
   noti.save!
 end

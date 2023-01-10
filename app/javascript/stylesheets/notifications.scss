@@ -32,7 +32,10 @@
   display: none;
   background-color: white;
   max-height: 85vh;
-  overflow-y: scroll;
+  overflow-y: auto;
+}
+.--no_notification {
+  text-align: center;
 }
 
 .noti__contain--page {
