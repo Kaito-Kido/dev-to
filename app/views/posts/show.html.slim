@@ -37,7 +37,7 @@
             .submit-btn 
               =form.submit "Submit"
 
-    - @post.comments.order(created_at: :desc).each do |comment|
+    - @comments.each do |comment|
       div class="cmt__output_field" id="#{dom_id(comment)}"
         =image_tag(comment.user.avatar)
         .reply__cmt--flex_col

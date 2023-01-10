@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @posts = @user.posts.published.includes(:user, :reacters)
+    @posts = @user.posts.published.includes(:categories)
     if params[:notification_id]
       notification = Notification.find(params[:notification_id])
       notification.seen = true

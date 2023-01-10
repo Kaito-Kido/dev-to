@@ -5,7 +5,8 @@ class HomeController < ApplicationController
   end
 
   def index
-    @pagy, @posts = pagy_countless(Post.published.includes(:user, :reacters), items: 10)
+    posts = Post.published.includes({user: {avatar_attachment: :blob}}, :categories)
+    @pagy, @posts = pagy_countless(posts, items: 10)
 
     render partial: "home/scrollable_list" if params[:page]
   end
@@ -14,15 +15,15 @@ class HomeController < ApplicationController
     case params[:type]    
     when "post"
       if params[:search]
-        @pagy, @res = pagy(Post.where('title LIKE ?', "%#{params[:search]}%").includes(:user, :reacters), items: 10)
+        @pagy, @res = pagy(Post.where('title LIKE ?', "%#{params[:search]}%").includes({user: {avatar_attachment: :blob}}, :categories), items: 10)
       else
-        @pagy, @res = pagy(Post.all.includes(:user, :reacters), items: 10)
+        @pagy, @res = pagy(Post.all.includes(user: {avatar_attachment: :blob}), items: 10)
       end
     when "user"
       if params[:search]
-        @pagy, @res = pagy(User.where('name LIKE ?', "%#{params[:search]}%"), items: 10)
+        @pagy, @res = pagy(User.where('name LIKE ?', "%#{params[:search]}%").includes(avatar_attachment: :blob), items: 10)
       else
-        @pagy, @res = pagy(User.all, items: 10)
+        @pagy, @res = pagy(User.all.includes(avatar_attachmetn: :blob), items: 10)
       end
     end
     if params[:order]

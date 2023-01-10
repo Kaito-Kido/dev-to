@@ -7,26 +7,26 @@ class PostsController < ApplicationController
     if current_user.admin?
       if params[:type] == "user"
         if params[:most]
-          @pagy, @res = pagy_countless(User.joins(:posts).distinct.select('users.*, COUNT(posts.reacts_count) AS user_reacts_count').group('id').order(user_reacts_count: :desc), items: 10)
+          @pagy, @res = pagy_countless(User.joins(:posts).distinct.select('users.*, COUNT(posts.reacts_count) AS user_reacts_count').group('id').order(user_reacts_count: :desc).includes(avatar_attachment: :blob), items: 10)
         else
-          @pagy, @res = pagy_countless(User.all, items:10)
+          @pagy, @res = pagy_countless(User.all.includes(avatar_attachment: :blob), items:10)
         end
       else
         if params[:most]
-          @pagy, @res = pagy_countless(Post.published.order(reacts_count: :desc), items: 10)
+          @pagy, @res = pagy_countless(Post.published.order(reacts_count: :desc).includes({user: {avatar_attachment: :blob}}, :categories), items: 10)
         elsif params[:status].present? && Post.statuses.keys.include?(params[:status])
-          @pagy, @res = pagy_countless(Post.send(params[:status]), items:10)
+          @pagy, @res = pagy_countless(Post.send(params[:status]).includes({user: {avatar_attachment: :blob}}, :categories), items:10)
         else
-          @pagy, @res = pagy_countless(Post.all, items:10)
+          @pagy, @res = pagy_countless(Post.all.includes({user: {avatar_attachment: :blob}}, :categories), items:10)
         end
       end
     else
       if params[:most]
         @pagy, @posts = pagy_countless(current_user.posts.published.order(reacts_count: :desc), items: 10)
       elsif params[:status].present? && Post.statuses.keys.include?(params[:status])
-        @pagy, @posts = pagy_countless(current_user.posts.send(params[:status]), items:10)
+        @pagy, @posts = pagy_countless(current_user.posts.send(params[:status]).includes(:categories), items:10)
       else
-        @pagy, @posts = pagy_countless(current_user.posts, items:10)
+        @pagy, @posts = pagy_countless(current_user.posts.includes(:categories), items:10)
       end
     end
   end
@@ -54,6 +54,9 @@ class PostsController < ApplicationController
       @post.assign_attributes(post_params)
       @post.cover.attach(post_params[:cover]) if post_params[:cover].present?
       if @post.save
+        User.where(role: "admin").each do |admin|
+          Notification.create(sender_id: @post.user.id, receiver_id: admin.id, action: :post, content: "#{@post.user.name} has made a post " +  "#{@post.categories.first&.name}", post_id: @post.id, seen: false)
+        end
         respond_to do |format|
           format.js {
             render js: "window.location='#{posts_path}'"
@@ -67,7 +70,7 @@ class PostsController < ApplicationController
         @post.cover.attach(post_params[:cover]) if post_params[:cover].present?
       end
       if @post.save 
-        NotificationCreatorForPostService.call(@post, current_user)
+        CreateNotificationJob.perform_later(@post, current_user)
         respond_to do |format|   
           format.js {
             render js: "window.location='#{post_path(@post)}'"
@@ -97,6 +100,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    @comments = @post.comments.includes(user: {avatar_attachment: :blob}, comments: [:user, :comments]).order(created_at: :desc)
     if params[:notification_id]
       notification = Notification.find(params[:notification_id])
       notification.seen = true
