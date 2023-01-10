@@ -8,6 +8,11 @@ class UsersController < ApplicationController
 
   def show
     @posts = @user.posts.published.includes(:user, :reacters)
+    if params[:notification_id]
+      notification = Notification.find(params[:notification_id])
+      notification.seen = true
+      notification.save
+    end
   end
 
   def edit

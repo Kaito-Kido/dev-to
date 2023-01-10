@@ -66,7 +66,8 @@ class PostsController < ApplicationController
         @post.assign_attributes(post_params)
         @post.cover.attach(post_params[:cover]) if post_params[:cover].present?
       end
-      if @post.save
+      if @post.save 
+        NotificationCreatorForPostService.call(@post, current_user)
         respond_to do |format|   
           format.js {
             render js: "window.location='#{post_path(@post)}'"
@@ -75,8 +76,8 @@ class PostsController < ApplicationController
       end
     when "declined"
       @post.status = params[:status]
-      @post.assign_attributes(post_params)
       if @post.save
+        Notification.create(sender_id: current_user.id, receiver_id: @post.user.id, action: :post, content: "Admin has declined a post " +  "#{@post.categories&.first.name}", post_id: @post.id)
         respond_to do |format|
           format.js {
             render js: "window.location='#{posts_path}'"
@@ -96,6 +97,11 @@ class PostsController < ApplicationController
   end
 
   def show
+    if params[:notification_id]
+      notification = Notification.find(params[:notification_id])
+      notification.seen = true
+      notification.save
+    end
   end
 
   private

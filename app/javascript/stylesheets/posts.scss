@@ -66,7 +66,7 @@
 
 .post__top--left {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .post__top--right {
@@ -364,7 +364,6 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  position: relative;
 }
 .cmt__date_name {
   display: flex;

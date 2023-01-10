@@ -1,0 +1,48 @@
+.notification-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+}
+
+.noti {
+  @extend .post;
+  min-width: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  &:hover {
+    color: black;
+    background-color: rgba(245, 245, 245);
+  }
+}
+
+#noti-menu {
+  max-width: 600px;
+  position: absolute;
+  top: 100%;
+  right: -50%;
+  left: auto;
+  width: 200%;
+  margin-top: 8px;
+  padding: 8px;
+  z-index: 400;
+  border-radius: var(--radius);
+  border: 0.3px solid rgba(0, 0, 0, 0.2);
+  display: none;
+  background-color: white;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+.--no_notification {
+  text-align: center;
+}
+
+.noti__contain--page {
+  max-width: 600px;
+  width: 100%;
+}
+
+.see_all__link {
+  text-decoration: none;
+}

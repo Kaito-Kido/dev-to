@@ -1,0 +1,7 @@
+div.noti__contain--page
+  div id="notification-list" class="notification-list"
+    - if notifications.present?
+      = render notifications
+    - else
+      p.--no_notification You don't have any notification 
+

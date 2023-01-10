@@ -17,6 +17,28 @@
   gap: 10px;
 }
 
+.filter__column {
+  @extend .filter__row;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 5px;
+}
+.filter__link {
+  a {
+    width: 100%;
+    max-width: 200px;
+    text-decoration: none;
+    padding: 8px;
+    border-radius: 5px;
+    color: black;
+    &:hover {
+      background-color: rgba(49, 46, 129, 0.8);
+      color: white;
+    }
+  }
+}
+
 .filter__btn {
   margin-right: 10px;
   border: 0.2px solid black;
