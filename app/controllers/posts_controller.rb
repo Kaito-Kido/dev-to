@@ -98,6 +98,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    @comments = @post.comments.includes(user: {avatar_attachment: :blob}, comments: [:user, :comments]).order(created_at: :desc)
     if params[:notification_id]
       notification = Notification.find(params[:notification_id])
       notification.seen = true

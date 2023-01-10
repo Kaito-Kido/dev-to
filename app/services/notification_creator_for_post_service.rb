@@ -7,7 +7,7 @@ class NotificationCreatorForPostService < ApplicationService
   def call
     if @post.user.admin?
       User.all.each do |user|
-        if user != User.admin[0]
+        if user != @post.user
           Notification.create(sender_id: @post.user.id, receiver_id: user.id, action: :post, content: "#{@post.user.name} has just posted an article", post_id: @post.id, seen: false)
         end
       end

@@ -11,16 +11,16 @@
     - if user_signed_in?
         .rh__group_button
             = link_to 'Create post', new_post_path, class: "sign-up-button"
-            - if user_signed_in?
+            - if user_signed_in? && controller.controller_name != "notifications"
                 .relative
                     = image_tag("/assets/bell.svg", class: "bell-button", id: "bell-button")
-                    - if current_user.notifications.pluck(:seen).include?(false)
+                    - if is_unread?
                         .ping.dot
                     - else 
                         .ping.dot.hide
             .div#noti-menu
-                - if current_user.notifications.first.present?
-                    = render "notifications/notifications_center", notifications: current_user.notifications.includes(sender: {avatar_attachment: :blob}).order(created_at: :desc).limit(20)
+                - if notifications.first.present?
+                    = render "notifications/notifications_center", notifications: notifications
                     .end__dropdown
                         = link_to "See all", notifications_path, class: "see_all__link"
                         = link_to "Mark all as read", mark_all_read_notifications_path, class: "see_all__link", remote: true
