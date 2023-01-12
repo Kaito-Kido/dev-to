@@ -19,7 +19,6 @@ class Post < ApplicationRecord
   end
 
   def check_draft
-    puts "haha"
     puts Post.first.name
   end
 end
