@@ -55,7 +55,7 @@ class PostsController < ApplicationController
       @post.cover.attach(post_params[:cover]) if post_params[:cover].present?
       if @post.save
         User.where(role: "admin").each do |admin|
-          Notification.create(sender_id: @post.user.id, receiver_id: admin.id, action: :post, content: "#{@post.user.name} has made a post " +  "#{@post.categories.first&.name}", post_id: @post.id, seen: false)
+          Notification.create(sender_id: @post.user.id, receiver_id: admin.id, action: :post, content: "#{@post.user.name} has made a post " +  "#{@post.categories.first&.name}", post_id: @post.id)
         end
         respond_to do |format|
           format.js {
