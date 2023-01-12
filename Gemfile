@@ -32,6 +32,8 @@ gem 'pagy'
 
 gem 'sidekiq'
 
+gem 'whenever', require: false
+
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
 
