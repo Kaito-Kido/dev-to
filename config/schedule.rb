@@ -6,7 +6,7 @@
 # Example:
 #
 set :output, "log/cron_log.log"
-set :environment, "development"
+set :environment, ENV['RAILS_ENV']
 #
 # every 2.hours do
 #   command "/usr/bin/some_great_command"

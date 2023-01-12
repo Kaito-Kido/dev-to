@@ -17,8 +17,4 @@ class Post < ApplicationRecord
   def is_not_draft?
     status != "draft"
   end
-
-  def check_draft
-    puts Post.first.name
-  end
 end

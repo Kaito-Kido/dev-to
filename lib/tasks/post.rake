@@ -1,5 +1,5 @@
 namespace :post do
-  desc "TODO"
+  desc "Check draft post to delete"
   task check: :environment do
     CheckDraftJob.perform_later
   end
