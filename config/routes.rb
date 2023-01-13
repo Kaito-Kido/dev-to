@@ -8,10 +8,6 @@ Rails.application.routes.draw do
     resource :react, only: [:create, :destroy]
     resources :comments
     resources :tags, only: [:create, :destroy]
-    member do 
-      post :show
-    end
-
     # collections do
     #   get :reacters_list
     # end
