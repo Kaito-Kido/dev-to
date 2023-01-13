@@ -1,3 +1,10 @@
 $("#comments").append(`<%= j render "comments/comments_of_post", comments: @comments %>`)
 
-$("#next_link").replaceWith(`<% if @pagy.next.present? %>`,`<%= j link_to "View more comments", pagy_url_for(@pagy, @pagy.next), remote: true, id: "next_link"%>`, `<%end%>`)
+if (<%= @pagy.next.present? %>)
+{
+  $("#next_link").replaceWith(`<%= j link_to "View more comments", pagy_url_for(@pagy, @pagy.next), remote: true, id: "next_link"%>`)
+}
+else {
+  $("#next_link").remove()
+}
+
