@@ -1,0 +1,4 @@
+= turbo_frame_tag "user-search-page-#{@pagy.page}", class: "contain--scroll"
+  = render 'users/users', users: @res
+  - if @pagy.next.present?
+    = render partial: "home/next_user_search_page"

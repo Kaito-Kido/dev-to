@@ -9,6 +9,5 @@ html
     = stylesheet_pack_tag 'application', meida: "all", 'data-turbo-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbo-track': 'reload'
   body
-    byebug
     = render "header/header", notifications: @notifications
     = yield
