@@ -19,12 +19,16 @@ class HomeController < ApplicationController
       else
         @pagy, @res = pagy(Post.all.includes(user: {avatar_attachment: :blob}), items: 10)
       end
+
+      render partial: "home/scrollable_post_search_list" if params[:page]
     when "user"
       if params[:search]
         @pagy, @res = pagy(User.where('name LIKE ?', "%#{params[:search]}%").includes(avatar_attachment: :blob), items: 10)
       else
         @pagy, @res = pagy(User.all.includes(avatar_attachmetn: :blob), items: 10)
       end
+
+      render partial: "home/scrollable_user_search_list" if params[:page] 
     end
     if params[:order]
       @res = @res.order(created_at: params[:order])

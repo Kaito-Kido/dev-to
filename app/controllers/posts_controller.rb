@@ -100,11 +100,15 @@ class PostsController < ApplicationController
   end
 
   def show
-    @comments = @post.comments.includes(user: {avatar_attachment: :blob}, comments: [:user, :comments]).order(created_at: :desc)
     if params[:notification_id]
       notification = Notification.find(params[:notification_id])
       notification.seen = true
       notification.save
+    end
+    @pagy, @comments = pagy_countless(@post.comments.includes(:user, :comments).order(created_at: :desc), items: 5)
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 

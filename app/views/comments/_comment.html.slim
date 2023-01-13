@@ -34,4 +34,4 @@ div class="cmt__output_field" id="#{dom_id(comment)}"
             | Dismiss
 - if comment.comments.present?
   .subcomment 
-    = render comment.comments.includes(:user, :comments)
+    = render comment.comments

@@ -1,7 +1,8 @@
 div.noti__contain--page
   div id="notification-list" class="notification-list"
     - if notifications.present?
-      = render notifications
+      - notifications.each do |noti|
+        = render "notifications/notification", notification: noti
     - else
       p.--no_notification You don't have any notification 
 

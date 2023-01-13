@@ -7,13 +7,15 @@
       = link_to "Post", search_path(search: params[:search], type: :post), class: params[:type] == "post" ? 'filter__btn--type filter--active' : 'filter__btn--type'
       = link_to "People", search_path(search: params[:search], type: :user), class: params[:type] == "user" ? 'filter__btn--type filter--active' : 'filter__btn--type'
   - if params[:type] == "post" && @res.present?
-    = turbo_frame_tag "posts-page-#{@pagy.page}", class: "contain--scroll"
+    .contain--scroll
       = render "posts/posts", posts: @res
-      = render partial: "home/next_page"
+      - if @pagy.next.present?
+        = render partial: "home/next_post_search_page"
   - elsif params[:type] == "user" && @res.present?
-    = turbo_frame_tag "posts-page-#{@pagy.page}", class: "contain--scroll"
+    .contain--scroll
       = render 'users/users', users: @res
-      = render partial: "home/next_page"
+      - if @pagy.next.present?
+        = render partial: "home/next_user_search_page"
   - else
     p No result found
 
