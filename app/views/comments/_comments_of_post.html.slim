@@ -1,5 +1,5 @@
 - comments.each do |comment|
-  div class="cmt__output_field" id="#{dom_id(comment)}"
+  = content_tag :div, class: "cmt__output_field",  id: dom_id(comment) do
     =image_tag(comment.user.avatar)
     .reply__cmt--flex_col
       .cmt__output_area
@@ -9,10 +9,10 @@
             span
               | •
             =date_created_at(comment)
-          =image_tag("/assets/threedot.svg", id: "drop-comment-#{comment.id}") 
+          =image_tag("/assets/threedot.svg", id: "drop-comment-#{comment.id}", class: "drop_comment") 
           div.edit_comment__button id="edit-comment-#{comment.id}"
             =link_to "Edit", edit_post_comment_path(post_id: @post.id, id: comment.id)
-            =link_to "Delete", post_comment_path(post_id: @post.id, id: comment.id), method: :delete, data: {confirm: "Are you sure?"}
+            =link_to "Delete", post_comment_path(post_id: @post.id, id: comment.id), method: :delete, data: {confirm: "Are you sure?"}, remote: true
         .cmt__content
           = comment.content 
       .reply__container

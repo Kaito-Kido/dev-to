@@ -8,10 +8,10 @@ div class="cmt__output_field" id="#{dom_id(comment)}"
           span
             | •
           =date_created_at(comment)
-        =image_tag("/assets/threedot.svg", id: "drop-comment-#{comment.id}") 
+        =image_tag("/assets/threedot.svg", id: "drop-comment-#{comment.id}", class: "drop_comment") 
         div.edit_comment__button id="edit-comment-#{comment.id}"
           =link_to "Edit", edit_comment_comment_path(comment_id: comment.commentable.id, id: comment.id, post_id: params[:id])
-          =link_to "Delete", comment_comment_path(comment_id: comment.commentable.id, id: comment.id, post_id: params[:id]), method: :delete, data: {confirm: "Are you sure?"}
+          =link_to "Delete", comment_comment_path(comment_id: comment.commentable.id, id: comment.id, post_id: params[:id]), method: :delete, data: {confirm: "Are you sure?"}, remote: true
       .cmt__content
         = comment.content 
     .post-bottom-interact
