@@ -1,5 +1,4 @@
 class TagsController < ApplicationController
-
   def create
     @tag = Tag.new(post_id: params[:post_id], category_id: params[:category_id])
     if @tag.save

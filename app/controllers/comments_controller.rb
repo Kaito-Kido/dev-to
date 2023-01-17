@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
   def create
     comment = @commentable.comments.new(user_id: current_user.id, content: params[:comment][:content], post_id: @post.id)
     if comment.save
-      CreateNotificationJob.perform_later(@post, current_user, @commentable)
+      CreateNotificationJob.perform_later(post: @post, current_user: current_user, commentable: @commentable, action: "comment")
       redirect_to post_path(@post)
     end
   end
@@ -31,6 +31,7 @@ class CommentsController < ApplicationController
   end
 
   private
+  
   def comment_params
     params.require(:comment).permit(:content)
   end
@@ -38,7 +39,12 @@ class CommentsController < ApplicationController
   def find_commentable
     @commentable = 
       if params[:comment_id]
-        Comment.find(params[:comment_id])
+        comment = Comment.find(params[:comment_id])
+        if comment.commentable.class.name == "Comment"
+          comment.commentable
+        else
+          comment
+        end
       elsif params[:post_id]
         Post.find(params[:post_id])
       end

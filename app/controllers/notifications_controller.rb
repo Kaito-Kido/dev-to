@@ -15,8 +15,8 @@ class NotificationsController < ApplicationController
         updated_at: Time.current
       }
     end
-    Notification.upsert_all(notis)
 
+    Notification.upsert_all(notis)
     respond_to do |format|
       format.js
     end
@@ -33,5 +33,4 @@ class NotificationsController < ApplicationController
       @notifications = current_user.notifications.includes(sender: {avatar_attachment: :blob})
     end
   end
-
 end
