@@ -68,7 +68,7 @@ class PostsController < ApplicationController
         @post.cover.attach(post_params[:cover]) if post_params[:cover].present?
       end
       if @post.save 
-        CreateNotificationJob.perform_later(post: @post, current_user: current_user, status: params[:status], action: "post")
+        CreateNotificationJob.perform_later(post: @post, sender: current_user, status: params[:status], action: "post")
         respond_to do |format|   
           format.js {
             render js: "window.location='#{post_path(@post)}'"
@@ -78,7 +78,7 @@ class PostsController < ApplicationController
     when "declined"
       @post.status = params[:status]
       if @post.save
-        CreateNotificationJob.perform_later(current_user: current_user, post: @post, status: params["status"], action: "post")
+        CreateNotificationJob.perform_later(sender: current_user, post: @post, status: params["status"], action: "post")
         respond_to do |format|
           format.js {
             render js: "window.location='#{posts_path}'"

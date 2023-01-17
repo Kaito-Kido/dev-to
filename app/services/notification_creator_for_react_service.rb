@@ -1,11 +1,11 @@
 class NotificationCreatorForReactService < ApplicationService
-  def initialize(current_user:, reactable:, post:)
+  def initialize(sender:, reactable:, post:)
     @post = post
     @reactable = reactable
-    @current_user = current_user
+    @sender = sender
   end
 
   def call
-    Notification.create(content: "#{@current_user.name} has just liked your #{@reactable.class.name.downcase}", sender_id: @current_user.id, receiver_id: @post.user.id, action: :like, post_id: @post.id)
+    Notification.create(content: "#{@sender.name} has just liked your #{@reactable.class.name.downcase}", sender_id: @sender.id, receiver_id: @post.user.id, action: :like, post_id: @post.id)
   end
 end

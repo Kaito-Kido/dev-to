@@ -8,7 +8,7 @@ class ReactsController < ApplicationController
     @react = @reactable.reacts.where(user_id: current_user.id, post_id: @post.id).first_or_initialize
     if @react.save
       if @post.user.id != current_user
-        CreateNotificationJob.perform_later(current_user: current_user, reactable: @reactable, post: @post, action: "like")
+        CreateNotificationJob.perform_later(sender: current_user, reactable: @reactable, post: @post, action: "like")
         respond_to do |format|
           format.js 
         end

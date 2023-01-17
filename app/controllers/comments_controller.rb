@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
   def create
     comment = @commentable.comments.new(user_id: current_user.id, content: params[:comment][:content], post_id: @post.id)
     if comment.save
-      CreateNotificationJob.perform_later(post: @post, current_user: current_user, commentable: @commentable, action: "comment")
+      CreateNotificationJob.perform_later(post: @post, sender: current_user, commentable: @commentable, action: "comment")
       redirect_to post_path(@post)
     end
   end

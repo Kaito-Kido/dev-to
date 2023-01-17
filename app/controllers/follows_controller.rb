@@ -2,7 +2,7 @@ class FollowsController < ApplicationController
   def create
     @follow = Follow.where(follower_id: current_user.id, followed_id: params[:user_id]).first_or_initialize
     if @follow.save
-      CreateNotificationJob.perform_later(current_user: current_user, receiver_id: params[:user_id], action: "follow")
+      CreateNotificationJob.perform_later(sender: current_user, receiver_id: params[:user_id], action: "follow")
       respond_to do |format|
         format.js
       end
