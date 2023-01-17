@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   before_action :load_notifications
 
   def load_notifications
-    @notifications = current_user.notifications.includes(sender: {avatar_attachment: :blob}).order(created_at: :desc).limit(20)
+    if user_signed_in?
+      @notifications = current_user.notifications.includes(sender: {avatar_attachment: :blob}).order(created_at: :desc).limit(20)
+    end
   end
 end

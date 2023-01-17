@@ -66,6 +66,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def set_avatar
     user = User.find_by(email: params[:user][:email])
     avatar = URI.parse("https://avatars.dicebear.com/api/adventurer-neutral/#{user.id}.svg").open
+    
     user.avatar.attach(io: avatar, filename: "user#{user.id}")
     user.name = "username#{user.id}"
     user.save

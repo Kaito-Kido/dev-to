@@ -54,9 +54,7 @@ class PostsController < ApplicationController
       @post.assign_attributes(post_params)
       @post.cover.attach(post_params[:cover]) if post_params[:cover].present?
       if @post.save
-        User.where(role: "admin").each do |admin|
-          Notification.create(sender_id: @post.user.id, receiver_id: admin.id, action: :post, content: "#{@post.user.name} has made a post " +  "#{@post.categories.first&.name}", post_id: @post.id)
-        end
+        CreateNotificationJob.perform_later(post: @post, status: params[:status], action: "post")
         respond_to do |format|
           format.js {
             render js: "window.location='#{posts_path}'"
@@ -70,7 +68,7 @@ class PostsController < ApplicationController
         @post.cover.attach(post_params[:cover]) if post_params[:cover].present?
       end
       if @post.save 
-        CreateNotificationJob.perform_later(@post, current_user)
+        CreateNotificationJob.perform_later(post: @post, sender: current_user, status: params[:status], action: "post")
         respond_to do |format|   
           format.js {
             render js: "window.location='#{post_path(@post)}'"
@@ -80,7 +78,7 @@ class PostsController < ApplicationController
     when "declined"
       @post.status = params[:status]
       if @post.save
-        Notification.create(sender_id: current_user.id, receiver_id: @post.user.id, action: :post, content: "Admin has declined a post " +  "#{@post.categories&.first.name}", post_id: @post.id)
+        CreateNotificationJob.perform_later(sender: current_user, post: @post, status: params["status"], action: "post")
         respond_to do |format|
           format.js {
             render js: "window.location='#{posts_path}'"
@@ -105,7 +103,8 @@ class PostsController < ApplicationController
       notification.seen = true
       notification.save
     end
-    @pagy, @comments = pagy_countless(@post.comments.includes(:user, :comments).order(created_at: :desc), items: 5)
+
+    @pagy, @comments = pagy_countless(@post.comments.includes({user: :avatar_attachment}, comments: [:user, {comments: [:user, :comments]}]).order(created_at: :desc), items: 5)
     respond_to do |format|
       format.html
       format.js
@@ -113,6 +112,7 @@ class PostsController < ApplicationController
   end
 
   private
+  
   def post_params
     params.require(:post).permit(:title, :content, :cover)
   end

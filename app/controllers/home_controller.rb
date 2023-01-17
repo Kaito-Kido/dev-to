@@ -7,7 +7,7 @@ class HomeController < ApplicationController
   def index
     posts = Post.published.includes({user: {avatar_attachment: :blob}}, :categories)
     @pagy, @posts = pagy_countless(posts, items: 10)
-
+    
     render partial: "home/scrollable_list" if params[:page]
   end
   
@@ -30,9 +30,9 @@ class HomeController < ApplicationController
 
       render partial: "home/scrollable_user_search_list" if params[:page] 
     end
+    
     if params[:order]
       @res = @res.order(created_at: params[:order])
     end
   end
-
 end

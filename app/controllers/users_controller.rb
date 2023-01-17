@@ -1,5 +1,4 @@
-class UsersController < ApplicationController
-  
+class UsersController < ApplicationController 
   before_action :set_user, except: [:root_routing]
 
 
@@ -16,13 +15,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-
   end
 
   def update
     @user.assign_attributes(user_params)
     @user.avatar.attach(params[:user][:avatar]) if params[:user][:avatar].present?
-
     if @user.save
       redirect_to user_path
     else
@@ -31,6 +28,7 @@ class UsersController < ApplicationController
   end
 
   private
+
   def user_params
     params.require(:user).permit(:name, :email, :avatar)
   end
@@ -38,5 +36,4 @@ class UsersController < ApplicationController
   def set_user
     @user = User.find(params[:id])
   end
-  
 end

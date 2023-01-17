@@ -1,6 +1,7 @@
 $(document).on("turbo:load", function () {
   // Catch event of all the dropdown of comment button
   $(document).on("click", 'img[id^="drop-comment-"]', function (e) {
+    e.stopImmediatePropagation();
     const id = e.currentTarget.id.match(/\d+/)[0];
     // If the menu is showing, hide it
     if ($("#edit-comment-" + id).is(":visible")) {
@@ -14,7 +15,8 @@ $(document).on("turbo:load", function () {
     }
   });
 
-  $(document).on("click", 'img[id^="drop-post-"]', function (e) {
+  $('img[id^="drop-post-"]').on("click", function (e) {
+    console.log(2);
     const id = e.currentTarget.id.match(/\d+/)[0];
     if ($("#edit-post-" + id).is(":visible")) {
       $("#edit-post-" + id).hide();

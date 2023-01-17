@@ -1,6 +1,6 @@
 class Notification < ApplicationRecord
   
-  enum action: {post: 0, comment: 1, like: 3, follow: 4, reply_comment: 5}
+  enum action: {post: 0, comment: 1, like: 3, follow: 4}
 
   belongs_to :sender, class_name: "User"
   belongs_to :receiver, class_name: "User"

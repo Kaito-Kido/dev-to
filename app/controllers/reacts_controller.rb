@@ -1,16 +1,14 @@
 class ReactsController < ApplicationController
-
   before_action :authenticate_user!
   before_action :find_reactable
   before_action :find_post
 
   def create
     #If reactable was reacted, do not do anything 
-    
     @react = @reactable.reacts.where(user_id: current_user.id, post_id: @post.id).first_or_initialize
     if @react.save
       if @post.user.id != current_user
-        Notification.create(content: "#{current_user.name} has just liked your #{@reactable.class.name.downcase}", sender_id: current_user.id, receiver_id: @post.user.id, action: :like, post_id: @post.id)
+        CreateNotificationJob.perform_later(sender: current_user, reactable: @reactable, post: @post, action: "like")
         respond_to do |format|
           format.js 
         end
@@ -30,6 +28,7 @@ class ReactsController < ApplicationController
   end
 
   private
+  
   #Find reactable by params in url
   def find_reactable
     @reactable =
