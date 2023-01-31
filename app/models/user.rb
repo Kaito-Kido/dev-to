@@ -1,6 +1,6 @@
 class User < ApplicationRecord
 
-  enum role: [:admin, :user]
+  enum role: {admin: 0, user: 1}
 
   
   has_one_attached :avatar
@@ -18,9 +18,8 @@ class User < ApplicationRecord
     has_many :send_notifications, foreign_key: :sender_id, class_name: Notification.name, dependent: :destroy
     has_many :notifications, foreign_key: :receiver_id, class_name: Notification.name, dependent: :destroy
 
+  validates :role, presence: true
   validates :name, presence: true, on: :update
-  
-
-
+  validates :email, uniqueness: { case_sensitive: true }
 end
 
