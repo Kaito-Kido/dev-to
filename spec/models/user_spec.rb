@@ -16,5 +16,4 @@ RSpec.describe User, type: :model do
   it { should have_many(:followers) }
   it { should have_many(:send_notifications).dependent(:destroy) }
   it { should have_many(:notifications).dependent(:destroy) }
-
 end
