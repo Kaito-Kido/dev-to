@@ -1,7 +1,7 @@
 
 class PostsController < ApplicationController
   before_action :set_post, except: [:index, :new, :archive]
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:show]
 
   def index
     if current_user.admin?
@@ -91,7 +91,7 @@ class PostsController < ApplicationController
       @post.cover.attach(post_params[:cover]) if post_params[:cover].present?
       if @post.save
         respond_to do |format| 
-          format.js 
+          format.js
         end
       end
     end
