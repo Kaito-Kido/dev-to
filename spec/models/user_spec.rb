@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   it { should define_enum_for(:role).with_values([:admin, :user]) }
 
-  it { should validate_uniqueness_of(:email)}
+  it { should validate_uniqueness_of(:email).case_insensitive}
   it { should validate_presence_of(:role)}
 
   it { should have_one_attached(:avatar) }
