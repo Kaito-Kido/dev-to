@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   before_action :find_commentable
   before_action :find_comment, except: [:create]
-  before_action :find_post, only: [:create, :update]
+  before_action :find_post, only: [:create]
   before_action :authenticate_user!
 
   def create
@@ -13,18 +13,21 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    respond_to do |format|
-      format.js
+    if @comment.destroy
+      respond_to do |format|
+        format.js
+      end
     end
   end
 
   def edit
-    @post = Post.find(params[:post_id])
+    @post = Post.find(@comment.post_id)
     @post_id = @post.id
   end
 
   def update
     @comment.assign_attributes(comment_params)
+    @post = Post.find(@comment.post_id)
     if @comment.save
       redirect_to post_path(@post)
     end

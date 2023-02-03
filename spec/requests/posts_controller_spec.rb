@@ -45,6 +45,16 @@ RSpec.describe "PostsControllers", type: :request do
     end
   end
 
+  describe "GET #edit" do
+    it "should render template :edit" do 
+      login_user
+      @post = create(:post, user: @user)
+      get "/posts/#{@post.id}/edit"
+      expect(response).to render_template(:edit)
+      expect(response).to have_http_status(:ok)
+    end
+  end
+
   describe "GET #show" do
     it "should render posts#show template"do
     user = create(:user)
