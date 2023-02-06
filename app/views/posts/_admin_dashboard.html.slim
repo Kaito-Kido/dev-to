@@ -13,14 +13,17 @@
   - if params[:most] 
     = turbo_frame_tag "posts-page-#{@pagy.page}", class: "contain--scroll", target: "_top"
       = render'users/users', users: res
-      = render partial: "home/next_page"
+      - if @pagy.next.present?
+        = render partial: "home/next_page"
   -elsif res.present?
     = turbo_frame_tag "posts-page-#{@pagy.page}", class: "contain--scroll", target: "_top"
       = render 'users/users', users: res
-      = render partial: "home/next_page"
+      - if @pagy.next.present?
+        = render partial: "home/next_page"
 - elsif res.present?
-  = turbo_frame_tag "posts-page-#{@pagy.page}", class: "contain--scroll", target: "_top"
+  = turbo_frame_tag "status-posts-#{@pagy.page}", class: "contain--scroll", target: "_top"
     = render "posts/status_posts", posts: res
-    = render partial: "home/next_page"
+    - if @pagy.next.present?
+      = render partial: "posts/next_status_posts"
 -else 
   p No result found

@@ -1,0 +1,9 @@
+= turbo_frame_tag "status-posts-#{@pagy.page}", class: "contain--scroll"
+  - if current_user.admin?
+    = render "posts/status_posts", posts: @res
+    - if @pagy.next.present?
+      = render partial: "posts/next_status_posts"
+  - else
+    = render "posts/status_posts", posts: @posts
+    - if @pagy.next.present?
+      = render partial: "posts/next_status_posts"

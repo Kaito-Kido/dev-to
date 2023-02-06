@@ -4,9 +4,10 @@
     = link_to "Pending Posts", posts_path(status: :pending), class: params[:status] == "pending" ? 'filter__btn--type filter--active' : 'filter__btn--type'
     = link_to "Draft Posts", posts_path(status: :draft), class: params[:status] == "draft" ? 'filter__btn--type filter--active' : 'filter__btn--type'
     = link_to "Most reacts post", posts_path(most: true), class: params[:most] ? 'filter__btn--type filter--active' : 'filter__btn--type'
-- if @posts.present?
-  = turbo_frame_tag "posts-page-#{@pagy.page}", class: "contain--scroll", target: "_top"
+- if posts.present?
+  = turbo_frame_tag "status_posts-#{@pagy.page}", class: "contain--scroll", target: "_top"
       = render "posts/status_posts", posts: posts
-      = render partial: "home/next_page"
+      - if @pagy.next.present?
+        = render partial: "posts/next_status_posts"
 - else
   p No result found

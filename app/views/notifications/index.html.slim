@@ -2,9 +2,9 @@
   .left__container
     h1 Notifications
     .filter__column.filter__link
-      = link_to "All"
-      = link_to "Comments", notifications_path(status: :comment)
-      = link_to "Post", notifications_path(status: :post)
-      = link_to "Like", notifications_path(status: :like)
-      = link_to "Follow", notifications_path(status: :follow)
+      = link_to "All", notifications_path(), class: params[:status] == nil ? "filter__noti--active" : ""
+      = link_to "Comments", notifications_path(status: :comment), class: params[:status] == "comment" ? "filter__noti--active" : ""
+      = link_to "Post", notifications_path(status: :post), class: params[:status] == "post" ? "filter__noti--active" : ""
+      = link_to "Like", notifications_path(status: :like), class: params[:status] == "like" ? "filter__noti--active" : ""
+      = link_to "Follow", notifications_path(status: :follow), class: params[:status] == "follow" ? "filter__noti--active" : ""
   = render "notifications/notifications_center", notifications: @notifications&.order(created_at: :desc)

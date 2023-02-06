@@ -48,7 +48,13 @@
   @media (max-width: 960px) {
     flex-direction: column;
     justify-content: flex-start;
+    align-items: center;
   }
+}
+
+.column-scroll-more {
+  @extend .contain--scroll;
+  padding: 0;
 }
 
 .column-post {
@@ -61,10 +67,10 @@
   padding: 0 200px;
 
   @media (max-width: 960px) {
-    padding: 15px;
+    padding: 0 15px;
   }
   @media (max-width: 460px) {
-    padding: 5px;
+    padding: 0 5px;
   }
 }
 

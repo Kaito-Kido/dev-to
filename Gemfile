@@ -81,3 +81,5 @@ group :test, :development do
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'
 end
+
+gem "bugsnag", "~> 6.25"

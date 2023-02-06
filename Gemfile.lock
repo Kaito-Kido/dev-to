@@ -66,6 +66,8 @@ GEM
     bindex (0.8.1)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
+    bugsnag (6.25.1)
+      concurrent-ruby (~> 1.0)
     builder (3.2.4)
     bullet (7.0.7)
       activesupport (>= 3.0.0)
@@ -308,6 +310,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap (>= 1.4.4)
+  bugsnag (~> 6.25)
   bullet
   byebug
   capybara (>= 3.26)
