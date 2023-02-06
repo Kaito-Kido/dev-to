@@ -1,4 +1,5 @@
 class FollowsController < ApplicationController
+  before_action :authenticate_user!
   def create
     @follow = Follow.where(follower_id: current_user.id, followed_id: params[:user_id]).first_or_initialize
     if @follow.save

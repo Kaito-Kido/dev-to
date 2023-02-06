@@ -20,6 +20,6 @@ class User < ApplicationRecord
 
   validates :role, presence: true
   validates :name, presence: true, on: :update
-  validates :email, uniqueness: { case_sensitive: true }
+  validates :email, uniqueness: true
 end
 
