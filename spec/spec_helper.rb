@@ -15,7 +15,8 @@
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'rails_helper'
 require "support/controller_helpers"
-
+require 'simplecov'
+SimpleCov.start
 RSpec.configure do |config|
 
 

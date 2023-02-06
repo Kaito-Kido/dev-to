@@ -3,7 +3,8 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 .box {
-  width: 640px;
+  max-width: 640px;
+  width: 100%;
   background: white;
   border-radius: 2px;
   color: rbg(23, 23, 23);

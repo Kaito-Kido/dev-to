@@ -1,5 +1,11 @@
 .contain
   .left__container
+    =form_with url: search_path, method: :get, id: "search-in-page" do |f|
+      .search-bar 
+        =f.text_field :search, placeholder: "Search...", value: params[:search]
+        =f.hidden_field :type, value: params[:type] ? params[:type] : :post
+        .search-logo
+          =f.submit "Search", type: :image, src: "/assets/search-icon.svg"
     h1 Search results for #{params[:search]}
     .filter__row 
       = link_to "Newest", search_path(search: params[:search], type: params[:type], order: :desc), class: params[:order] == "desc" ? 'filter__btn filter--active' : 'filter__btn'
