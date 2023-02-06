@@ -33,6 +33,10 @@
   background-color: white;
   max-height: 85vh;
   overflow-y: auto;
+
+  @media (max-width: 910px) {
+    right: 0;
+  }
 }
 .--no_notification {
   text-align: center;

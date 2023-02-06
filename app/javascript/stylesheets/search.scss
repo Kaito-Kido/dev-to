@@ -7,6 +7,12 @@
   h1 {
     font-size: 26px;
   }
+
+  @media (max-width: 960px) {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+  }
 }
 
 .filter__row {
@@ -49,6 +55,9 @@
   text-decoration: none;
   text-align: center;
   max-width: 400px;
+  @media (max-width: 960px) {
+    max-width: none;
+  }
   &:hover {
     background-color: black;
     color: white;

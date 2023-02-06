@@ -42,7 +42,7 @@ RSpec.describe "UsersControllers", type: :request do
       it "should response with Unauthorized" do
         user = create(:user)
         patch "/users/#{user.id}", params: {user: {name: "oke"}}
-        expect(response).to have_http_status(401)
+        expect(response).to have_http_status(302)
       end
     end
   end

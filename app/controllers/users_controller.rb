@@ -1,5 +1,6 @@
 class UsersController < ApplicationController 
   before_action :set_user, except: [:root_routing]
+  before_action :authenticate_user!, except: [:show]
 
 
   def index
