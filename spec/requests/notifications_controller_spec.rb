@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "NotificationsControllers", type: :request do
   describe "GET /index" do
-    context "siged in" do
+    context "singed in" do
       it "should render template :index" do
         user = create(:user)
         sign_in user
@@ -11,7 +11,7 @@ RSpec.describe "NotificationsControllers", type: :request do
       end
     end
 
-    context "log out" do
+    context "logged out" do
       it "should redirect to sign in page" do
         get "/notifications"
         expect(response).to redirect_to(new_user_session_path)

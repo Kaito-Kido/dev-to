@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+  before_action :authenticate_user!
   def show
     @posts = Category.find(params[:id]).posts.includes(:categories, {user: {avatar_attachment: :blob}})
   end
