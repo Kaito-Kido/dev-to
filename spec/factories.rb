@@ -68,4 +68,9 @@ FactoryBot.define do
     action {"post"}
     seen {false}
   end
+
+  factory :bookmark do
+    association :user
+    association :post
+  end
 end
