@@ -106,7 +106,7 @@ class PostsController < ApplicationController
       notification.save
     end
 
-    @pagy, @comments = pagy_countless(@post.comments.includes({user: :avatar_attachment}, comments: [:user, {comments: [:user, :comments]}]).order(created_at: :desc), items: 5)
+    @pagy, @comments = pagy_countless(@post.comments.includes({user: {avatar_attachment: :blob}}, comments: [:user, {comments: [:user, :comments]}]).order(created_at: :desc), items: 5)
     respond_to do |format|
       format.html
       format.js
