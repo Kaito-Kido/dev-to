@@ -16,6 +16,7 @@
         div
           = link_to "Edit", edit_post_path(@post), class: "save_draft__button"
           = link_to "Delete", post_path(@post), method: :delete, class: "save_draft__button"
+    = link_to image_tag('/assets/facebook-share-button-icon.svg'), 'http://www.facebook.com/sharer.php?u='+request.url, :target => :blank, class: "share__button"
     .sp__head--title
       h1 =@post.title
     .hashtag__row

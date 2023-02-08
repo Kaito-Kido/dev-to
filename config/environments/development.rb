@@ -10,6 +10,8 @@ Rails.application.configure do
     Bullet.add_footer    = true
   end
 
+  config.hosts << "ed34-2a09-bac1-7aa0-10-00-1bd-6e.ngrok.io"
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time
