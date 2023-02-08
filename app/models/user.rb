@@ -15,8 +15,10 @@ class User < ApplicationRecord
     has_many :followers, through: :received_follows, source: :follower
     has_many :given_follows, foreign_key: :follower_id, class_name: "Follow", dependent: :destroy
     has_many :followings, through: :given_follows, source: :followed_user
-    has_many :send_notifications, foreign_key: :sender_id, class_name: Notification.name, dependent: :destroy
-    has_many :notifications, foreign_key: :receiver_id, class_name: Notification.name, dependent: :destroy
+    has_many :send_notifications, foreign_key: :sender_id, class_name: "Notification", dependent: :destroy
+    has_many :notifications, foreign_key: :receiver_id, class_name: "Notification", dependent: :destroy
+    has_many :bookmarks, dependent: :destroy
+    has_many :bookmark_posts, through: :bookmarks, source: :post
 
   validates :role, presence: true
   validates :name, presence: true, on: :update

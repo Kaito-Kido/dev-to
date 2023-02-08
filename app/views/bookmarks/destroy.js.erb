@@ -1,0 +1,3 @@
+$("a[data-bookmark-post-id=<%=@post.id%>]").replaceWith(
+  `<%= j render "bookmarks/bookmark", post: @post %>`
+)
