@@ -10,6 +10,7 @@ class Post < ApplicationRecord
   has_one_attached :cover
   has_rich_text :content
   has_many :comments, as: :commentable, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
   
   validates :content, presence: true, if: :is_not_draft?
   validates :title, presence: true

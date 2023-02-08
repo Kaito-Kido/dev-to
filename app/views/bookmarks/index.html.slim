@@ -1,0 +1,7 @@
+.contain
+  .left__container#reading-list
+    h1 Reading list (#{@bookmark_posts.count})
+  - if @bookmark_posts.present?
+    = render "posts/posts", posts: @bookmark_posts
+  - else
+    p You haven't bookmarked any post yet

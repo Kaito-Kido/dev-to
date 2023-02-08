@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resource :react, only: [:create, :destroy]
     resources :comments
     resources :tags, only: [:create, :destroy]
+    resource :bookmark, only: [:create, :destroy]
     # collections do
     #   get :reacters_list
     # end
@@ -20,6 +21,7 @@ Rails.application.routes.draw do
   resources :categories, only: [:create, :destroy, :show]
   resources :users do 
     resource :follow, only: [:create, :destroy]
+    resources :bookmarks, only: [:index]
   end
   get "search", to: "home#search", as: "search"
   resources :notifications do
