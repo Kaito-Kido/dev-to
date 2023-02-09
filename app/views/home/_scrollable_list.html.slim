@@ -1,3 +1,4 @@
-= turbo_frame_tag "posts-page-#{@pagy.page}"
+= turbo_frame_tag "posts-page-#{@pagy.page}", class: "contain--scroll"
   = render "posts/posts", posts: @posts
-  = render partial: "home/next_page"
+  - if @pagy.next.present?
+    = render partial: "home/next_page"

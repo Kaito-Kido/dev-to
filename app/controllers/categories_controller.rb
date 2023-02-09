@@ -1,11 +1,14 @@
 class CategoriesController < ApplicationController
   before_action :authenticate_user!
   def show
-    @posts = Category.find(params[:id]).posts.includes(:categories, {user: {avatar_attachment: :blob}})
+    @category = Category.find(params[:id])
+    @pagy, @posts = pagy(@category.posts.includes(:categories, {user: {avatar_attachment: :blob}}), items: 10)
+
+    render partial: "home/scrollable_list" if params[:page]
   end
 
   def create
-    category = Category.where(name: params[:category_name]).first_or_initialize
+    category = Category.find_by(name: params[:category_name]).first_or_initialize
     if category.save
       Tag.create(post_id: params[:post_id], category_id: category.id)
       respond_to do |format|

@@ -43,6 +43,16 @@
     align-items: center;
     width: 100%;
     justify-content: flex-start;
+    gap: 5px;
+    min-width: 700px;
+
+    @media (max-width: 960px) {
+      min-width: 400px;
+    }
+
+    @media (max-width: 400px) {
+      min-width: 0;
+    }
   }
 
   @media (max-width: 960px) {
@@ -58,19 +68,21 @@
 }
 
 .column-post {
-  width: 100%;
+  width: fit-content;
   height: 100%;
   display: flex;
   flex-direction: column;
   gap: 5px;
   margin-bottom: 8px;
-  padding: 0 200px;
+  margin: 0 auto 8px auto;
+  // padding: 0 250px;
 
   @media (max-width: 960px) {
     padding: 0 15px;
   }
   @media (max-width: 460px) {
     padding: 0 5px;
+    width: 100%;
   }
 }
 
@@ -94,7 +106,7 @@
 
 .post__top--left {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .post__top--right {
@@ -188,6 +200,22 @@
   font-size: 0.875rem;
   line-height: 1.25;
   gap: 10px;
+}
+
+.interact__post--bottom {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 1fr 1fr;
+  background-color: white;
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px;
+    margin: 0;
+  }
 }
 
 .post--approve {
@@ -315,6 +343,10 @@
   padding: 32px 48px;
   width: 100%;
   background-color: white;
+
+  @media (max-width: 960px) {
+    padding: 16px;
+  }
 }
 
 .cmt__contain {
@@ -604,6 +636,8 @@ img#cover-prev {
   width: fit-content;
   margin-bottom: 8px;
   margin-left: -4px;
+  flex-wrap: wrap;
+  height: 32px;
 
   a {
     padding: 4px 7px;

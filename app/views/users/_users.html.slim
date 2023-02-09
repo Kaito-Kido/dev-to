@@ -1,16 +1,15 @@
-.column-post
-    - users.each do |user|
-        .post
-            = link_to user_path(user), class: "post-top"
-                .post__top--left
-                    .avatar
-                        = image_tag(user.avatar, alt: "avatar")
-                    .name-date 
-                        .name
-                            =user.email
-                .post-bottom
-            .post-main 
-                .post-title
-                    =link_to user_path(user) 
-                        = user.name
+- users.each do |user|
+    .post
+        = link_to user_path(user), class: "post-top"
+            .post__top--left
+                .avatar
+                    = image_tag(user.avatar, alt: "avatar")
+                .name-date 
+                    .name
+                        =user.email
+            .post-bottom
+        .post-main 
+            .post-title
+                =link_to user_path(user) 
+                    = user.name
 

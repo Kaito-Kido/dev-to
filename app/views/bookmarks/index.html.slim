@@ -1,7 +1,10 @@
-.contain
-  .left__container#reading-list
-    h1 Reading list (#{@bookmark_posts.count})
-  - if @bookmark_posts.present?
-    = render "posts/posts", posts: @bookmark_posts
-  - else
-    p You haven't bookmarked any post yet
+
+.contain 
+  .column-post.grid__container
+    .left__container.item--left#reading-list
+      h1 Reading list (#{@bookmark_posts.count})
+    - if @bookmark_posts.present?
+      .contain-scroll.right__container.item--right
+        = render "posts/posts", posts: @bookmark_posts
+    - else
+      p You haven't bookmarked any post yet

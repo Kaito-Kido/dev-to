@@ -23,6 +23,16 @@
           = link_to "#" + category.name, category_path(category)
   .sp__main
     = @post.content.to_s
+  .interact__post--bottom
+    - if reacted?(@post)
+        = render "reacts/reacted", reactable: @post
+    - else
+        = render "reacts/react", reactable: @post 
+    - if bookmarked?(@post)
+        = render "bookmarks/bookmarked", post: @post
+    - else 
+        = render "bookmarks/bookmark", post: @post
+    = link_to image_tag("/assets/share-facebook.svg"), 'http://www.facebook.com/sharer.php?u=' + request.host_with_port + "/posts/#{@post.id}", :target => :blank, class: "react-button"
   .cmt__contain#comment-section 
     .cmt__header 
       .cmt__header--h2 

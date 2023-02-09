@@ -2,7 +2,7 @@ class BookmarksController < ApplicationController
   before_action :authenticate_user!
   before_action :find_post, only: [:create, :destroy]
   def index
-    @pagy, @bookmark_posts = pagy(current_user.bookmark_posts.includes({user: {avatar_attachment: :blob}}, :categories), item: 10)
+    @pagy, @bookmark_posts = pagy(current_user.bookmark_posts.includes({user: {avatar_attachment: :blob}}, :categories), items: 10)
   end
 
   def create
