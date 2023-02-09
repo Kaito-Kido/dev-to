@@ -9,10 +9,10 @@
       = link_to "Most reacts post", posts_path(most: true), class: params[:most] ? 'filter__btn--type filter--active' : 'filter__btn--type'
   - if posts.present?
     = turbo_frame_tag "status_posts-#{@pagy.page}", class: "contain--scroll", target: "_top"
-      .contain--scroll.right__container.item--right
-        = render "posts/status_posts", posts: posts
-        - if @pagy.next.present?
-          = render partial: "posts/next_status_posts"
+      / .contain--scroll.right__container.item--right
+      = render "posts/status_posts", posts: posts
+      - if @pagy.next.present?
+        = render partial: "posts/next_status_posts"
   - else
     .contain--scroll.right__container.item--right
       p No result found
