@@ -1,13 +1,18 @@
-.left__container
-  .filter__row 
-    = link_to "Published Posts", posts_path(status: :published), class: params[:status] == "published" ? 'filter__btn--type filter--active' : 'filter__btn--type'
-    = link_to "Pending Posts", posts_path(status: :pending), class: params[:status] == "pending" ? 'filter__btn--type filter--active' : 'filter__btn--type'
-    = link_to "Draft Posts", posts_path(status: :draft), class: params[:status] == "draft" ? 'filter__btn--type filter--active' : 'filter__btn--type'
-    = link_to "Most reacts post", posts_path(most: true), class: params[:most] ? 'filter__btn--type filter--active' : 'filter__btn--type'
-- if posts.present?
-  = turbo_frame_tag "status_posts-#{@pagy.page}", class: "contain--scroll", target: "_top"
-      = render "posts/status_posts", posts: posts
-      - if @pagy.next.present?
-        = render partial: "posts/next_status_posts"
-- else
-  p No result found
+.column-post.grid__container
+  .top__container.item--top
+    h1 Dashboard
+  .left__container.item--left
+    .filter__row 
+      = link_to "Published Posts", posts_path(status: :published), class: params[:status] == "published" ? 'filter__btn--type filter--active' : 'filter__btn--type'
+      = link_to "Pending Posts", posts_path(status: :pending), class: params[:status] == "pending" ? 'filter__btn--type filter--active' : 'filter__btn--type'
+      = link_to "Draft Posts", posts_path(status: :draft), class: params[:status] == "draft" ? 'filter__btn--type filter--active' : 'filter__btn--type'
+      = link_to "Most reacts post", posts_path(most: true), class: params[:most] ? 'filter__btn--type filter--active' : 'filter__btn--type'
+  - if posts.present?
+    = turbo_frame_tag "status_posts-#{@pagy.page}", class: "contain--scroll", target: "_top"
+      .contain--scroll.right__container.item--right
+        = render "posts/status_posts", posts: posts
+        - if @pagy.next.present?
+          = render partial: "posts/next_status_posts"
+  - else
+    .contain--scroll.right__container.item--right
+      p No result found

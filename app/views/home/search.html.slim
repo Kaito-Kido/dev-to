@@ -1,28 +1,32 @@
 .contain
-  .left__container
+  .column-post.grid__container
     =form_with url: search_path, method: :get, id: "search-in-page" do |f|
       .search-bar 
         =f.text_field :search, placeholder: "Search...", value: params[:search]
         =f.hidden_field :type, value: params[:type] ? params[:type] : :post
         .search-logo
           =f.submit "Search", type: :image, src: "/assets/search-icon.svg"
-    h1 Search results for #{params[:search]}
-    .filter__row 
-      = link_to "Newest", search_path(search: params[:search], type: params[:type], order: :desc), class: params[:order] == "desc" ? 'filter__btn filter--active' : 'filter__btn'
-      = link_to "Oldest", search_path(search: params[:search], type: params[:type], order: :asc), class: params[:order] == "asc" ? 'filter__btn filter--active' : 'filter__btn'
-      = link_to "Post", search_path(search: params[:search], type: :post), class: params[:type] == "post" ? 'filter__btn--type filter--active' : 'filter__btn--type'
-      = link_to "People", search_path(search: params[:search], type: :user), class: params[:type] == "user" ? 'filter__btn--type filter--active' : 'filter__btn--type'
-  - if params[:type] == "post" && @res.present?
-    .contain--scroll
-      = render "posts/posts", posts: @res
-      - if @pagy.next.present?
-        = render partial: "home/next_post_search_page"
-  - elsif params[:type] == "user" && @res.present?
-    .contain--scroll
-      = render 'users/users', users: @res
-      - if @pagy.next.present?
-        = render partial: "home/next_user_search_page"
-  - else
-    p No result found
+    .top__container.item--top
+      h1 Search results for #{params[:search]}
+      div
+        = link_to "Newest", search_path(search: params[:search], type: params[:type], order: :desc), class: params[:order] == "desc" ? 'filter__btn filter--active' : 'filter__btn'
+        = link_to "Oldest", search_path(search: params[:search], type: params[:type], order: :asc), class: params[:order] == "asc" ? 'filter__btn filter--active' : 'filter__btn'
+    .left__container.item--left
+      .filter__row 
+        = link_to "Post", search_path(search: params[:search], type: :post), class: params[:type] == "post" ? 'filter__btn--type filter--active' : 'filter__btn--type'
+        = link_to "People", search_path(search: params[:search], type: :user), class: params[:type] == "user" ? 'filter__btn--type filter--active' : 'filter__btn--type'
+    - if params[:type] == "post" && @res.present?
+      .contain--scroll.right-container.item--right
+        = render "posts/posts", posts: @res
+        - if @pagy.next.present?
+          = render partial: "home/next_post_search_page"
+    - elsif params[:type] == "user" && @res.present?
+      .contain--scroll.right-container.item-right
+        = render 'users/users', users: @res
+        - if @pagy.next.present?
+          = render partial: "home/next_user_search_page"
+    - else
+      .right-container.item--right
+        p No result found
 
 

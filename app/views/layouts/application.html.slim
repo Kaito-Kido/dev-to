@@ -8,6 +8,7 @@ html
     = csp_meta_tag
     = stylesheet_pack_tag 'application', meida: "all", 'data-turbo-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbo-track': 'reload'
+    = favicon_link_tag '/assets/logo.png'
   body
     = render "header/header", notifications: @notifications
     = yield

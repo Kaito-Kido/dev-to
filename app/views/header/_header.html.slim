@@ -1,7 +1,7 @@
 .header-container 
     .logo-search-bar
         = link_to home_index_path
-            =image_tag("https://dev-to-uploads.s3.amazonaws.com/uploads/logos/resized_logo_UQww2soKuUsjaOGNB38o.png", alt: "logo",class: "logo")
+            =image_tag("/assets/logo.png", alt: "logo",class: "logo")
         =form_with url: search_path, method: :get do |f|
             .search-bar 
                 =f.text_field :search, placeholder: "Search...", value: params[:search], id: "header-search"

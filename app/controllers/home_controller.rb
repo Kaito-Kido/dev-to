@@ -15,7 +15,7 @@ class HomeController < ApplicationController
     case params[:type]    
     when "post"
       if params[:search]
-        @pagy, @res = pagy(Post.where('title LIKE ?', "%#{params[:search]}%").includes({user: {avatar_attachment: :blob}}, :categories), items: 10)
+        @pagy, @res = pagy(Post.joins(tags: :category).where("name LIKE ?", "%" + Category.sanitize_sql_like(params[:search]) + "%").or(Post.joins(tags: :category).where('title LIKE ?', "%" + Post.sanitize_sql_like(params[:search]) + "%")).includes({user: {avatar_attachment: :blob}}, :categories), items: 10)
       else
         @pagy, @res = pagy(Post.all.includes(user: {avatar_attachment: :blob}), items: 10)
       end
@@ -23,7 +23,7 @@ class HomeController < ApplicationController
       render partial: "home/scrollable_post_search_list" if params[:page]
     when "user"
       if params[:search]
-        @pagy, @res = pagy(User.where('name LIKE ?', "%#{params[:search]}%").includes(avatar_attachment: :blob), items: 10)
+        @pagy, @res = pagy(User.where('name LIKE ?', "%" + User.sanitize_sql_like(params[:search]) + "%").includes(avatar_attachment: :blob), items: 10)
       else
         @pagy, @res = pagy(User.all.includes(avatar_attachmetn: :blob), items: 10)
       end

@@ -61,14 +61,20 @@
 #   Category.create(name: Faker::ProgrammingLanguage.name)
 # end
 
-posts = Post.all
-posts.each do |post|
-  4.times.each do
-    Tag.create(post_id: post.id, category_id: Category.find(rand(1...Category.all.count)).id)
-  end
-end
+# posts = Post.all
+# posts.each do |post|
+#   4.times.each do
+#     Tag.create(post_id: post.id, category_id: Category.find(rand(1...Category.all.count)).id)
+#   end
+# end
 
 # Notification.all.each do |noti|
 #   noti.seen = false
 #   noti.save!
 # end
+
+#Add content to post
+posts = Post.all
+posts.each do |post|
+  post.update(content: Faker::Lorem.paragraph(sentence_count: 10))
+end
