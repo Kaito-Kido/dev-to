@@ -6,6 +6,8 @@ class NotificationCreatorForReactService < ApplicationService
   end
 
   def call
-    Notification.create(content: "#{@sender.name} has just liked your #{@reactable.class.name.downcase}", sender_id: @sender.id, receiver_id: @post.user.id, action: :like, post_id: @post.id)
+    if @reactable.user != current_user
+      Notification.create(content: "#{@sender.name} has just liked your #{@reactable.class.name.downcase}", sender_id: @sender.id, receiver_id: @post.user.id, action: :like, post_id: @post.id)
+    end
   end
 end

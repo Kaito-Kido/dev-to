@@ -3,13 +3,23 @@
     <span>
       <img src="/assets/like.svg"/>
     </span>
-    <p><%= reactable.reacts_count%> Like</p>
+    <p>
+      <%- if reactable.reacts_count.present? && reactable.reacts_count > 0 %>
+        <%= reactable.reacts_count%> 
+      <%end%>
+      Like
+    </p>
   <% end %>
 <%- else %>
   <%= link_to comment_react_path(reactable), remote: true, method: :post, class: "react-button", id: "like-#{reactable.id}", data: { "comment-id": reactable.id } do %>
     <span>
       <img src="/assets/like.svg"/>
     </span>
-    <p><%= reactable.reacts_count%> Like</p>
+    <p>
+      <%- if reactable.reacts_count.present? && reactable.reacts_count > 0 %>
+        <%= reactable.reacts_count%> 
+      <%end%> 
+      Like
+    </p>
   <% end %>
 <% end %>

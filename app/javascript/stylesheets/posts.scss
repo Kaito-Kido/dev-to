@@ -251,6 +251,10 @@
   }
 }
 
+[id^="like"] {
+  width: 98px;
+}
+
 .hide {
   display: none !important;
 }
@@ -628,4 +632,10 @@ img#cover-prev {
 .subcomment {
   padding-left: 40px;
   width: 100%;
+}
+
+.share__button {
+  img {
+    width: 100px;
+  }
 }
