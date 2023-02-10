@@ -43,35 +43,35 @@
 # end
 
 #seed location, work and bio for user
-users = User.all
-information = []
-users.each do |user| 
-  information.append(
-    id: user.id,
-    location: Faker::Address.city,
-    work: Faker::Company.name,
-    education: Faker::Educator.university,
-    bio: Faker::Lorem.sentence,
-    updated_at: Time.now,
-    created_at: Time.now
-  )
-end
-User.upsert_all(information)
+# users = User.all
+# information = []
+# users.each do |user| 
+#   information.append(
+#     id: user.id,
+#     location: Faker::Address.city,
+#     work: Faker::Company.name,
+#     education: Faker::Educator.university,
+#     bio: Faker::Lorem.sentence,
+#     updated_at: Time.now,
+#     created_at: Time.now
+#   )
+# end
+# User.upsert_all(information)
 
-30.times.each do
-  Category.create(name: Faker::ProgrammingLanguage.name)
-end
+# 30.times.each do
+#   Category.create(name: Faker::ProgrammingLanguage.name)
+# end
 
-posts = Post.all
-posts.each do |post|
-  4.times.each do
-    Tag.create(post_id: post.id, category_id: Category.find(rand(1...Category.all.count)).id)
-  end
-end
+# posts = Post.all
+# posts.each do |post|
+#   4.times.each do
+#     Tag.create(post_id: post.id, category_id: Category.find(rand(1...Category.all.count)).id)
+#   end
+# end
 
 
 #Add content to post
-posts = Post.all
-posts.each do |post|
-  post.update(content: Faker::Lorem.paragraph(sentence_count: 10))
-end
+# posts = Post.all
+# posts.each do |post|
+#   post.update(content: Faker::Lorem.paragraph(sentence_count: 10))
+# end
