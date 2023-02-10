@@ -12,11 +12,14 @@
 
 ActiveRecord::Schema.define(version: 2023_02_08_164931) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
     t.string "record_type", null: false
-    t.integer "record_id", null: false
+    t.bigint "record_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
@@ -51,8 +54,8 @@ ActiveRecord::Schema.define(version: 2023_02_08_164931) do
   end
 
   create_table "bookmarks", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "post_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "post_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["post_id"], name: "index_bookmarks_on_post_id"
@@ -67,13 +70,13 @@ ActiveRecord::Schema.define(version: 2023_02_08_164931) do
 
   create_table "comments", force: :cascade do |t|
     t.string "content"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "commentable_type", null: false
-    t.integer "commentable_id", null: false
+    t.bigint "commentable_id", null: false
     t.integer "reacts_count"
-    t.integer "post_id", null: false
+    t.bigint "post_id", null: false
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
     t.index ["post_id"], name: "index_comments_on_post_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
@@ -100,7 +103,7 @@ ActiveRecord::Schema.define(version: 2023_02_08_164931) do
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "content"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "status"
@@ -109,20 +112,20 @@ ActiveRecord::Schema.define(version: 2023_02_08_164931) do
   end
 
   create_table "reacts", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "reactable_type", null: false
-    t.integer "reactable_id", null: false
-    t.integer "post_id", null: false
+    t.bigint "reactable_id", null: false
+    t.bigint "post_id", null: false
     t.index ["post_id"], name: "index_reacts_on_post_id"
     t.index ["reactable_type", "reactable_id"], name: "index_reacts_on_reactable"
     t.index ["user_id"], name: "index_reacts_on_user_id"
   end
 
   create_table "tags", force: :cascade do |t|
-    t.integer "category_id", null: false
-    t.integer "post_id", null: false
+    t.bigint "category_id", null: false
+    t.bigint "post_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["category_id"], name: "index_tags_on_category_id"

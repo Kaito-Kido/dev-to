@@ -12,10 +12,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     build_resource(sign_up_params)
-    resource.name = "username#{User.last.id + 1}"
-    resource.role = "user"
-    avatar = URI.parse("https://avatars.dicebear.com/api/adventurer-neutral/#{User.last.id + 1}.svg").open
-    resource.avatar.attach(io: avatar, filename: "user#{User.last.id + 1}")
+    resource.name = "username#{(User.last&.id || -1) + 1 }" if resource.name.nil?
+    resource.role = "user" if resource.role.nil?
+    avatar = URI.parse("https://avatars.dicebear.com/api/adventurer-neutral/#{(User.last&.id || -1) + 1}.svg").open
+    resource.avatar.attach(io: avatar, filename: "user#{(User.last&.id || -1) + 1}")
     resource.save
     yield resource if block_given?
     if resource.persisted?
