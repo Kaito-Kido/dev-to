@@ -14,24 +14,29 @@
           = render "follows/unfollow_button", user: @user
       .pro__header--detailed 
         h1 = @user.name
-      .bio 
-        h3 = @user.bio
+      - if @user.bio.present?
+        .bio 
+          h3 = @user.bio
       .row 
-        .profile--item 
-          =image_tag("/assets/location.svg")
-          =@user.location
+        - if @user.location.present?
+          .profile--item 
+            =image_tag("/assets/location.svg")
+            =@user.location
         .profile--item 
           =image_tag("/assets/cake.svg")
           =@user.created_at
         .profile--item 
           =image_tag("/assets/mail.svg")
           =@user.email
-      .row--top-border 
-        .profile--bigger-item 
-          span Education 
-          = @user.education
-        .profile--bigger-item 
-          span Work 
-          = @user.work
+      - if @user.education.present? || @user.work.present?
+        .row--top-border 
+          - if @user.education.present?
+            .profile--bigger-item 
+              span Education 
+              = @user.education
+          - if @user.work.present?
+            .profile--bigger-item 
+              span Work 
+              = @user.work
   .column-post
     =render "posts/posts", posts: @posts

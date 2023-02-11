@@ -13,25 +13,26 @@
 #   )
 # end
 
-#Create post
-# user_ids = User.pluck(:id)
-# 1000.times.each do |id|
-#   Post.create(
-#     user_id: user_ids.sample, 
-#     title: Faker::Lorem.sentence,
-#     content: Faker::Lorem.sentence
-#   )
-# end
-
 # 100.times.each do |id|
 #   User.create!(
 #     name: Faker::Name.name,
-#     avatar: Faker::Avatar.image,
 #     role: :user,
 #     email: Faker::Internet.email,
 #     password: Faker::Internet.password,
 #   )
 # end
+
+# Create post
+# user_ids = User.pluck(:id)
+# 1000.times.each do |id|
+#   Post.create(
+#     user_id: user_ids.sample, 
+#     title: Faker::Lorem.sentence,
+#     content: Faker::Lorem.sentence,
+#     status: published
+#   )
+# end
+
 
 
 # seed avatar with active storate
@@ -68,13 +69,9 @@
 #   end
 # end
 
-# Notification.all.each do |noti|
-#   noti.seen = false
-#   noti.save!
-# end
 
 #Add content to post
-posts = Post.all
-posts.each do |post|
-  post.update(content: Faker::Lorem.paragraph(sentence_count: 10))
-end
+# posts = Post.all
+# posts.each do |post|
+#   post.update(content: Faker::Lorem.paragraph(sentence_count: 10))
+# end
