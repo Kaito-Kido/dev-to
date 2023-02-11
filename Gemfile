@@ -47,9 +47,6 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem "sentry-ruby"
 gem "sentry-rails"
 
-gem 'capistrano-passenger', '~> 0.2.0'
-gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
-gem "capistrano-secrets-yml"
 
 gem 'ed25519', '>= 1.2', '< 2.0'
 gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
@@ -62,11 +59,18 @@ group :development, :test do
   gem 'faker'
 
   gem 'dotenv-rails'
-  gem 'capistrano', '~> 3.11'
-  gem 'capistrano-rails', '~> 1.4'
+
+  gem 'rspec-rails', '~> 6.0.0'
+  gem 'factory_bot_rails'
+  gem 'rails-controller-testing'
 end
 
 group :development do
+  gem 'capistrano-passenger', '~> 0.2.0'
+  gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
+  gem "capistrano-secrets-yml"
+  gem 'capistrano', '~> 3.11'
+  gem 'capistrano-rails', '~> 1.4'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 4.1.0'
   # Display performance information such as SQL time and flame graphs for each request in your browser.
@@ -92,10 +96,5 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-group :test, :development do 
-  gem 'rspec-rails', '~> 6.0.0'
-  gem 'factory_bot_rails'
-  gem 'rails-controller-testing'
-end
 
 gem "bugsnag", "~> 6.25"
