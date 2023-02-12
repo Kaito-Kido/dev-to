@@ -47,6 +47,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem "sentry-ruby"
 gem "sentry-rails"
 
+gem "bugsnag", "~> 6.25"
 
 gem 'ed25519', '>= 1.2', '< 2.0'
 gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
@@ -97,4 +98,3 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 
-gem "bugsnag", "~> 6.25"
