@@ -44,6 +44,7 @@ yarn-debug.log*
 /config/deploy.rb
 /config/deploy/
 /config/secrets.yml
+/config/databse.yml
 
 # /Capfile
 
