@@ -366,7 +366,7 @@ DEPENDENCIES
   jquery-rails
   listen (~> 3.3)
   pagy
-  pg (~> 1.4.5)
+  pg
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.3, >= 6.1.3.1)
