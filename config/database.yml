@@ -12,7 +12,7 @@
 #       Install PostgreSQL and put its /bin directory on your path.
 #
 # Configure Using Gemfile
-gem 'pg'
+# gem 'pg'
 #
 default: &default
   adapter: postgresql
@@ -75,10 +75,10 @@ test:
 #
 production:
   <<: *default
-    database: <%= ENV["MY_APP_DATABASE_DATABASE"] %>
-    host: <%= ENV["MY_APP_DATABASE_HOST"] %>
-    username: <%= ENV["MY_APP_DATABASE_USERNAME"] %>
-    password: <%= ENV["MY_APP_DATABASE_PASSWORD"] %>
+  database: <%= ENV["MY_APP_DATABASE_DATABASE"] %>
+  host: <%= ENV["MY_APP_DATABASE_HOST"] %>
+  username: <%= ENV["MY_APP_DATABASE_USERNAME"] %>
+  password: <%= ENV["MY_APP_DATABASE_PASSWORD"] %>
 #
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
