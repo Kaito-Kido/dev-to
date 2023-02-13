@@ -16,13 +16,13 @@ class NotificationCreatorForPostService < ApplicationService
         end
       else
         @post.user.followers.each do |follower|
-          Notification.create(sender_id: @post.user.id, receiver_id: follower.id, action: :post, content: "#{@post.user.name} has made a post " +  @post.categories.first.present? "about #{@post.categories.first&.name}" : "", post_id: @post.id)
+          Notification.create(sender_id: @post.user.id, receiver_id: follower.id, action: :post, content: "#{@post.user.name} has made a post #{@post.categories.first.present? ? "about #{@post.categories.first&.name}" : ""}", post_id: @post.id)
         end
         Notification.create(sender_id: @sender.id, receiver_id: @post.user.id, action: :post, content: "Admin has just approved your post", post_id: @post.id )
       end
     when "pending"
       User.where(role: "admin").each do |admin|
-        Notification.create(sender_id: @post.user.id, receiver_id: admin.id, action: :post, content: "#{@post.user.name} has made a post " +  @post.categories.first.present? "about #{@post.categories.first&.name}" : "", post_id: @post.id)
+        Notification.create(sender_id: @post.user.id, receiver_id: admin.id, action: :post, content: "#{@post.user.name} has made a post #{@post.categories.first.present? ? "about #{@post.categories.first&.name}" : ""}", post_id: @post.id)
       end
     when "declined"
       Notification.create(sender_id: @sender.id, receiver_id: @post.user.id, action: :post, content: "Admin has declined a post " +  "#{@post.categories.first&.name}", post_id: @post.id)
