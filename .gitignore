@@ -43,9 +43,9 @@ yarn-debug.log*
 /config/credentials/production.key
 /config/credentials/
 /config/deploy.rb
-/config/deploy/
+/config/deploy/*
 /config/secrets.yml
 /config/database.yml
 
-# /Capfile
+Capfile
 
