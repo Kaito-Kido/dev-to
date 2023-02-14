@@ -673,3 +673,16 @@ img#cover-prev {
     width: 100px;
   }
 }
+
+.chart {
+  width: 800px;
+  @media (max-width: 960px) {
+    width: 400px;
+  }
+}
+
+.chart--flex {
+  @extend .chart;
+  display: flex;
+  align-items: center;
+}

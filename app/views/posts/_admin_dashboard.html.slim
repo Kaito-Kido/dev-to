@@ -1,8 +1,11 @@
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
 .column-post.grid__container
   .top__container.item--top
       h1 Admin Dashboard
   .left__container.item--left
     .filter__row 
+      = link_to "Analysis", posts_path(type: :chart), class: params[:type] == "chart" ? 'filter__btn--type filter--active' : 'filter__btn--type'
       = link_to "List Posts", posts_path(type: :post), class: params[:type] == "post" ? 'filter__btn--type filter--active' : 'filter__btn--type'
       div class="selection__contain #{"hide" if params[:type] != "post"}"
         = link_to "Published Posts", posts_path(type: :post, status: :published), class: params[:status] == "published" ? 'filter__btn--type filter--active' : 'filter__btn--type'
@@ -25,12 +28,24 @@
           = render 'users/users', users: res
           - if @pagy.next.present?
             = render partial: "home/next_page"
+  - elsif params[:type] == "chart"
+    .chart
+      .chart--flex
+        = donut_chart([{name: "Published", data: @published_count},
+                        {name: "Draft", data: @draft_count},
+                        {name: "Pending", data: @pending_count},
+                        {name: "Declined", data: @declined_count}], title: "Percentage of post type",legend: true, theme: 'palette6', width: 400)
+        - series = [name: "Posts", data: @created_post_in_week]
+        = line_chart(series, { title: 'Post that is created in a week', xtitle: 'Week', ytitle: 'Number of post', height: 400, width: 400, theme: 'palette7', curve: 'stepline'})
+      - series = [name: "Reacts", data: @top_author]
+      = bar_chart(series, {title: 'Top 10 user with most reacts', xtitle: 'Reacts count', ytitle: 'Authors', height: 400, noData: "Loading", theme: 'palette8'})
   - elsif res.present?
     = turbo_frame_tag "status-posts-#{@pagy.page}", class: "contain--scroll", target: "_top"
       .contain--scroll.right__container.item--right
         = render "posts/status_posts", posts: res
         - if @pagy.next.present?
           = render partial: "posts/next_status_posts"
+
   -else 
     .contain--scroll.right__container.item--right
       p No result found
