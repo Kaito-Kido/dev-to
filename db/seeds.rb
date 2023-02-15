@@ -74,7 +74,7 @@ end
 
 # Reset count
 Post.all.each do |post|
-  Post.reset_count(post.id, :reacts)
+  Post.reset_counters(post.id, :reacts)
 end
 
 # seed react
