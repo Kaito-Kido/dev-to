@@ -48,4 +48,5 @@ yarn-debug.log*
 /config/database.yml
 
 Capfile
-
+package-lock.json
+yarn.lock
