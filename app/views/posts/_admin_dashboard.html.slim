@@ -31,10 +31,10 @@
   - elsif params[:type] == "chart"
     .chart
       .chart--flex
-        = donut_chart([{name: "Published", data: @published_count},
-                        {name: "Draft", data: @draft_count},
-                        {name: "Pending", data: @pending_count},
-                        {name: "Declined", data: @declined_count}], title: "Percentage of post type",legend: true, theme: 'palette6', width: 400)
+        = donut_chart([{name: "Published", data: @status.count("published")},
+                        {name: "Draft", data: @status.count("draft")},
+                        {name: "Pending", data: @status.count("pending")},
+                        {name: "Declined", data: @status.count("declined")}], title: "Percentage of post type",legend: true, theme: 'palette6', width: 400)
         - series = [name: "Posts", data: @created_post_in_week]
         = line_chart(series, { title: 'Post that is created in a week', xtitle: 'Week', ytitle: 'Number of post', height: 400, width: 400, theme: 'palette7', curve: 'stepline'})
       - series = [name: "Reacts", data: @top_author]

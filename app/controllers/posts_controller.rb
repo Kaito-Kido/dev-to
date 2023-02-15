@@ -11,10 +11,7 @@ class PostsController < ApplicationController
         top_author.each do |r|
           @top_author["#{r.name}"] = r.user_reacts_count
         end
-        @published_count = Post.published.count
-        @pending_count = Post.pending.count
-        @draft_count = Post.draft.count
-        @declined_count = Post.declined.count
+        @status = Post.pluck(:status)
         @created_post_in_week = Post.group_by_day(:created_at).count 
       elsif params[:type] == "user"
         if params[:most]
