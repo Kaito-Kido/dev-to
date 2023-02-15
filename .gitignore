@@ -48,4 +48,3 @@ yarn-debug.log*
 /config/database.yml
 
 Capfile
-Gemfile.lock
