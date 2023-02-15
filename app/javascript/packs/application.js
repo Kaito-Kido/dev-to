@@ -25,3 +25,5 @@ import "@hotwired/turbo-rails";
 require("trix");
 require("@rails/actiontext");
 import "select2";
+import ApexCharts from "apexcharts";
+window.ApexCharts = ApexCharts;

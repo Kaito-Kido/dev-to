@@ -27,6 +27,8 @@ gem 'image_processing', '~> 1.2'
 
 gem "devise"
 
+gem "groupdate"
+
 
 gem 'pagy'
 
@@ -53,6 +55,8 @@ gem 'ed25519', '>= 1.2', '< 2.0'
 gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
 
 gem 'faker'
+
+gem 'apexcharts'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

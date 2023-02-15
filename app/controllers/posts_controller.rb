@@ -5,9 +5,17 @@ class PostsController < ApplicationController
 
   def index
     if current_user.admin?
-      if params[:type] == "user"
+      if params[:type] == "chart"
+        top_author = User.joins(:posts).distinct.select('users.*, SUM(posts.reacts_count) AS user_reacts_count').group('id').order(user_reacts_count: :desc).limit(10)
+        @top_author = {}
+        top_author.each do |r|
+          @top_author["#{r.name}"] = r.user_reacts_count
+        end
+        @status = Post.pluck(:status)
+        @created_post_in_week = Post.group_by_day(:created_at).count 
+      elsif params[:type] == "user"
         if params[:most]
-          @pagy, @res = pagy_countless(User.joins(:posts).distinct.select('users.*, COUNT(posts.reacts_count) AS user_reacts_count').group('id').order(user_reacts_count: :desc).includes(avatar_attachment: :blob), items: 10)
+          @pagy, @res = pagy_countless(User.joins(:posts).distinct.select('users.*, SUM(posts.reacts_count) AS user_reacts_count').group('id').order(user_reacts_count: :desc).includes(avatar_attachment: :blob), items: 10)
         else
           @pagy, @res = pagy_countless(User.all.includes(avatar_attachment: :blob), items:10)
         end
