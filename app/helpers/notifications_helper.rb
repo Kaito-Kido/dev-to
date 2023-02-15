@@ -1,6 +1,12 @@
 module NotificationsHelper
   def find_post_by_notification(notification)
-    Post.find(notification.post_id) if notification.post_id.present?
+    if post_present?(notification.post_id)
+      Post.find(notification.post_id)
+    end
+  end
+
+  def post_present?(id)
+    Post.where(id: id).present?
   end
 
   def is_unread?

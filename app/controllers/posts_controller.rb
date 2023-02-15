@@ -1,6 +1,6 @@
 
 class PostsController < ApplicationController
-  before_action :set_post, except: [:index, :new, :archive]
+  before_action :set_post, except: [:index, :new]
   before_action :authenticate_user!, except: [:show]
 
   def index

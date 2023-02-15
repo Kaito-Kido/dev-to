@@ -1,4 +1,4 @@
-  - if notification.post_id
+  - if post_present?(notification.post_id)
     = link_to post_path(id: find_post_by_notification(notification).id, notification_id: notification.id), class: "post-top"
       div class="noti" id="noti-#{notification.id}"
         .post__top--left
