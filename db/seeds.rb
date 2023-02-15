@@ -87,9 +87,11 @@ end
 end
 
 # seed post status
-20.times.each do
-  Post.find(rand(1005...2007)).update(status: "declined")
-end
+Post.limit(20).order(id: :desc).update(status: "declined")
+
+Post.limit(100).order(id: :asc).offset(100).update(status: "pending")
+
+Post.limit(200).order(id: :asc).offset(300).update(status: "draft")
 
 Post.all.each do |post|
   post.update(created_at: Time.now - rand(1...7).day)

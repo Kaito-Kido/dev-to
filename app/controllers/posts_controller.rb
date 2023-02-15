@@ -23,9 +23,9 @@ class PostsController < ApplicationController
         if params[:most]
           @pagy, @res = pagy_countless(Post.published.order(reacts_count: :desc).includes({user: {avatar_attachment: :blob}}, :categories), items: 10)
         elsif params[:status].present? && Post.statuses.keys.include?(params[:status])
-          @pagy, @res = pagy_countless(Post.send(params[:status]).includes({user: {avatar_attachment: :blob}}, :categories), items:10)
+          @pagy, @res = pagy_countless(Post.send(params[:status]).order(id: :desc).includes({user: {avatar_attachment: :blob}}, :categories), items:10)
         else
-          @pagy, @res = pagy_countless(Post.all.includes({user: {avatar_attachment: :blob}}, :categories), items:10)
+          @pagy, @res = pagy_countless(Post.all.order(id: :desc).includes({user: {avatar_attachment: :blob}}, :categories), items:10)
         end
         render partial: "posts/scrollable_status_posts" if params[:page]
       end

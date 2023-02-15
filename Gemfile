@@ -29,10 +29,9 @@ gem "devise"
 
 gem "groupdate"
 
-
 gem 'pagy'
 
-gem 'sidekiq'
+gem 'sidekiq', '~> 5.2.8'
 
 gem 'whenever', require: false
 
