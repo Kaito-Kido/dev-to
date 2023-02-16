@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-git_source(:github) { |repo| "https://github.com/Kaito-Kido/dev-to.git" }
+git_source(:github) { |_repo| 'https://github.com/Kaito-Kido/dev-to.git' }
 
 ruby '2.7.0'
 
@@ -21,13 +21,13 @@ gem 'jbuilder', '~> 2.7'
 gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-gem "slim"
+gem 'slim'
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'
 
-gem "devise"
+gem 'devise'
 
-gem "groupdate"
+gem 'groupdate'
 
 gem 'pagy'
 
@@ -36,50 +36,52 @@ gem 'sidekiq', '~> 5.2.8'
 gem 'whenever', require: false
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem "turbo-rails"
+gem 'turbo-rails'
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem "stimulus-rails"
+gem 'stimulus-rails'
 
 gem 'jquery-rails'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
-gem "sentry-ruby"
-gem "sentry-rails"
+gem 'sentry-rails'
+gem 'sentry-ruby'
 
-gem "bugsnag", "~> 6.25"
+gem 'bugsnag', '~> 6.25'
 
-gem 'ed25519', '>= 1.2', '< 2.0'
 gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
+gem 'ed25519', '>= 1.2', '< 2.0'
 
 gem 'faker'
 
 gem 'apexcharts'
 
+gem 'rubocop'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
+
   gem 'dotenv-rails'
 
-  gem 'rspec-rails', '~> 6.0.0'
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'
+  gem 'rspec-rails', '~> 6.0.0'
 end
 
 group :development do
-  gem 'capistrano-passenger', '~> 0.2.0'
-  gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
-  gem "capistrano-secrets-yml"
   gem 'capistrano', '~> 3.11'
+  gem 'capistrano-passenger', '~> 0.2.0'
   gem 'capistrano-rails', '~> 1.4'
+  gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
+  gem 'capistrano-secrets-yml'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 4.1.0'
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
-  gem 'rack-mini-profiler', '~> 2.0'
   gem 'listen', '~> 3.3'
+  gem 'rack-mini-profiler', '~> 2.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 
@@ -91,12 +93,10 @@ group :test do
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver', '>= 4.0.0.rc1'
   # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers'
   gem 'shoulda-matchers', '~> 5.0'
   gem 'simplecov', require: false
+  gem 'webdrivers'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
-
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

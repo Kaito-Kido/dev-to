@@ -1,4 +1,4 @@
-<%- if is_post?(reactable) %>
+<%- if post?(reactable) %>
   <%= link_to post_react_path(reactable), remote: true, method: :delete, class: "react-button", id: "like-#{reactable.id}", data: { "post-id": reactable.id } do%>
     <span class="liked">
       <img src="/assets/reacted.svg">

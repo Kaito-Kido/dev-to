@@ -1,9 +1,9 @@
 class Post < ApplicationRecord
-  enum status: {draft: 0, pending: 1, published: 2, declined: 3}
-  
+  enum status: { draft: 0, pending: 1, published: 2, declined: 3 }
+
   belongs_to :user
 
-  has_many :reacts, as: :reactable,  dependent: :destroy
+  has_many :reacts, as: :reactable, dependent: :destroy
   has_many :reacters, through: :reacts, source: :user
   has_many :tags, dependent: :destroy
   has_many :categories, through: :tags
@@ -11,11 +11,11 @@ class Post < ApplicationRecord
   has_rich_text :content
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
-  
-  validates :content, presence: true, if: :is_not_draft?
+
+  validates :content, presence: true, if: :not_draft?
   validates :title, presence: true
 
-  def is_not_draft?
-    status != "draft"
+  def not_draft?
+    status != 'draft'
   end
 end

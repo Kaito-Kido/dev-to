@@ -637,7 +637,6 @@ img#cover-prev {
   margin-bottom: 8px;
   margin-left: -4px;
   flex-wrap: wrap;
-  height: 32px;
 
   a {
     padding: 4px 7px;
@@ -677,7 +676,7 @@ img#cover-prev {
 .chart {
   width: 800px;
   @media (max-width: 960px) {
-    width: 400px;
+    width: 100%;
   }
 }
 
@@ -685,4 +684,38 @@ img#cover-prev {
   @extend .chart;
   display: flex;
   align-items: center;
+  @media (max-width: 960px) {
+    flex-direction: column;
+  }
+
+  #chart-1 {
+    flex: 1;
+    @media (max-width: 960px) {
+      width: 100%;
+    }
+  }
+  #chart-2 {
+    @media (max-width: 960px) {
+      width: 100%;
+    }
+  }
+}
+
+p.liked {
+  @media (max-width: 460px) {
+    display: none;
+  }
+}
+
+p.comment--add {
+  @media (max-width: 460px) {
+    display: none;
+  }
+}
+
+[id^="chart-"] {
+  @media (max-width: 460px) {
+    width: 100%;
+    height: auto;
+  }
 }

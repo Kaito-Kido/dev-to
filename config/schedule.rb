@@ -1,8 +1,6 @@
-set :output, "log/cron_log.log"
+set :output, 'log/cron_log.log'
 set :environment, ENV['RAILS_ENV']
 
 every 1.day do
-  rake "post:check"
+  rake 'post:check'
 end
-
-

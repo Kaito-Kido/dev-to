@@ -14,7 +14,7 @@
             - if user_signed_in? && controller.controller_name != "notifications"
                 .relative
                     = image_tag("/assets/bell.svg", class: "bell-button", id: "bell-button")
-                    - if is_unread?
+                    - if unread?
                         .ping.dot
                     - else 
                         .ping.dot.hide

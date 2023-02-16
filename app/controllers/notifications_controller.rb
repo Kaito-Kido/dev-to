@@ -1,5 +1,4 @@
 class NotificationsController < ApplicationController
-
   before_action :authenticate_user!
 
   def index
@@ -26,11 +25,9 @@ class NotificationsController < ApplicationController
 
   def filter(params)
     if params[:status]
-      if Notification.actions.include?(params[:status])
-        @notifications = current_user.notifications.includes(sender: {avatar_attachment: :blob}).send(params[:status])
-      end
+      @notifications = current_user.notifications.includes(sender: { avatar_attachment: :blob }).send(params[:status]) if Notification.actions.include?(params[:status])
     else
-      @notifications = current_user.notifications.includes(sender: {avatar_attachment: :blob})
+      @notifications = current_user.notifications.includes(sender: { avatar_attachment: :blob })
     end
   end
 end
