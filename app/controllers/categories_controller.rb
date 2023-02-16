@@ -8,7 +8,7 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    category = Category.find_by(name: params[:category_name]).first_or_initialize
+    category = Category.where(name: params[:category_name]).first_or_initialize
     return unless category.save
 
     Tag.create(post_id: params[:post_id], category_id: category.id)

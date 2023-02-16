@@ -6,7 +6,7 @@ RSpec.describe Post, type: :model do
   it { should validate_presence_of(:title) }
 
   context 'if not draft' do
-    before { allow(subject).to receive(:is_not_draft?).and_return(true) }
+    before { allow(subject).to receive(:not_draft?).and_return(true) }
     it { should validate_presence_of(:content) }
   end
 
