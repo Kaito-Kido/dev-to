@@ -1,23 +1,23 @@
 require 'open-uri'
 FactoryBot.define do
   factory :user do
-    sequence(:name) { |n| "Ben#{n}"}
+    sequence(:name) { |n| "Ben#{n}" }
     sequence(:email) { |n| "test-#{n}@example.com" }
-    password {"mailam123"}
-    role {"user"}
+    password { 'mailam123' }
+    role { 'user' }
     after(:build) do |user|
       user.avatar.attach(
-        io: URI.parse("https://avatars.dicebear.com/api/adventurer-neutral/test.svg").open,
-        filename: "test"
+        io: URI.parse('https://avatars.dicebear.com/api/adventurer-neutral/test.svg').open,
+        filename: 'test'
       )
     end
   end
 
   factory :post do
     association :user
-    title {"Untitled"}
-    content {nil}
-    status {:draft}
+    title { 'Untitled' }
+    content { nil }
+    status { :draft }
   end
 
   factory :comment do
@@ -37,8 +37,8 @@ FactoryBot.define do
   end
 
   factory :follow do
-    follower_id {1}
-    followed_id {2}
+    follower_id { 1 }
+    followed_id { 2 }
   end
 
   factory :react do
@@ -53,7 +53,7 @@ FactoryBot.define do
   end
 
   factory :category do
-    sequence(:name) { |n| "Ruby #{n}"}
+    sequence(:name) { |n| "Ruby #{n}" }
   end
 
   factory :tag do
@@ -62,11 +62,11 @@ FactoryBot.define do
   end
 
   factory :notification do
-    sender_id {1}
-    receiver_id {2}
-    content {Faker::Lorem.sentence}
-    action {"post"}
-    seen {false}
+    sender_id { 1 }
+    receiver_id { 2 }
+    content { Faker::Lorem.sentence }
+    action { 'post' }
+    seen { false }
   end
 
   factory :bookmark do

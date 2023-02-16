@@ -1,22 +1,19 @@
-class UsersController < ApplicationController 
+class UsersController < ApplicationController
   before_action :set_user, except: [:root_routing]
   before_action :authenticate_user!, except: [:show]
 
-
-  def index
-  end
+  def index; end
 
   def show
     @posts = @user.posts.published.includes(:categories)
-    if params[:notification_id]
-      notification = Notification.find(params[:notification_id])
-      notification.seen = true
-      notification.save
-    end
+    return unless params[:notification_id]
+
+    notification = Notification.find(params[:notification_id])
+    notification.seen = true
+    notification.save
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     @user.assign_attributes(user_params)

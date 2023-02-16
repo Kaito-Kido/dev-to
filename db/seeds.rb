@@ -1,35 +1,30 @@
-
-100.times.each do |id|
+100.times.each do |_id|
   User.create!(
     name: Faker::Name.name,
     role: :user,
     email: Faker::Internet.email,
-    password: Faker::Internet.password,
+    password: Faker::Internet.password
   )
 end
 
 # Create admin
 User.create(
-  name: "admin",
-  role: :admin, 
-  email: "admin@gmail.com",
-  password: "admin123",
+  name: 'admin',
+  role: :admin,
+  email: 'admin@gmail.com',
+  password: 'admin123'
 )
-
-
 
 # # Create post
 user_ids = User.pluck(:id)
-1000.times.each do |id|
+1000.times.each do |_id|
   Post.create(
-    user_id: user_ids.sample, 
+    user_id: user_ids.sample,
     title: Faker::Lorem.sentence,
     content: Faker::Lorem.sentence,
-    status: "published"
+    status: 'published'
   )
 end
-
-
 
 # # seed avatar with active storate
 users = User.all
@@ -41,7 +36,7 @@ end
 # #seed location, work and bio for user
 users = User.all
 information = []
-users.each do |user| 
+users.each do |user|
   information.append(
     id: user.id,
     location: Faker::Address.city,
@@ -65,7 +60,6 @@ posts.each do |post|
   end
 end
 
-
 # #Add content to post
 posts = Post.all
 posts.each do |post|
@@ -82,16 +76,16 @@ end
   user = User.find(rand(1...50))
   user2 = User.find(rand(51...100))
   user.posts.each do |post|
-    React.create(user: user2, post_id: post.id, reactable_type: "Post", reactable_id: post.id)
+    React.create(user: user2, post_id: post.id, reactable_type: 'Post', reactable_id: post.id)
   end
 end
 
 # seed post status
-Post.limit(20).order(id: :desc).update(status: "declined")
+Post.limit(20).order(id: :desc).update(status: 'declined')
 
-Post.limit(100).order(id: :asc).offset(100).update(status: "pending")
+Post.limit(100).order(id: :asc).offset(100).update(status: 'pending')
 
-Post.limit(200).order(id: :asc).offset(300).update(status: "draft")
+Post.limit(200).order(id: :asc).offset(300).update(status: 'draft')
 
 Post.all.each do |post|
   post.update(created_at: Time.now - rand(1...7).day)

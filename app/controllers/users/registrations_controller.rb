@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'open-uri'
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
@@ -12,8 +13,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     build_resource(sign_up_params)
-    resource.name = "username#{(User.last&.id || -1) + 1 }" if resource.name.nil?
-    resource.role = "user" if resource.role.nil?
+    resource.name = "username#{(User.last&.id || -1) + 1}" if resource.name.nil?
+    resource.role = 'user' if resource.role.nil?
     avatar = URI.parse("https://avatars.dicebear.com/api/adventurer-neutral/#{(User.last&.id || -1) + 1}.svg").open
     resource.avatar.attach(io: avatar, filename: "user#{(User.last&.id || -1) + 1}")
     resource.save
