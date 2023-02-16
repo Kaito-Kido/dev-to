@@ -26,7 +26,7 @@
                     = render "reacts/react", reactable: post
                 = link_to post_path(post, anchor: 'comment-section'), class: "react-button" 
                     =image_tag('/assets/comment-icon.svg')
-                    p Add Comment 
+                    p.comment--add Add Comment 
                 - if bookmarked?(post)
                     = render "bookmarks/bookmarked", post: post
                 - else 
