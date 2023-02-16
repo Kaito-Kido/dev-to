@@ -27,7 +27,9 @@ RSpec.describe 'CommentsControllers', type: :request do
       context 'belong to comment' do
         it 'should save to db' do
           comment = create(:comment, :for_post, post_id: @post.id, user: @user)
-          expect { create(:comment, :for_comment, post_id: @post.id, user: @user, commentable: comment) }.to change(Comment, :count).by(1)
+          expect do
+            create(:comment, :for_comment, post_id: @post.id, user: @user, commentable: comment)
+          end.to change(Comment, :count).by(1)
         end
 
         it 'should redirect to post_path' do
@@ -77,7 +79,10 @@ RSpec.describe 'CommentsControllers', type: :request do
         it 'should detele the comment' do
           comment = create(:comment, :for_post, post_id: @post.id)
           reply_comment = create(:comment, :for_comment, post_id: @post.id, user: @user, commentable: comment)
-          expect { delete "/comments/#{reply_comment.commentable.id}/comments/#{reply_comment.id}", params: { format: :js } }.to change(Comment, :count).by(-1)
+          expect do
+            delete "/comments/#{reply_comment.commentable.id}/comments/#{reply_comment.id}",
+                   params: { format: :js }
+          end.to change(Comment, :count).by(-1)
         end
       end
     end

@@ -24,10 +24,10 @@ class NotificationsController < ApplicationController
   private
 
   def filter(params)
-    if params[:status]
-      @notifications = current_user.notifications.includes(sender: { avatar_attachment: :blob }).send(params[:status]) if Notification.actions.include?(params[:status])
-    else
-      @notifications = current_user.notifications.includes(sender: { avatar_attachment: :blob })
-    end
+    @notifications = if params[:status] && Notification.actions.include?(params[:status])
+                       current_user.notifications.includes(sender: { avatar_attachment: :blob }).send(params[:status])
+                     else
+                       current_user.notifications.includes(sender: { avatar_attachment: :blob })
+                     end
   end
 end

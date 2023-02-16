@@ -14,23 +14,34 @@ class PostsController < ApplicationController
         @created_post_in_week = Post.group_by_day(:created_at).count
       elsif params[:type] == 'user'
         if params[:most]
-          @pagy, @res = pagy_countless(User.joins(:posts).distinct.select('users.*, SUM(posts.reacts_count) AS user_reacts_count').group('id').order(user_reacts_count: :desc).includes(avatar_attachment: :blob), items: 10)
+          @pagy, @res = pagy_countless(
+            User.joins(:posts).distinct.select('users.*, SUM(posts.reacts_count) AS user_reacts_count').group('id').order(user_reacts_count: :desc).includes(avatar_attachment: :blob), items: 10
+          )
         else
           @pagy, @res = pagy_countless(User.all.includes(avatar_attachment: :blob), items: 10)
         end
       else
         if params[:most]
-          @pagy, @res = pagy_countless(Post.published.order(reacts_count: :desc).includes({ user: { avatar_attachment: :blob } }, :categories), items: 10)
+          @pagy, @res = pagy_countless(
+            Post.published.order(reacts_count: :desc).includes({ user: { avatar_attachment: :blob } },
+                                                               :categories), items: 10
+          )
         elsif params[:status].present? && Post.statuses.keys.include?(params[:status])
-          @pagy, @res = pagy_countless(Post.send(params[:status]).order(id: :desc).includes({ user: { avatar_attachment: :blob } }, :categories), items: 10)
+          @pagy, @res = pagy_countless(
+            Post.send(params[:status]).order(id: :desc).includes({ user: { avatar_attachment: :blob } },
+                                                                 :categories), items: 10
+          )
         else
-          @pagy, @res = pagy_countless(Post.all.order(id: :desc).includes({ user: { avatar_attachment: :blob } }, :categories), items: 10)
+          @pagy, @res = pagy_countless(
+            Post.all.order(id: :desc).includes({ user: { avatar_attachment: :blob } }, :categories), items: 10
+          )
         end
         render partial: 'posts/scrollable_status_posts' if params[:page]
       end
     else
       if params[:most]
-        @pagy, @posts = pagy_countless(current_user.posts.published.order(reacts_count: :desc).includes([:categories]), items: 10)
+        @pagy, @posts = pagy_countless(current_user.posts.published.order(reacts_count: :desc).includes([:categories]),
+                                       items: 10)
       elsif params[:status].present? && Post.statuses.keys.include?(params[:status])
         @pagy, @posts = pagy_countless(current_user.posts.send(params[:status]).includes([:categories]), items: 10)
       else
@@ -113,7 +124,10 @@ class PostsController < ApplicationController
       notification.save
     end
 
-    @pagy, @comments = pagy_countless(@post.comments.includes({ user: { avatar_attachment: :blob } }, comments: [:user, { comments: %i[user comments] }]).order(created_at: :desc), items: 5)
+    @pagy, @comments = pagy_countless(
+      @post.comments.includes({ user: { avatar_attachment: :blob } },
+                              comments: [:user, { comments: %i[user comments] }]).order(created_at: :desc), items: 5
+    )
     respond_to do |format|
       format.html
       format.js

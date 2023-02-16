@@ -5,7 +5,8 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    comment = @commentable.comments.new(user_id: current_user.id, content: params[:comment][:content], post_id: @post.id)
+    comment = @commentable.comments.new(user_id: current_user.id, content: params[:comment][:content],
+                                        post_id: @post.id)
     return unless comment.save
 
     CreateNotificationJob.perform_later(post: @post, sender: current_user, commentable: @commentable, action: 'comment')
