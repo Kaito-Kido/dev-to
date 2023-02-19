@@ -15,5 +15,6 @@ module DevTo
   class Application < Rails::Application
     config.load_defaults 6.1
     config.active_job.queue_adapter = :sidekiq
+    Rails.application.routes.default_url_options[:host] = Rails.env == 'production' ? '137.184.91.249' : 'localhost:3000'
   end
 end
