@@ -7,6 +7,7 @@ class HomeController < ApplicationController
   def index
     posts = Post.published.includes({ user: { avatar_attachment: :blob } }, :categories)
     @pagy, @posts = pagy_countless(posts, items: 10)
+    @recommend_posts = Category.first.posts.limit(10)
 
     render partial: 'home/scrollable_list' if params[:page]
   end

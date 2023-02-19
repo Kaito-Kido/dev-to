@@ -1,45 +1,46 @@
-.header-container 
-    .logo-search-bar
-        = link_to home_index_path
-            =image_tag("/assets/logo.png", alt: "logo",class: "logo")
-        =form_with url: search_path, method: :get do |f|
-            .search-bar 
-                =f.text_field :search, placeholder: "Search...", value: params[:search], id: "header-search"
-                =f.hidden_field :type, value: params[:type] ? params[:type] : :post
-                .search-logo
-                    =f.submit "Search", type: :image, src: "/assets/search-icon.svg"
-    - if user_signed_in?
-        .rh__group_button
-            = link_to 'Create post', new_post_path, class: "sign-up-button"
-            - if user_signed_in? && controller.controller_name != "notifications"
-                .relative
-                    = image_tag("/assets/bell.svg", class: "bell-button", id: "bell-button")
-                    - if unread?
-                        .ping.dot
+.sticky__header
+    .header-container 
+        .logo-search-bar
+            = link_to home_index_path
+                =image_tag("/assets/logo.png", alt: "logo",class: "logo")
+            =form_with url: search_path, method: :get do |f|
+                .search-bar 
+                    =f.text_field :search, placeholder: "Search...", value: params[:search], id: "header-search"
+                    =f.hidden_field :type, value: params[:type] ? params[:type] : :post
+                    .search-logo
+                        =f.submit "Search", type: :image, src: "/assets/search-icon.svg"
+        - if user_signed_in?
+            .rh__group_button
+                = link_to 'Create post', new_post_path, class: "sign-up-button"
+                - if user_signed_in? && controller.controller_name != "notifications"
+                    .relative
+                        = image_tag("/assets/bell.svg", class: "bell-button", id: "bell-button")
+                        - if unread?
+                            .ping.dot
+                        - else 
+                            .ping.dot.hide
+                .div#noti-menu
+                    - if notifications.first.present?
+                        = render "notifications/notifications_center", notifications: notifications
+                        .end__dropdown
+                            = link_to "See all", notifications_path, class: "see_all__link"
+                            = link_to "Mark all as read", mark_all_read_notifications_path, class: "see_all__link", remote: true
                     - else 
-                        .ping.dot.hide
-            .div#noti-menu
-                - if notifications.first.present?
-                    = render "notifications/notifications_center", notifications: notifications
-                    .end__dropdown
-                        = link_to "See all", notifications_path, class: "see_all__link"
-                        = link_to "Mark all as read", mark_all_read_notifications_path, class: "see_all__link", remote: true
-                - else 
-                    p.--no_notification You don't have any notification
-            .rh__group_button--right#drop-button
-                = image_tag current_user.avatar
-            .rh__dropdown#menu 
-                = link_to user_path(current_user.id)
-                    span
-                        =current_user.name
-                    span.header__email
-                        = current_user.email
-                = link_to 'Dashboard', posts_path
-                = link_to "Reading list", user_bookmarks_path(current_user.id)
-                = link_to 'Setting', edit_user_registration_path
-                .rh__dropdown__line
-                = link_to 'Log out', destroy_user_session_path, method: :delete
-    - else
-        .log-in-out 
-            = link_to 'Log in', new_user_session_path, class: "login-button" 
-            = link_to 'Create account',  new_user_registration_path, class: "sign-up-button"
+                        p.--no_notification You don't have any notification
+                .rh__group_button--right#drop-button
+                    = image_tag current_user.avatar
+                .rh__dropdown#menu 
+                    = link_to user_path(current_user.id)
+                        span
+                            =current_user.name
+                        span.header__email
+                            = current_user.email
+                    = link_to 'Dashboard', posts_path
+                    = link_to "Reading list", user_bookmarks_path(current_user.id)
+                    = link_to 'Setting', edit_user_registration_path
+                    .rh__dropdown__line
+                    = link_to 'Log out', destroy_user_session_path, method: :delete
+        - else
+            .log-in-out 
+                = link_to 'Log in', new_user_session_path, class: "login-button" 
+                = link_to 'Create account',  new_user_registration_path, class: "sign-up-button"

@@ -1,9 +1,10 @@
 .contain--scroll
-  h1.topic__span 
-    span ##{@category.name} 
-    | topic
-  
-  = render "posts/posts", posts: @posts
-  - if @pagy.next.present?
-    .column-post
-      = render "home/next_page"
+  .category__main
+    h1.topic__span 
+      span ##{@category.name} 
+      | topic
+    
+    = render "posts/posts", posts: @posts
+    - if @pagy.next.present?
+      .column-post
+        = render "home/next_page"

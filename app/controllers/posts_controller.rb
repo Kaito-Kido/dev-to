@@ -28,12 +28,11 @@ class PostsController < ApplicationController
           )
         elsif params[:status].present? && Post.statuses.keys.include?(params[:status])
           @pagy, @res = pagy_countless(
-            Post.send(params[:status]).order(id: :desc).includes({ user: { avatar_attachment: :blob } },
-                                                                 :categories), items: 10
+            Post.send(params[:status]).order(created_at: :desc).includes({ user: { avatar_attachment: :blob } }, :categories), items: 10
           )
         else
           @pagy, @res = pagy_countless(
-            Post.all.order(id: :desc).includes({ user: { avatar_attachment: :blob } }, :categories), items: 10
+            Post.all.order(created_at: :desc).includes({ user: { avatar_attachment: :blob } }, :categories), items: 10
           )
         end
         render partial: 'posts/scrollable_status_posts' if params[:page]
@@ -77,7 +76,7 @@ class PostsController < ApplicationController
         CreateNotificationJob.perform_later(post: @post, status: params[:status], action: 'post')
         respond_to do |format|
           format.js do
-            render js: "window.location='#{posts_path}'"
+            render js: "window.location='#{posts_path}?status=pending'"
           end
         end
       end
@@ -89,21 +88,13 @@ class PostsController < ApplicationController
       end
       if @post.save
         CreateNotificationJob.perform_later(post: @post, sender: current_user, status: params[:status], action: 'post')
-        respond_to do |format|
-          format.js do
-            render js: "window.location='#{post_path(@post)}'"
-          end
-        end
+        redirect_to posts_path
       end
     when 'declined'
       @post.status = params[:status]
       if @post.save
         CreateNotificationJob.perform_later(sender: current_user, post: @post, status: params['status'], action: 'post')
-        respond_to do |format|
-          format.js do
-            render js: "window.location='#{posts_path}'"
-          end
-        end
+        redirect_to posts_path
       end
     else
       @post.status = :draft

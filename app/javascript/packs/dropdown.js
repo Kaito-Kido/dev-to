@@ -16,7 +16,6 @@ $(document).on("turbo:load", function () {
   });
 
   $('img[id^="drop-post-"]').on("click", function (e) {
-    console.log(2);
     const id = e.currentTarget.id.match(/\d+/)[0];
     if ($("#edit-post-" + id).is(":visible")) {
       $("#edit-post-" + id).hide();

@@ -11,7 +11,6 @@
  * file per style scope.
  *
  *= require_self
- *= require rails-social-share-button
  */
 
 @import "~bootstrap/scss/bootstrap";
@@ -22,6 +21,7 @@
 @import "./actiontext.scss";
 @import "./notifications.scss";
 @import "./bookmarks.scss";
+@import "./index.scss";
 
 :root {
   --header-height: 56px;

@@ -1,6 +1,58 @@
 .contain--scroll
-  .column-post
-    = render "posts/posts", posts: @posts
-    = render "home/next_page"
-
-
+  .index__container
+    .sidebar 
+      .part__sidebar
+        a.filter__btn--type
+          = image_tag('/assets/home.svg')
+          | Home
+        a.filter__btn--type
+          = image_tag('/assets/list.svg')
+          | Listings
+        a.filter__btn--type
+          = image_tag('/assets/podcast.svg')
+          | Podcasts
+        a.filter__btn--type
+          = image_tag('/assets/video.svg')
+          | Videos
+        a.filter__btn--type
+          = image_tag('/assets/tag.svg')
+          | Tags
+        a.filter__btn--type
+          == image_tag('/assets/bulb.svg')
+          | FAQ 
+        a.filter__btn--type
+          = image_tag('/assets/shop.svg')
+          | Forem Shop
+        a.filter__btn--type
+          = image_tag('/assets/sponsor.svg')
+          | Sponsors
+        a.filter__btn--type
+          = image_tag('/assets/about.svg')
+          | About
+        a.filter__btn--type
+          = image_tag('/assets/home.svg')
+          | Contact
+        a.filter__btn--type
+          = image_tag('/assets/book.svg')
+          | Guides
+        a.filter__btn--type
+          = image_tag('/assets/software.svg')
+          | Software Comparisions
+      .part__sidebar
+        p Other
+        a.filter__btn--type
+          = image_tag('/assets/thumbup.svg')
+          | Code of Conduct
+        a.filter__btn--type
+          = image_tag('/assets/policy.svg')
+          | Privacy Policy
+        a.filter__btn--type
+          = image_tag('/assets/term.svg')
+          | Term of use
+    .column-post
+      = render "posts/posts", posts: @posts
+      = render "home/next_page"
+    .sidebar--right
+      =image_tag('thumbnail.webp')
+      - @recommend_posts.each do |post|
+        = link_to post.title,post_path(post), class: 'rec__box' 
