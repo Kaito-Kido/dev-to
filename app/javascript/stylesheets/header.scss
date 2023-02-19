@@ -6,7 +6,6 @@
   align-items: center;
   position: sticky;
   width: 100%;
-  max-width: 1280px;
   box-sizing: border-box;
   top: 0;
   left: 0;
@@ -254,4 +253,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.max__contain {
+  @extend .header-container;
+  max-width: 1280px;
+  width: 100%;
 }

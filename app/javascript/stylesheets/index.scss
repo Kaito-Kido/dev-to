@@ -29,6 +29,8 @@
   height: fit-content;
   flex-direction: column;
   display: flex;
+  position: sticky;
+  top: 64px;
   a {
     width: 100%;
     img {
@@ -86,6 +88,4 @@
   width: 100%;
   height: fit-content;
   position: sticky;
-  top: 0;
-  background-color: white;
 }

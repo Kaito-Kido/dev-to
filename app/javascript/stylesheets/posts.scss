@@ -695,6 +695,7 @@ img#cover-prev {
     }
   }
   #chart-2 {
+    flex: 1;
     @media (max-width: 960px) {
       width: 100%;
     }
