@@ -51,7 +51,7 @@ rails db:migrate
 rails db:seed
 ```
 
-### 4. Local hosting
+### 3. Local hosting
 
 Open a terminal and run:
 
